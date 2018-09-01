@@ -1,7 +1,7 @@
 import React from 'react'
 import { css } from 'emotion'
 
-const Container = props => (
+const Container = ({ children }) => (
 	<div
 		className={css`
 			width: 170px;
@@ -11,7 +11,7 @@ const Container = props => (
 			position: relative;
 		`}
 	>
-		{props.children}
+		{children}
 	</div>
 )
 

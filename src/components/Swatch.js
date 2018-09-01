@@ -1,10 +1,10 @@
 import React from 'react'
 import { css } from 'emotion'
 
-const Color = props => (
+const Swatch = ({ value, updateSwatch, onSwatchHover, updateSwatchOnEnter }) => (
 	<div
 		className={css`
-			background: ${props.value};
+			background: ${value};
 			height: 22px;
 			width: 22px;
 			cursor: pointer;
@@ -15,14 +15,15 @@ const Color = props => (
 			margin-bottom: 10px;
 			border-radius: 4px;
 			&:focus {
-				box-shadow: ${props.value} 0px 0px 4px;
+				box-shadow: ${value} 0px 0px 4px;
 			}
 		`}
-		onClick={props.updateColor}
+		title={value}
+		onClick={updateSwatch}
+		onKeyDown={updateSwatchOnEnter}
+		onMouseOver={onSwatchHover}
 		tabIndex={0}
 	/>
 )
 
-// box-shadow: ${props.value} 0px 0px 4px;
-
-export default Color
+export default Swatch

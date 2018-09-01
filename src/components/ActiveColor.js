@@ -1,15 +1,17 @@
 import React from 'react'
 import { css } from 'emotion'
 
-const ActiveColor = props => (
+import { getContrastingColor } from '../utils/colors'
+
+const ActiveColor = ({ color }) => (
 	<div
 		className={css`
 			font-size: 18px;
-			color: ${props.color === 'white' || props.color === '#ffff' ? 'black' : '#ffff'};
+			color: ${getContrastingColor(color.toHex())};
 			position: relative;
 		`}
 	>
-		{props.color}
+		{color.toHexString()}
 	</div>
 )
 

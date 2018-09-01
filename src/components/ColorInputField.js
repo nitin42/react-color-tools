@@ -21,8 +21,8 @@ const inputStyles = {
 	},
 }
 
-const ColorInputField = props => (
-	<EditableInput style={inputStyles} label={props.label} value={props.value} onChange={props.onChange} />
+const ColorInputField = ({ label, onChange, value }) => (
+	<EditableInput style={inputStyles} label={label} value={value} onChange={onChange} />
 )
 
 export default ColorInputField

@@ -1,6 +1,22 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import { BasicPicker } from './BasicPicker'
+import { BasicPicker } from './pickers/BasicPicker'
 
-ReactDOM.render(<BasicPicker />, document.getElementById('root'))
+class App extends React.Component {
+	state = {
+		color: 'magenta',
+	}
+
+	render() {
+		return (
+			<BasicPicker
+				color={this.state.color}
+				onChange={color => this.setState({ color })}
+				onSwatchHover={color => this.setState({ color })}
+			/>
+		)
+	}
+}
+
+ReactDOM.render(<App />, document.getElementById('root'))

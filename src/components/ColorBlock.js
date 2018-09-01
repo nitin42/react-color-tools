@@ -1,11 +1,11 @@
 import React from 'react'
 import { css } from 'emotion'
 
-const ColorBlock = props => (
+const ColorBlock = ({ color, children }) => (
 	<div
 		className={css`
 			height: 110px;
-			background: ${props.color};
+			background: ${color.toHexString()};
 			border-radius: 6px 6px 0px 0px;
 			display: flex;
 			align-items: center;
@@ -13,7 +13,7 @@ const ColorBlock = props => (
 			position: relative;
 		`}
 	>
-		{props.children}
+		{children}
 	</div>
 )
 

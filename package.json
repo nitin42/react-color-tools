@@ -6,7 +6,9 @@
 	"author": "Nitin Tulswani",
 	"license": "MIT",
 	"dependencies": {
+		"@ctrl/tinycolor": "^2.2.0",
 		"emotion": "^9.2.8",
+		"prop-types": "^15.6.2",
 		"randomcolor": "^0.5.3",
 		"react-c": "^0.2.0",
 		"react-color": "^2.14.1",
