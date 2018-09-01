@@ -19,4 +19,8 @@ const Swatches = ({ swatches, updateSwatch, onSwatchHover }) => (
 	</div>
 )
 
+Swatches.defaultProps = {
+	onSwatchHover: (color, e) => {},
+}
+
 export default Swatches

@@ -5,7 +5,7 @@ import { BasicPicker } from './pickers/BasicPicker'
 
 class App extends React.Component {
 	state = {
-		color: 'magenta',
+		color: 'blue',
 	}
 
 	render() {
@@ -13,7 +13,7 @@ class App extends React.Component {
 			<BasicPicker
 				color={this.state.color}
 				onChange={color => this.setState({ color })}
-				onSwatchHover={color => this.setState({ color })}
+				// onSwatchHover={color => this.setState({ color })}
 			/>
 		)
 	}

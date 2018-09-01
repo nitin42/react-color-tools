@@ -10,9 +10,10 @@
 		"emotion": "^9.2.8",
 		"prop-types": "^15.6.2",
 		"randomcolor": "^0.5.3",
-		"react-c": "^0.2.0",
 		"react-color": "^2.14.1",
-		"react-color-extractor": "^1.1.2"
+		"react-color-extractor": "^1.1.2",
+		"react-select": "^2.0.0",
+		"values.js": "^1.0.3"
 	},
 	"devDependencies": {
 		"babel-core": "^6.26.3",
