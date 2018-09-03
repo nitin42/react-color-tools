@@ -1,5 +1,4 @@
 import React from 'react'
-import { css } from 'emotion'
 
 const ImagePicker = ({ uploadImage }) => (
 	<span title="Image picker">

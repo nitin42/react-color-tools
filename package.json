@@ -7,6 +7,7 @@
 	"license": "MIT",
 	"dependencies": {
 		"@ctrl/tinycolor": "^2.2.0",
+		"coolhue": "^1.0.9",
 		"emotion": "^9.2.8",
 		"prop-types": "^15.6.2",
 		"randomcolor": "^0.5.3",
@@ -36,6 +37,9 @@
 		}
 	},
 	"lint-staged": {
-		"*.{js,json,css,md}": ["prettier --write --no-semi --single-quote ", "git add"]
+		"*.{js,json,css,md}": [
+			"prettier --write --no-semi --single-quote ",
+			"git add"
+		]
 	}
 }

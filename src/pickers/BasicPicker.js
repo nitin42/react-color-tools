@@ -20,13 +20,13 @@ const DEFAULT_COLOR = '#088da5'
 
 const MAX_COLORS = 64
 
-injectGlobal`body{ background: mistyrose; }`
+injectGlobal`body{ background: mistyrose; padding: 50px; }`
 
 /**
  * Basic Color Picker - Similar to <BlockPicker /> from react-color but it has image color extractor and palette generator.
  *
  * API
- * 
+ *
  * <BasicPicker
  * 	color={DEFAULT_COLOR_IN_COLOR_BLOCK} // Color to show in colorblock pane and input field
  * 	swatches={ARRAY_OF_SWATCHES} // array of swatches to show in the color picker
@@ -34,6 +34,19 @@ injectGlobal`body{ background: mistyrose; }`
  * 	onSwatchHover={} // Update the color when hover over the swatches
  * />
  */
+
+const inputStyles = {
+	border: '0px solid rgb(102, 102, 102)',
+	boxSizing: 'border-box',
+	padding: '0px 7px',
+	borderRadius: '4px',
+	color: 'rgb(102, 102, 102)',
+	height: '22px',
+	boxShadow: 'rgb(221, 221, 221) 0px 0px 0px 1px inset',
+	outline: 'none',
+	fontSize: '12px',
+	color: 'rgb(102, 102, 102)',
+}
 
 export class BasicPicker extends React.Component {
 	imageIcon = null
@@ -45,9 +58,10 @@ export class BasicPicker extends React.Component {
 		image: null,
 		shades: [],
 		tints: [],
+		// spin: 0,
 		showShades: false,
 		showTints: false,
-		currentFormat: 'HSL',
+		currentFormat: 'HEX',
 		formats: ['HSL', 'HSV', 'RGB', 'HEX'],
 	}
 
@@ -70,7 +84,6 @@ export class BasicPicker extends React.Component {
 	componentDidUpdate(oldProps) {
 		if (oldProps.color !== this.props.color) {
 			const color = new TinyColor(this.props.color)
-
 			if (color.isValid) {
 				this.setState({ color })
 			}
@@ -85,6 +98,26 @@ export class BasicPicker extends React.Component {
 		this.imageIcon.removeEventListener('click', this.simulateClick)
 		document.removeEventListener('keydown', this.updateKey)
 	}
+
+	getFormat = color => ({
+		HSL: color.toHslString(),
+		HEX: color.toHexString(),
+		RGB: color.toRgbString(),
+		HSV: color.toHsvString(),
+	})
+
+	oldColor = null
+
+	// updateOnSpin = e => {
+	// 	const value = parseInt(e.target.value)
+
+	// 	// Mutate the original color and not the successive color mutations
+	// 	if (this.oldColor === null) {
+	// 		this.oldColor = this.state.color.originalInput
+	// 	}
+
+	// 	this.setState({ color: new TinyColor(this.oldColor).brighten(value), spin: value })
+	// }
 
 	renderFormats = () => {
 		const { formats } = this.state
@@ -159,14 +192,16 @@ export class BasicPicker extends React.Component {
 	}
 
 	render() {
-		const { image, color, swatches, shades, showShades, showTints, tints } = this.state
+		const { image, swatches, shades, showShades, showTints, tints, currentFormat } = this.state
+		const color = this.getFormat(this.state.color)[currentFormat]
+
 		const styles = {
 			triangle: {
 				width: '0px',
 				height: '0px',
 				borderStyle: 'solid',
 				borderWidth: '0 10px 10px 10px',
-				borderColor: `transparent transparent ${color.toHexString()} transparent`,
+				borderColor: `transparent transparent ${this.state.color.toHexString()} transparent`,
 				position: 'absolute',
 				top: '-10px',
 				left: '50%',
@@ -177,7 +212,7 @@ export class BasicPicker extends React.Component {
 		return (
 			<Container width={this.props.width}>
 				{this.props.triangle && <div style={styles.triangle} />}
-				<ColorBlock color={color}>
+				<ColorBlock color={this.state.color}>
 					<ActiveColor color={color} />
 				</ColorBlock>
 				{image && <ColorExtractor maxColors={this.props.maxColors} src={image} getColors={this.updateSwatches} />}
@@ -201,10 +236,15 @@ export class BasicPicker extends React.Component {
 							onSwatchHover={this.props.onSwatchHover && this.updateSwatch}
 						/>
 					)}
-					<ColorInput value={color.toHexString()} onChange={this.props.onChange} />
+					<ColorInput value={color} onChange={this.props.onChange} />
+					<div style={{ display: 'flex', justifyContent: 'center', marginTop: 10 }}>
+						<select style={inputStyles} name="formats" onChange={e => this.setState({ currentFormat: e.target.value })}>
+							{this.renderFormats()}
+						</select>
+					</div>
 					<div
 						className={css`
-							margin-top: 20px;
+							margin-top: 10px;
 							display: flex;
 							justify-content: center;
 							cursor: pointer;
@@ -221,40 +261,27 @@ export class BasicPicker extends React.Component {
 						<span
 							title="clipboard picker"
 							onClick={e => {
-								const { currentFormat } = this.state
-
-								const options = {
-									HSL: color.toHslString(),
-									HEX: color.toHexString(),
-									RGB: color.toRgbString(),
-									HSV: color.toHsvString(),
-								}
-
-								navigator.clipboard.writeText(options[currentFormat])
+								navigator.clipboard.writeText(color)
 							}}
 						>
 							<i id="image-icon" className="fas fa-clipboard" style={{ marginLeft: 10 }} />
 						</span>
 						<span
 							title="reset picker"
-							onClick={e => this.setState({ shades: [], tint: [], showShades: false, showTints: false })}
+							onClick={e =>
+								this.setState({
+									color: new TinyColor(this.props.color),
+									swatches: this.props.swatches,
+									image: null,
+									shades: [],
+									tints: [],
+									showShades: false,
+									showTints: false,
+								})
+							}
 						>
 							<i id="image-icon" className="fas fa-arrow-alt-circle-left" style={{ marginLeft: 10 }} />
 						</span>
-					</div>
-					<div style={{ display: 'flex', justifyContent: 'center', marginTop: 20 }}>
-						<select
-							style={{
-								border: '0.5px solid rgb(102, 102, 102)',
-								backgroundColor: 'smokewhite',
-								width: 50,
-								color: 'rgb(102, 102, 102)',
-							}}
-							name="formats"
-							onChange={e => this.setState({ currentFormat: e.target.value })}
-						>
-							{this.renderFormats()}
-						</select>
 					</div>
 				</div>
 			</Container>

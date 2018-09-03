@@ -5,16 +5,19 @@ import { BasicPicker } from './pickers/BasicPicker'
 
 class App extends React.Component {
 	state = {
-		color: 'blue',
+		color: '#f00',
 	}
 
 	render() {
 		return (
-			<BasicPicker
-				color={this.state.color}
-				onChange={color => this.setState({ color })}
-				// onSwatchHover={color => this.setState({ color })}
-			/>
+			<div>
+				<BasicPicker
+					color={this.state.color}
+					onChange={color => this.setState({ color })}
+					// onSwatchHover={color => this.setState({ color })}
+				/>
+				<h2 style={{ color: this.state.color }}>React Color Picker</h2>
+			</div>
 		)
 	}
 }

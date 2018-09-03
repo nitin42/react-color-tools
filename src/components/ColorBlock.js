@@ -1,6 +1,7 @@
 import React from 'react'
 import { css } from 'emotion'
 
+// Displays a color block with the active color hex code
 const ColorBlock = ({ color, children }) => (
 	<div
 		className={css`
