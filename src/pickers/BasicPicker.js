@@ -97,9 +97,9 @@ export class BasicPicker extends React.Component {
 			}
 		}
 
-		if (oldProps.swatches !== this.props.swatches) {
-			this.setState({ swatches: this.props.swatches })
-		}
+		// if (oldProps.swatches !== this.props.swatches) {
+		// 	this.setState({ swatches: this.props.swatches })
+		// }
 	}
 
 	componentWillUnmount() {
@@ -166,25 +166,18 @@ export class BasicPicker extends React.Component {
 	updateSwatches = swatches =>
 		this.setState({ swatches: [...swatches], color: new TinyColor(swatches[0]), showShades: false, showTints: false })
 
-	generateShades = e => {
-		const shades = []
+	generateSwatchesFromHue = (term, showShades, showTints) => {
+		const colorBuffer = []
 		const color = new Values(this.state.color.toHexString())
 
-		color.shades().forEach(shade => shades.push(shade.hexString()))
+		color[term]().forEach(c => colorBuffer.push(c.hexString()))
 
-		// Disable tints
-		this.setState({ shades: [...shades], showShades: true, showTints: false })
+		this.setState({ [term]: [...colorBuffer], showShades: showShades, showTints: showTints })
 	}
 
-	generateTints = e => {
-		const tints = []
-		const color = new Values(this.state.color.toHexString())
+	generateShades = e => this.generateSwatchesFromHue('shades', true, false)
 
-		color.tints().forEach(tint => tints.push(tint.hexString()))
-
-		// Disable shades
-		this.setState({ tints: [...tints], showShades: false, showTints: true })
-	}
+	generateTints = e => this.generateSwatchesFromHue('tints', false, true)
 
 	changeFormat = e => this.setState({ currentFormat: e.target.value })
 
