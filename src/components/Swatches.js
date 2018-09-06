@@ -10,7 +10,7 @@ const Swatches = ({ swatches, updateSwatch, onSwatchHover }) => (
 				<Swatch
 					value={color}
 					updateSwatch={e => updateSwatch(color, e)}
-					updateSwatchOnEnter={e => (e.keyCode === 13 ? updateSwatch(color, e) : null)}
+					updateSwatchOnKeyDown={e => (e.keyCode === 13 ? updateSwatch(color, e) : null)}
 					onSwatchHover={e => onSwatchHover(color, e)}
 				/>
 			</span>
@@ -18,9 +18,5 @@ const Swatches = ({ swatches, updateSwatch, onSwatchHover }) => (
 		<div style={{ clear: 'both' }} />
 	</div>
 )
-
-Swatches.defaultProps = {
-	onSwatchHover: (color, e) => {},
-}
 
 export default Swatches

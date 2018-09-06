@@ -30,22 +30,34 @@ injectGlobal`body{ background: mistyrose; padding: 50px; }`
  * 		onChange={} // Invoked when the color is updated
  * 		onSwatchHover={} // Invoked on hover over the swatches
  * 		maxColors={} // use this prop to control amount of palette generated from the swatches the when an image is uploaded
+ * 		theme="dark_or_light"
  * />
  */
 
 export class BasicPicker extends React.Component {
+	// Image upload icon
 	imageIcon = null
+	// Hidden input element for uploading an image
 	uploadElement = null
 
 	state = {
+		// Current block, active and input field color (or hue)
 		color: new TinyColor(this.props.color),
+		// Current swatches to be displayed in picker
 		swatches: this.props.swatches,
+		// Image from which colors are extracted
 		image: null,
+		// Shades are the hue darkened with black
 		shades: [],
+		// Tints are the hue lightend with white
 		tints: [],
+		// Should display the shades swatches
 		showShades: false,
+		// Should display the tint swatches
 		showTints: false,
+		// Current color format selected
 		currentFormat: 'HEX',
+		// Color format options
 		formats: ['HSL', 'HSV', 'RGB', 'HEX'],
 	}
 
@@ -56,6 +68,8 @@ export class BasicPicker extends React.Component {
 		triangle: true,
 		width: '170px',
 		theme: 'light',
+		onSwatchHover: (color, e) => {},
+		onChange: color => {},
 	}
 
 	componentDidMount() {
@@ -63,12 +77,18 @@ export class BasicPicker extends React.Component {
 		this.imageIcon = document.getElementById('image-icon')
 
 		this.imageIcon.addEventListener('click', this.simulateClick)
+
+		// Attach a listener for deleting the image (if any) from the color block
 		document.addEventListener('keydown', this.updateKey)
 	}
 
-	componentDidUpdate(oldProps) {
+	componentDidUpdate(oldProps, oldState) {
+		// This is invoked only when we are working with actual API of this component
+
 		if (oldProps.color !== this.props.color) {
 			const color = new TinyColor(this.props.color)
+
+			// Check if its a valid hex and then update the color
 			if (color.isValid) {
 				this.setState({ color })
 			}
@@ -84,6 +104,7 @@ export class BasicPicker extends React.Component {
 		document.removeEventListener('keydown', this.updateKey)
 	}
 
+	// outputs the color according to the color format
 	getFormat = color => ({
 		HSL: color.toHslString(),
 		HEX: color.toHexString(),
@@ -91,19 +112,14 @@ export class BasicPicker extends React.Component {
 		HSV: color.toHsvString(),
 	})
 
-	oldColor = null
-
-	renderFormats = () => {
-		const { formats } = this.state
-
-		return formats.map((format, key) => {
+	renderFormats = () =>
+		this.state.formats.map((format, key) => {
 			return (
 				<option value={format} key={key}>
 					{format}
 				</option>
 			)
 		})
-	}
 
 	updateKey = e => {
 		if (e.which === 8) {
@@ -119,8 +135,10 @@ export class BasicPicker extends React.Component {
 		e.preventDefault()
 	}
 
+	// Randomly generate new swatches
 	generateSwatches = e => {
 		let i = 0
+
 		// Each swatch should be different
 		const newColors = new Set()
 
@@ -129,39 +147,51 @@ export class BasicPicker extends React.Component {
 			i++
 		}
 
+		// Remove shades and tints when new swatches are generated
 		this.setState({ swatches: [...newColors], showShades: false, showTints: false })
 	}
 
-	uploadImage = e => {
-		this.setState({ image: window.URL.createObjectURL(e.target.files[0]) })
-	}
+	uploadImage = e => this.setState({ image: window.URL.createObjectURL(e.target.files[0]) })
 
 	updateSwatch = color => {
-		if (this.props.onChange) {
-			this.props.onChange(color)
-		} else {
-			this.setState({ color: new TinyColor(color), showShades: false, showTints: false })
-		}
+		this.setState({ color: new TinyColor(color) })
+
+		this.props.onChange && this.props.onChange(color)
+
+		this.props.onSwatchHover && this.props.onSwatchHover(color)
 	}
 
+	updateColorInput = color => {
+		const newColor = new TinyColor(color)
+
+		if (newColor.isValid) {
+			this.setState({ color: newColor })
+		}
+
+		this.props.onChange && this.props.onChange(color)
+	}
+
+	// disable shades and tints when colors are extracted from an image
 	updateSwatches = swatches =>
 		this.setState({ swatches: [...swatches], color: new TinyColor(swatches[0]), showShades: false, showTints: false })
 
 	generateShades = e => {
-		const color = new Values(this.state.color.toHexString())
 		const shades = []
+		const color = new Values(this.state.color.toHexString())
 
 		color.shades().forEach(shade => shades.push(shade.hexString()))
 
+		// Disable tints
 		this.setState({ shades: [...shades], showShades: true, showTints: false })
 	}
 
 	generateTints = e => {
-		const color = new Values(this.state.color.toHexString())
 		const tints = []
+		const color = new Values(this.state.color.toHexString())
 
 		color.tints().forEach(tint => tints.push(tint.hexString()))
 
+		// Disable shades
 		this.setState({ tints: [...tints], showShades: false, showTints: true })
 	}
 
@@ -174,46 +204,39 @@ export class BasicPicker extends React.Component {
 
 		return (
 			<Container background={bg} width={this.props.width}>
-				{this.props.triangle && (
-					<div
-						className={css`
-							width: 0px;
-							height: 0px;
-							border-style: solid;
-							border-width: 0 10px 10px 10px;
-							border-color: transparent transparent ${this.state.color.toHexString()} transparent;
-							position: absolute;
-							top: -10px;
-							left: 50%;
-							margin-left: -10px;
-						`}
-					/>
+				{this.props.triangle &&
+					this.state.image === null && (
+						<div
+							className={css`
+								width: 0px;
+								height: 0px;
+								border-style: solid;
+								border-width: 0 10px 10px 10px;
+								border-color: transparent transparent ${this.state.color.toHexString()} transparent;
+								position: absolute;
+								top: -10px;
+								left: 50%;
+								margin-left: -10px;
+							`}
+						/>
+					)}
+				{this.state.image === null ? (
+					<ColorBlock color={this.state.color}>
+						<ActiveColor color={color} />
+					</ColorBlock>
+				) : (
+					<img src={this.state.image} style={{ width: this.props.width }} />
 				)}
-				<ColorBlock color={this.state.color}>
-					<ActiveColor color={color} />
-				</ColorBlock>
 				{image && <ColorExtractor maxColors={this.props.maxColors} src={image} getColors={this.updateSwatches} />}
 				<div style={{ padding: 10 }}>
 					{showShades ? (
-						<Swatches
-							swatches={shades}
-							updateSwatch={this.updateSwatch}
-							onSwatchHover={this.props.onSwatchHover && this.updateSwatch}
-						/>
+						<Swatches swatches={shades} updateSwatch={this.updateSwatch} onSwatchHover={this.updateSwatch} />
 					) : showTints ? (
-						<Swatches
-							swatches={tints}
-							updateSwatch={this.updateSwatch}
-							onSwatchHover={this.props.onSwatchHover && this.updateSwatch}
-						/>
+						<Swatches swatches={tints} updateSwatch={this.updateSwatch} onSwatchHover={this.updateSwatch} />
 					) : (
-						<Swatches
-							swatches={swatches}
-							updateSwatch={this.updateSwatch}
-							onSwatchHover={this.props.onSwatchHover && this.updateSwatch}
-						/>
+						<Swatches swatches={swatches} updateSwatch={this.updateSwatch} onSwatchHover={this.updateSwatch} />
 					)}
-					<ColorInput value={color} onChange={this.props.onChange} />
+					<ColorInput value={color} onChange={this.updateColorInput} />
 					<div style={{ display: 'flex', justifyContent: 'center', marginTop: 10 }}>
 						<select
 							className={css`

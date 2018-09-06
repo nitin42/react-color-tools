@@ -1,7 +1,7 @@
 import React from 'react'
 import { css } from 'emotion'
 
-const Swatch = ({ value, updateSwatch, onSwatchHover, updateSwatchOnEnter }) => (
+const Swatch = ({ value, updateSwatch, onSwatchHover, updateSwatchOnKeyDown }) => (
 	<div
 		className={css`
 			background: ${value};
@@ -20,7 +20,7 @@ const Swatch = ({ value, updateSwatch, onSwatchHover, updateSwatchOnEnter }) => 
 		`}
 		title={value}
 		onClick={updateSwatch}
-		onKeyDown={updateSwatchOnEnter}
+		onKeyDown={updateSwatchOnKeyDown}
 		onMouseOver={onSwatchHover}
 		tabIndex={0}
 	/>
