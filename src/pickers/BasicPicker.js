@@ -2,7 +2,6 @@ import React from 'react'
 import { css, injectGlobal } from 'emotion'
 import { ColorExtractor } from 'react-color-extractor'
 import generateColors from 'randomcolor'
-import PropTypes from 'prop-types'
 import { TinyColor } from '@ctrl/tinycolor'
 import Values from 'values.js'
 
@@ -23,30 +22,16 @@ const MAX_COLORS = 64
 injectGlobal`body{ background: mistyrose; padding: 50px; }`
 
 /**
- * Basic Color Picker - Similar to <BlockPicker /> from react-color but it has image color extractor and palette generator.
- *
- * API
+ * API usage -
  *
  * <BasicPicker
- * 	color={DEFAULT_COLOR_IN_COLOR_BLOCK} // Color to show in colorblock pane and input field
- * 	swatches={ARRAY_OF_SWATCHES} // array of swatches to show in the color picker
- * 	onChange={} // Update the color
- * 	onSwatchHover={} // Update the color when hover over the swatches
+ * 		color={DEFAULT_COLOR_IN_COLOR_BLOCK_AND_INPUT_FIELD} // Color to show in colorblock pane and input field
+ * 		swatches={ARRAY_OF_SWATCHES} // array of swatches to show in the color picker
+ * 		onChange={} // Invoked when the color is updated
+ * 		onSwatchHover={} // Invoked on hover over the swatches
+ * 		maxColors={} // use this prop to control amount of palette generated from the swatches the when an image is uploaded
  * />
  */
-
-const inputStyles = {
-	border: '0px solid rgb(102, 102, 102)',
-	boxSizing: 'border-box',
-	padding: '0px 7px',
-	borderRadius: '4px',
-	color: 'rgb(102, 102, 102)',
-	height: '22px',
-	boxShadow: 'rgb(221, 221, 221) 0px 0px 0px 1px inset',
-	outline: 'none',
-	fontSize: '12px',
-	color: 'rgb(102, 102, 102)',
-}
 
 export class BasicPicker extends React.Component {
 	imageIcon = null
@@ -58,7 +43,6 @@ export class BasicPicker extends React.Component {
 		image: null,
 		shades: [],
 		tints: [],
-		// spin: 0,
 		showShades: false,
 		showTints: false,
 		currentFormat: 'HEX',
@@ -71,6 +55,7 @@ export class BasicPicker extends React.Component {
 		maxColors: MAX_COLORS,
 		triangle: true,
 		width: '170px',
+		theme: 'light',
 	}
 
 	componentDidMount() {
@@ -107,17 +92,6 @@ export class BasicPicker extends React.Component {
 	})
 
 	oldColor = null
-
-	// updateOnSpin = e => {
-	// 	const value = parseInt(e.target.value)
-
-	// 	// Mutate the original color and not the successive color mutations
-	// 	if (this.oldColor === null) {
-	// 		this.oldColor = this.state.color.originalInput
-	// 	}
-
-	// 	this.setState({ color: new TinyColor(this.oldColor).brighten(value), spin: value })
-	// }
 
 	renderFormats = () => {
 		const { formats } = this.state
@@ -195,23 +169,26 @@ export class BasicPicker extends React.Component {
 		const { image, swatches, shades, showShades, showTints, tints, currentFormat } = this.state
 		const color = this.getFormat(this.state.color)[currentFormat]
 
-		const styles = {
-			triangle: {
-				width: '0px',
-				height: '0px',
-				borderStyle: 'solid',
-				borderWidth: '0 10px 10px 10px',
-				borderColor: `transparent transparent ${this.state.color.toHexString()} transparent`,
-				position: 'absolute',
-				top: '-10px',
-				left: '50%',
-				marginLeft: '-10px',
-			},
-		}
+		const bg = this.props.theme === 'dark' ? '#1f1f1f' : 'rgb(255, 255, 255)'
+		const iconColor = this.props.theme === 'dark' ? 'rgb(255, 255, 255)' : '#000A14'
 
 		return (
-			<Container width={this.props.width}>
-				{this.props.triangle && <div style={styles.triangle} />}
+			<Container background={bg} width={this.props.width}>
+				{this.props.triangle && (
+					<div
+						className={css`
+							width: 0px;
+							height: 0px;
+							border-style: solid;
+							border-width: 0 10px 10px 10px;
+							border-color: transparent transparent ${this.state.color.toHexString()} transparent;
+							position: absolute;
+							top: -10px;
+							left: 50%;
+							margin-left: -10px;
+						`}
+					/>
+				)}
 				<ColorBlock color={this.state.color}>
 					<ActiveColor color={color} />
 				</ColorBlock>
@@ -238,7 +215,22 @@ export class BasicPicker extends React.Component {
 					)}
 					<ColorInput value={color} onChange={this.props.onChange} />
 					<div style={{ display: 'flex', justifyContent: 'center', marginTop: 10 }}>
-						<select style={inputStyles} name="formats" onChange={e => this.setState({ currentFormat: e.target.value })}>
+						<select
+							className={css`
+								border: 0px solid rgb(102, 102, 102);
+								box-sizing: border-box;
+								padding: 0px 7px;
+								border-radius: 4px;
+								color: rgb(102, 102, 102);
+								height: 16px;
+								box-shadow: rgb(221, 221, 221) 0px 0px 0px 1px inset;
+								outline: none;
+								font-size: 10px;
+								color: rgb(102, 102, 102);
+							`}
+							name="formats"
+							onChange={e => this.setState({ currentFormat: e.target.value })}
+						>
 							{this.renderFormats()}
 						</select>
 					</div>
@@ -250,13 +242,13 @@ export class BasicPicker extends React.Component {
 							cursor: pointer;
 						`}
 					>
-						<ImagePicker uploadImage={this.uploadImage} />
-						<PaletteGenerator generateSwatches={this.generateSwatches} />
+						<ImagePicker uploadImage={this.uploadImage} color={iconColor} />
+						<PaletteGenerator generateSwatches={this.generateSwatches} color={iconColor} />
 						<span title="tint picker" onClick={this.generateTints}>
-							<i id="image-icon" className="fas fa-tint" style={{ marginLeft: 10 }} />
+							<i id="image-icon" className="fas fa-tint" style={{ marginLeft: 10, color: iconColor }} />
 						</span>
 						<span title="shade picker" onClick={this.generateShades}>
-							<i id="image-icon" className="fas fa-adjust" style={{ marginLeft: 10 }} />
+							<i id="image-icon" className="fas fa-adjust" style={{ marginLeft: 10, color: iconColor }} />
 						</span>
 						<span
 							title="clipboard picker"
@@ -264,7 +256,7 @@ export class BasicPicker extends React.Component {
 								navigator.clipboard.writeText(color)
 							}}
 						>
-							<i id="image-icon" className="fas fa-clipboard" style={{ marginLeft: 10 }} />
+							<i id="image-icon" className="fas fa-clipboard" style={{ marginLeft: 10, color: iconColor }} />
 						</span>
 						<span
 							title="reset picker"
@@ -279,6 +271,7 @@ export class BasicPicker extends React.Component {
 									showTints: false,
 								})
 							}
+							style={{ color: iconColor }}
 						>
 							<i id="image-icon" className="fas fa-arrow-alt-circle-left" style={{ marginLeft: 10 }} />
 						</span>

@@ -1,14 +1,12 @@
 import React from 'react'
 import { css } from 'emotion'
 
-const CONTAINER_BACKGROUND = 'rgb(255, 255, 255)'
-
 // Main color picker container
-const Container = ({ children, width }) => (
+const Container = ({ children, width, background = 'rgb(255, 255, 255)' }) => (
 	<div
 		className={css`
 			width: ${width};
-			background: ${CONTAINER_BACKGROUND};
+			background: ${background};
 			box-shadow: rgba(0, 0, 0, 0.1) 0px 1px;
 			border-radius: 6px;
 			position: relative;
