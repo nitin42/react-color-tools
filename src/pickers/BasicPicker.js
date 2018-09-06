@@ -19,11 +19,20 @@ import ShadesGenerator from '../components/ShadesGenerator'
 import Clipboard from '../components/Clipboard'
 import Reset from '../components/Reset'
 
-const DEFAULT_SWATCHES = ['#5a80b4', '#40e0d0', '#088da5', '#f6546a', '#cac8a0', '#0079cf']
+const DEFAULT_SWATCHES = [
+	'#5a80b4',
+	'#40e0d0',
+	'#088da5',
+	'#f6546a',
+	'#cac8a0',
+	'#0079cf',
+	'#ffa6ca',
+	'#03ec13',
+	'#3999dc',
+	'#e1c9ec',
+]
 const DEFAULT_COLOR = '#088da5'
 const MAX_COLORS = 64
-
-injectGlobal`body{ background: mistyrose; padding: 50px; }`
 
 /**
  * API usage -

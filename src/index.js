@@ -12,10 +12,9 @@ class App extends React.Component {
 		return (
 			<div>
 				<BasicPicker
-					swatches={['red', 'green', 'mistyrose', 'pink']}
 					color={this.state.color}
-					onChange={color => this.setState({ color })}
-					// onSwatchHover={color => this.setState({ color })}
+					// onChange={color => this.setState({ color })}
+					onSwatchHover={color => this.setState({ color })}
 					theme="dark"
 				/>
 				<h2 style={{ color: this.state.color }}>React Color Picker</h2>
