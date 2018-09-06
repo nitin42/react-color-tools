@@ -12,11 +12,15 @@ import Container from '../components/Container'
 import Swatches from '../components/Swatches'
 import ImagePicker from '../components/ImagePicker'
 import PaletteGenerator from '../components/PaletteGenerator'
+import Triangle from '../components/Triangle'
+import ColorFormatPicker from '../components/ColorFormatPicker'
+import TintsGenerator from '../components/TintsGenerator'
+import ShadesGenerator from '../components/ShadesGenerator'
+import Clipboard from '../components/Clipboard'
+import Reset from '../components/Reset'
 
 const DEFAULT_SWATCHES = ['#5a80b4', '#40e0d0', '#088da5', '#f6546a', '#cac8a0', '#0079cf']
-
 const DEFAULT_COLOR = '#088da5'
-
 const MAX_COLORS = 64
 
 injectGlobal`body{ background: mistyrose; padding: 50px; }`
@@ -68,8 +72,6 @@ export class BasicPicker extends React.Component {
 		triangle: true,
 		width: '170px',
 		theme: 'light',
-		onSwatchHover: (color, e) => {},
-		onChange: color => {},
 	}
 
 	componentDidMount() {
@@ -89,13 +91,14 @@ export class BasicPicker extends React.Component {
 			const color = new TinyColor(this.props.color)
 
 			// Check if its a valid hex and then update the color
+			// on changing the color input field, it only updates the color block if the hex code is valid
 			if (color.isValid) {
 				this.setState({ color })
 			}
 		}
 
 		if (oldProps.swatches !== this.props.swatches) {
-			this.setState({ swatches })
+			this.setState({ swatches: this.props.swatches })
 		}
 	}
 
@@ -147,7 +150,7 @@ export class BasicPicker extends React.Component {
 			i++
 		}
 
-		// Remove shades and tints when new swatches are generated
+		// Remove shades and tints when new swatches are added
 		this.setState({ swatches: [...newColors], showShades: false, showTints: false })
 	}
 
@@ -155,18 +158,6 @@ export class BasicPicker extends React.Component {
 
 	updateSwatch = color => {
 		this.setState({ color: new TinyColor(color) })
-
-		this.props.onChange && this.props.onChange(color)
-
-		this.props.onSwatchHover && this.props.onSwatchHover(color)
-	}
-
-	updateColorInput = color => {
-		const newColor = new TinyColor(color)
-
-		if (newColor.isValid) {
-			this.setState({ color: newColor })
-		}
 
 		this.props.onChange && this.props.onChange(color)
 	}
@@ -195,8 +186,22 @@ export class BasicPicker extends React.Component {
 		this.setState({ tints: [...tints], showShades: false, showTints: true })
 	}
 
+	changeFormat = e => this.setState({ currentFormat: e.target.value })
+
+	resetColors = e =>
+		this.setState({
+			color: new TinyColor(this.props.color),
+			swatches: this.props.swatches,
+			image: null,
+			shades: [],
+			tints: [],
+			showShades: false,
+			showTints: false,
+		})
+
 	render() {
 		const { image, swatches, shades, showShades, showTints, tints, currentFormat } = this.state
+
 		const color = this.getFormat(this.state.color)[currentFormat]
 
 		const bg = this.props.theme === 'dark' ? '#1f1f1f' : 'rgb(255, 255, 255)'
@@ -204,100 +209,44 @@ export class BasicPicker extends React.Component {
 
 		return (
 			<Container background={bg} width={this.props.width}>
-				{this.props.triangle &&
-					this.state.image === null && (
-						<div
-							className={css`
-								width: 0px;
-								height: 0px;
-								border-style: solid;
-								border-width: 0 10px 10px 10px;
-								border-color: transparent transparent ${this.state.color.toHexString()} transparent;
-								position: absolute;
-								top: -10px;
-								left: 50%;
-								margin-left: -10px;
-							`}
-						/>
-					)}
+				{this.props.triangle && this.state.image === null && <Triangle color={this.state.color.toHexString()} />}
 				{this.state.image === null ? (
 					<ColorBlock color={this.state.color}>
 						<ActiveColor color={color} />
 					</ColorBlock>
 				) : (
-					<img src={this.state.image} style={{ width: this.props.width }} />
+					<img src={this.state.image} alt="image" style={{ width: this.props.width }} />
 				)}
 				{image && <ColorExtractor maxColors={this.props.maxColors} src={image} getColors={this.updateSwatches} />}
 				<div style={{ padding: 10 }}>
 					{showShades ? (
-						<Swatches swatches={shades} updateSwatch={this.updateSwatch} onSwatchHover={this.updateSwatch} />
+						<Swatches swatches={shades} updateSwatch={this.updateSwatch} onSwatchHover={this.props.onSwatchHover} />
 					) : showTints ? (
-						<Swatches swatches={tints} updateSwatch={this.updateSwatch} onSwatchHover={this.updateSwatch} />
+						<Swatches swatches={tints} updateSwatch={this.updateSwatch} onSwatchHover={this.props.onSwatchHover} />
 					) : (
-						<Swatches swatches={swatches} updateSwatch={this.updateSwatch} onSwatchHover={this.updateSwatch} />
+						<Swatches swatches={swatches} updateSwatch={this.updateSwatch} onSwatchHover={this.props.onSwatchHover} />
 					)}
-					<ColorInput value={color} onChange={this.updateColorInput} />
-					<div style={{ display: 'flex', justifyContent: 'center', marginTop: 10 }}>
-						<select
-							className={css`
-								border: 0px solid rgb(102, 102, 102);
-								box-sizing: border-box;
-								padding: 0px 7px;
-								border-radius: 4px;
-								color: rgb(102, 102, 102);
-								height: 16px;
-								box-shadow: rgb(221, 221, 221) 0px 0px 0px 1px inset;
-								outline: none;
-								font-size: 10px;
-								color: rgb(102, 102, 102);
-							`}
-							name="formats"
-							onChange={e => this.setState({ currentFormat: e.target.value })}
-						>
-							{this.renderFormats()}
-						</select>
-					</div>
+					<ColorInput value={color} onChange={this.props.onChange} />
+					<ColorFormatPicker changeFormat={this.changeFormat} renderFormats={this.renderFormats} />
 					<div
 						className={css`
-							margin-top: 10px;
 							display: flex;
 							justify-content: center;
+							margin-top: 10px;
 							cursor: pointer;
 						`}
 					>
 						<ImagePicker uploadImage={this.uploadImage} color={iconColor} />
 						<PaletteGenerator generateSwatches={this.generateSwatches} color={iconColor} />
-						<span title="tint picker" onClick={this.generateTints}>
-							<i id="image-icon" className="fas fa-tint" style={{ marginLeft: 10, color: iconColor }} />
-						</span>
-						<span title="shade picker" onClick={this.generateShades}>
-							<i id="image-icon" className="fas fa-adjust" style={{ marginLeft: 10, color: iconColor }} />
-						</span>
-						<span
-							title="clipboard picker"
-							onClick={e => {
+						<TintsGenerator generateTints={this.generateTints} color={iconColor} />
+						<ShadesGenerator generateShades={this.generateShades} color={iconColor} />
+						<Clipboard
+							copyColor={e => {
 								navigator.clipboard.writeText(color)
 							}}
-						>
-							<i id="image-icon" className="fas fa-clipboard" style={{ marginLeft: 10, color: iconColor }} />
-						</span>
-						<span
-							title="reset picker"
-							onClick={e =>
-								this.setState({
-									color: new TinyColor(this.props.color),
-									swatches: this.props.swatches,
-									image: null,
-									shades: [],
-									tints: [],
-									showShades: false,
-									showTints: false,
-								})
-							}
-							style={{ color: iconColor }}
-						>
-							<i id="image-icon" className="fas fa-arrow-alt-circle-left" style={{ marginLeft: 10 }} />
-						</span>
+							color={iconColor}
+						/>
+						<Reset resetColors={this.resetColors} color={iconColor} />
 					</div>
 				</div>
 			</Container>

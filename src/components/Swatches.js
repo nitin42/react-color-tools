@@ -3,6 +3,8 @@ import { css } from 'emotion'
 
 import Swatch from './Swatch'
 
+const ENTER_KEY = 13
+
 const Swatches = ({ swatches, updateSwatch, onSwatchHover }) => (
 	<div style={{ marginRight: -10 }}>
 		{swatches.map((color, key) => (
@@ -10,8 +12,8 @@ const Swatches = ({ swatches, updateSwatch, onSwatchHover }) => (
 				<Swatch
 					value={color}
 					updateSwatch={e => updateSwatch(color, e)}
-					updateSwatchOnKeyDown={e => (e.keyCode === 13 ? updateSwatch(color, e) : null)}
-					onSwatchHover={e => onSwatchHover(color, e)}
+					updateSwatchOnKeyDown={e => (e.keyCode === ENTER_KEY ? updateSwatch(color, e) : null)}
+					onSwatchHover={e => onSwatchHover && onSwatchHover(color, e)}
 				/>
 			</span>
 		))}
