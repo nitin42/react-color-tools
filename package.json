@@ -11,6 +11,7 @@
 		"prop-types": "^15.6.2",
 		"randomcolor": "^0.5.3",
 		"react-color-extractor": "^1.1.2",
+		"react-emotion": "^9.2.8",
 		"values.js": "^1.0.3"
 	},
 	"devDependencies": {
@@ -35,6 +36,9 @@
 		}
 	},
 	"lint-staged": {
-		"*.{js,json,css,md}": ["./node_modules/.bin/prettier --write --no-semi --single-quote ", "git add"]
+		"*.{js,json,css,md}": [
+			"./node_modules/.bin/prettier --write --no-semi --single-quote ",
+			"git add"
+		]
 	}
 }

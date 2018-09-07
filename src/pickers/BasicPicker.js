@@ -18,6 +18,9 @@ import TintsGenerator from '../components/TintsGenerator'
 import ShadesGenerator from '../components/ShadesGenerator'
 import Clipboard from '../components/Clipboard'
 import Reset from '../components/Reset'
+import Tools from '../components/Tools'
+
+import { Provider } from '../utils/context'
 
 const DEFAULT_SWATCHES = [
 	'#5a80b4',
@@ -35,6 +38,29 @@ const DEFAULT_SWATCHES = [
 ]
 const DEFAULT_COLOR = '#088da5'
 const MAX_COLORS = 64
+
+injectGlobal`
+.icon {
+	display: inline-block;
+	width: 20px;
+	position: relative;
+	top: 5px;
+	left: -5px;
+}
+
+i:not(.icon) {
+	cursor: pointer;
+}
+
+ul {
+	display: grid;
+	justify-content: center;
+	grid-template-columns: 1fr;
+	grid-gap: 15px;
+	list-style: none;
+	margin-left: -28px;
+}
+`
 
 /**
  * API usage -
@@ -350,56 +376,11 @@ export class BasicPicker extends React.Component {
 
 		const color = this.getFormat(this.state.color)[currentFormat]
 
+		// Set the background color of color picker according to the current theme
 		const bg = this.props.theme === 'dark' ? '#1f1f1f' : 'rgb(255, 255, 255)'
 
+		// Set icon color according to the current theme
 		const iconColor = this.props.theme === 'dark' ? 'rgb(255, 255, 255)' : '#000A14'
-
-		const thumbColor = this.props.theme === 'light' ? '#1f1f1f' : iconColor
-
-		injectGlobal`
-			.slider {
-				-webkit-appearance: none;
-				width: 140px;
-				height: 2px;
-				border-radius: 5px;   
-				background: #DCDCDC;
-				outline: none;
-				opacity: 0.7;
-				-webkit-transition: .2s;
-				transition: opacity .2s;
-			}
-
-			.slider::-webkit-slider-thumb {
-				-webkit-appearance: none;
-				appearance: none;
-				width: 15px;
-				height: 15px;
-				border-radius: 50%; 
-				cursor: pointer;
-				background: ${thumbColor};
-			}
-
-			.icon {
-				display: inline-block;
-				width: 20px;
-				position: relative;
-				top: 5px;
-				left: -5px;
-			}
-
-			i:not(.icon) {
-				cursor: pointer;
-			}
-
-			ul {
-				display: grid;
-				justify-content: center;
-				grid-template-columns: 1fr;
-				grid-gap: 15px;
-				list-style: none;
-				margin-left: -28px;
-			}
-		`
 
 		return (
 			<Container background={bg} width={this.props.width}>
@@ -422,97 +403,52 @@ export class BasicPicker extends React.Component {
 					)}
 					<ColorInput value={color} onChange={this.props.onChange} />
 					<ColorFormatPicker changeFormat={this.changeFormat} renderFormats={this.renderFormats} />
-					<div
-						className={css`
-							display: grid;
-							grid-template-columns: repeat(6, 1fr);
-							grid-gap: 18px;
-							justify-content: center;
-							margin-top: 20px;
-						`}
-					>
-						<ImagePicker uploadImage={this.uploadImage} color={iconColor} />
-						<PaletteGenerator generateSwatches={this.generateSwatches} color={iconColor} />
-						<TintsGenerator generateTints={this.generateTints} color={iconColor} />
-						<ShadesGenerator generateShades={this.generateShades} color={iconColor} />
-						<Clipboard
-							copyColor={e => {
-								navigator.clipboard.writeText(color)
-							}}
-							color={iconColor}
-						/>
-						<Reset resetColors={this.resetColors} color={iconColor} />
-					</div>
+					<Provider value={iconColor}>
+						<div
+							className={css`
+								display: grid;
+								grid-template-columns: repeat(6, 1fr);
+								grid-gap: 18px;
+								justify-content: center;
+								margin-top: 20px;
+							`}
+						>
+							<ImagePicker uploadImage={this.uploadImage} />
+							<PaletteGenerator generateSwatches={this.generateSwatches} />
+							<TintsGenerator generateTints={this.generateTints} />
+							<ShadesGenerator generateShades={this.generateShades} />
+							<Clipboard
+								copyColor={e => {
+									navigator.clipboard.writeText(color)
+								}}
+							/>
+							<Reset resetColors={this.resetColors} />
+						</div>
+					</Provider>
 					{this.props.showTools ? (
 						<div>
-							<ul>
-								<li>
-									<i className="fas fa-sync-alt icon" style={{ color: iconColor }} />
-									<input className="slider" type="range" min="-360" max="360" value={spin} onChange={this.handleSpin} />
-								</li>
-								<li>
-									<i className="fas fa-star-half-alt icon" style={{ color: iconColor }} />
-									<input
-										className="slider"
-										type="range"
-										min="10"
-										max="100"
-										value={saturate}
-										onChange={this.handleSaturate}
-									/>
-								</li>
-								<li>
-									<i className="fas fa-fill icon" style={{ color: iconColor }} />
-									<input
-										className="slider"
-										type="range"
-										min="10"
-										max="100"
-										value={desaturate}
-										onChange={this.handleDesaturate}
-									/>
-								</li>
-								<li>
-									<span>
-										<i className="fas fa-moon icon" style={{ color: iconColor }} />
-										<input
-											className="slider"
-											type="range"
-											min="10"
-											max="100"
-											value={darken}
-											onChange={this.handleDarken}
-										/>
-									</span>
-								</li>
-
-								<li>
-									<span>
-										<i className="far fa-moon icon" style={{ color: iconColor }} />
-										<input
-											className="slider"
-											type="range"
-											min="10"
-											max="100"
-											value={lighten}
-											onChange={this.handleLighten}
-										/>
-									</span>
-								</li>
-								<li>
-									<span>
-										<i className="fas fa-sun icon" style={{ color: iconColor }} />
-										<input
-											className="slider"
-											type="range"
-											min="10"
-											max="100"
-											value={brighten}
-											onChange={this.handleBrighten}
-										/>
-									</span>
-								</li>
-							</ul>
+							<Provider value={iconColor}>
+								<ul>
+									<li>
+										<Tools.ColorSpinner value={spin} onChange={this.handleSpin} />
+									</li>
+									<li>
+										<Tools.ColorSaturator value={saturate} onChange={this.handleSaturate} />
+									</li>
+									<li>
+										<Tools.ColorDesaturator value={desaturate} onChange={this.handleDesaturate} />
+									</li>
+									<li>
+										<Tools.ColorDarkener value={darken} onChange={this.handleDarken} />
+									</li>
+									<li>
+										<Tools.ColorLightener value={lighten} onChange={this.handleLighten} />
+									</li>
+									<li>
+										<Tools.ColorBrightener value={brighten} onChange={this.handleBrighten} />
+									</li>
+								</ul>
+							</Provider>
 						</div>
 					) : null}
 				</div>

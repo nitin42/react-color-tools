@@ -15,7 +15,7 @@ class App extends React.Component {
 					color={this.state.color}
 					onChange={color => this.setState({ color })}
 					// onSwatchHover={color => this.setState({ color })}
-					theme="light"
+					// theme="dark"
 					showTools
 				/>
 				<h2 style={{ color: this.state.color }}>React Color Picker</h2>
