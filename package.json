@@ -34,11 +34,12 @@
   },
   "lint-staged": {
     "*.{js,json,css,md}": [
-      "prettier --write",
+      "prettier --write --no-semi --single-quote",
       "git add"
     ]
   },
   "scripts": {
-    "start": "parcel ./public/index.html -p 4567"
+    "start": "parcel ./public/index.html -p 4567",
+    "formatall": "find src -name '*.js' | xargs prettier --write --no-semi --single-quote"
   }
 }
