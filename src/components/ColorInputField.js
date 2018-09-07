@@ -82,6 +82,7 @@ export default class ColorInputField extends React.Component {
 					width: 100%;
 					box-shadow: rgb(221, 221, 221) 0px 0px 0px 1px inset;
 					outline: none;
+					margin-top: 10px;
 					font-size: 12px;
 				`}
 				ref={input => (this.input = input)}

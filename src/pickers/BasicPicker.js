@@ -30,6 +30,8 @@ const DEFAULT_SWATCHES = [
 	'#03ec13',
 	'#3999dc',
 	'#e1c9ec',
+	'#2f9d66',
+	'#daa520',
 ]
 const DEFAULT_COLOR = '#088da5'
 const MAX_COLORS = 64
@@ -72,6 +74,12 @@ export class BasicPicker extends React.Component {
 		currentFormat: 'HEX',
 		// Color format options
 		formats: ['HSL', 'HSV', 'RGB', 'HEX'],
+		lighten: 0,
+		brighten: 0,
+		darken: 0,
+		spin: 0,
+		desaturate: 0,
+		saturate: 0,
 	}
 
 	static defaultProps = {
@@ -79,9 +87,17 @@ export class BasicPicker extends React.Component {
 		swatches: DEFAULT_SWATCHES,
 		maxColors: MAX_COLORS,
 		triangle: true,
-		width: '170px',
+		width: '200px',
 		theme: 'light',
+		showTools: false,
 	}
+
+	lightenColor = null
+	brightenColor = null
+	darkenColor = null
+	spinColor = null
+	desaturateColor = null
+	saturateColor = null
 
 	componentDidMount() {
 		this.uploadElement = document.getElementById('uploader')
@@ -105,15 +121,129 @@ export class BasicPicker extends React.Component {
 				this.setState({ color })
 			}
 		}
-
-		// if (oldProps.swatches !== this.props.swatches) {
-		// 	this.setState({ swatches: this.props.swatches })
-		// }
 	}
 
 	componentWillUnmount() {
 		this.imageIcon.removeEventListener('click', this.simulateClick)
 		document.removeEventListener('keydown', this.updateKey)
+	}
+
+	handleSpin = e => {
+		const value = parseInt(e.target.value)
+
+		if (this.spinColor === null) {
+			this.spinColor = this.state.color.originalInput
+		}
+
+		this.darkenColor = null
+		this.lightenColor = null
+		this.brightenColor = null
+
+		const color = new TinyColor(this.spinColor).spin(value)
+
+		this.props.onChange && this.props.onChange(color.toHexString())
+
+		this.setState({ color, spin: value })
+	}
+
+	handleSaturate = e => {
+		const value = parseInt(e.target.value)
+
+		if (this.saturateColor === null) {
+			this.saturateColor = this.state.color.originalInput
+		}
+
+		this.darkenColor = null
+		this.lightenColor = null
+		this.spinColor = null
+		this.brightenColor = null
+		this.desaturateColor = null
+
+		const color = new TinyColor(this.saturateColor).saturate(value)
+
+		this.props.onChange && this.props.onChange(color.toHexString())
+
+		this.setState({ color, saturate: value })
+	}
+
+	handleDesaturate = e => {
+		const value = parseInt(e.target.value)
+
+		if (this.desaturateColor === null) {
+			this.desaturateColor = this.state.color.originalInput
+		}
+
+		this.darkenColor = null
+		this.lightenColor = null
+		this.spinColor = null
+		this.brightenColor = null
+		this.saturateColor = null
+
+		const color = new TinyColor(this.desaturateColor).desaturate(value)
+
+		this.props.onChange && this.props.onChange(color.toHexString())
+
+		this.setState({ color, desaturate: value })
+	}
+
+	handleBrighten = e => {
+		const value = parseInt(e.target.value)
+
+		if (this.brightenColor === null) {
+			this.brightenColor = this.state.color.originalInput
+		}
+
+		this.darkenColor = null
+		this.lightenColor = null
+		this.spinColor = null
+		this.desaturateColor = null
+		this.saturateColor = null
+
+		const color = new TinyColor(this.brightenColor).brighten(value)
+
+		this.props.onChange && this.props.onChange(color.toHexString())
+
+		this.setState({ color, brighten: value })
+	}
+
+	handleDarken = e => {
+		const value = parseInt(e.target.value)
+
+		if (this.darkenColor === null) {
+			this.darkenColor = this.state.color.originalInput
+		}
+
+		this.brightenColor = null
+		this.lightenColor = null
+		this.spinColor = null
+		this.desaturateColor = null
+		this.saturateColor = null
+
+		const color = new TinyColor(this.darkenColor).darken(value)
+
+		this.props.onChange && this.props.onChange(color.toHexString())
+
+		this.setState({ color, darken: value })
+	}
+
+	handleLighten = e => {
+		const value = parseInt(e.target.value)
+
+		if (this.lightenColor === null) {
+			this.lightenColor = this.state.color.originalInput
+		}
+
+		this.brightenColor = null
+		this.darkenColor = null
+		this.spinColor = null
+		this.desaturateColor = null
+		this.saturateColor = null
+
+		const color = new TinyColor(this.lightenColor).lighten(value)
+
+		this.props.onChange && this.props.onChange(color.toHexString())
+
+		this.setState({ color, lighten: value })
 	}
 
 	// outputs the color according to the color format
@@ -154,7 +284,7 @@ export class BasicPicker extends React.Component {
 		// Each swatch should be different
 		const newColors = new Set()
 
-		while (i < 10) {
+		while (i < 12) {
 			newColors.add(generateColors())
 			i++
 		}
@@ -202,12 +332,74 @@ export class BasicPicker extends React.Component {
 		})
 
 	render() {
-		const { image, swatches, shades, showShades, showTints, tints, currentFormat } = this.state
+		const {
+			image,
+			swatches,
+			shades,
+			showShades,
+			showTints,
+			tints,
+			currentFormat,
+			darken,
+			brighten,
+			spin,
+			lighten,
+			desaturate,
+			saturate,
+		} = this.state
 
 		const color = this.getFormat(this.state.color)[currentFormat]
 
 		const bg = this.props.theme === 'dark' ? '#1f1f1f' : 'rgb(255, 255, 255)'
+
 		const iconColor = this.props.theme === 'dark' ? 'rgb(255, 255, 255)' : '#000A14'
+
+		const thumbColor = this.props.theme === 'light' ? '#1f1f1f' : iconColor
+
+		injectGlobal`
+			.slider {
+				-webkit-appearance: none;
+				width: 140px;
+				height: 2px;
+				border-radius: 5px;   
+				background: #DCDCDC;
+				outline: none;
+				opacity: 0.7;
+				-webkit-transition: .2s;
+				transition: opacity .2s;
+			}
+
+			.slider::-webkit-slider-thumb {
+				-webkit-appearance: none;
+				appearance: none;
+				width: 15px;
+				height: 15px;
+				border-radius: 50%; 
+				cursor: pointer;
+				background: ${thumbColor};
+			}
+
+			.icon {
+				display: inline-block;
+				width: 20px;
+				position: relative;
+				top: 5px;
+				left: -5px;
+			}
+
+			i:not(.icon) {
+				cursor: pointer;
+			}
+
+			ul {
+				display: grid;
+				justify-content: center;
+				grid-template-columns: 1fr;
+				grid-gap: 15px;
+				list-style: none;
+				margin-left: -28px;
+			}
+		`
 
 		return (
 			<Container background={bg} width={this.props.width}>
@@ -232,10 +424,11 @@ export class BasicPicker extends React.Component {
 					<ColorFormatPicker changeFormat={this.changeFormat} renderFormats={this.renderFormats} />
 					<div
 						className={css`
-							display: flex;
+							display: grid;
+							grid-template-columns: repeat(6, 1fr);
+							grid-gap: 18px;
 							justify-content: center;
-							margin-top: 10px;
-							cursor: pointer;
+							margin-top: 20px;
 						`}
 					>
 						<ImagePicker uploadImage={this.uploadImage} color={iconColor} />
@@ -250,6 +443,78 @@ export class BasicPicker extends React.Component {
 						/>
 						<Reset resetColors={this.resetColors} color={iconColor} />
 					</div>
+					{this.props.showTools ? (
+						<div>
+							<ul>
+								<li>
+									<i className="fas fa-sync-alt icon" style={{ color: iconColor }} />
+									<input className="slider" type="range" min="-360" max="360" value={spin} onChange={this.handleSpin} />
+								</li>
+								<li>
+									<i className="fas fa-star-half-alt icon" style={{ color: iconColor }} />
+									<input
+										className="slider"
+										type="range"
+										min="10"
+										max="100"
+										value={saturate}
+										onChange={this.handleSaturate}
+									/>
+								</li>
+								<li>
+									<i className="fas fa-fill icon" style={{ color: iconColor }} />
+									<input
+										className="slider"
+										type="range"
+										min="10"
+										max="100"
+										value={desaturate}
+										onChange={this.handleDesaturate}
+									/>
+								</li>
+								<li>
+									<span>
+										<i className="fas fa-moon icon" style={{ color: iconColor }} />
+										<input
+											className="slider"
+											type="range"
+											min="10"
+											max="100"
+											value={darken}
+											onChange={this.handleDarken}
+										/>
+									</span>
+								</li>
+
+								<li>
+									<span>
+										<i className="far fa-moon icon" style={{ color: iconColor }} />
+										<input
+											className="slider"
+											type="range"
+											min="10"
+											max="100"
+											value={lighten}
+											onChange={this.handleLighten}
+										/>
+									</span>
+								</li>
+								<li>
+									<span>
+										<i className="fas fa-sun icon" style={{ color: iconColor }} />
+										<input
+											className="slider"
+											type="range"
+											min="10"
+											max="100"
+											value={brighten}
+											onChange={this.handleBrighten}
+										/>
+									</span>
+								</li>
+							</ul>
+						</div>
+					) : null}
 				</div>
 			</Container>
 		)

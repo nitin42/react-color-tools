@@ -6,7 +6,7 @@ import Swatch from './Swatch'
 const ENTER_KEY = 13
 
 const Swatches = ({ swatches, updateSwatch, onSwatchHover }) => (
-	<div style={{ marginRight: -10 }}>
+	<div style={{ marginRight: -20 }}>
 		{swatches.map((color, key) => (
 			<span key={key}>
 				<Swatch
