@@ -1,44 +1,44 @@
 {
-	"name": "react-color-plus",
-	"version": "1.0.0",
-	"description": "A collection of advance color pickers created with react-color primitives",
-	"main": "index.js",
-	"author": "Nitin Tulswani",
-	"license": "MIT",
-	"dependencies": {
-		"@ctrl/tinycolor": "^2.2.0",
-		"emotion": "^9.2.8",
-		"prop-types": "^15.6.2",
-		"randomcolor": "^0.5.3",
-		"react-color-extractor": "^1.1.2",
-		"react-emotion": "^9.2.8",
-		"values.js": "^1.0.3"
-	},
-	"devDependencies": {
-		"babel-core": "^6.26.3",
-		"babel-plugin-transform-class-properties": "^6.24.1",
-		"babel-plugin-transform-object-rest-spread": "^6.26.0",
-		"babel-preset-env": "^1.7.0",
-		"babel-preset-react": "^6.24.1",
-		"husky": "^0.14.3",
-		"lint-staged": "^7.2.2",
-		"parcel-bundler": "^1.9.7",
-		"prettier": "^1.14.2",
-		"react": "^16.4.2",
-		"react-dom": "^16.4.2"
-	},
-	"scripts": {
-		"start": "parcel ./public/index.html -p 4567"
-	},
-	"husky": {
-		"hooks": {
-			"pre-commit": "lint-staged"
-		}
-	},
-	"lint-staged": {
-		"*.{js,json,css,md}": [
-			"./node_modules/.bin/prettier --write --no-semi --single-quote ",
-			"git add"
-		]
-	}
+  "name": "react-color-plus",
+  "version": "1.0.0",
+  "description": "A collection of advance color pickers created with react-color primitives",
+  "main": "index.js",
+  "author": "Nitin Tulswani",
+  "license": "MIT",
+  "dependencies": {
+    "@ctrl/tinycolor": "^2.2.0",
+    "emotion": "^9.2.8",
+    "prop-types": "^15.6.2",
+    "randomcolor": "^0.5.3",
+    "react-color-extractor": "^1.1.2",
+    "react-emotion": "^9.2.8",
+    "values.js": "^1.0.3"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "husky": "^1.0.0-rc.13",
+    "lint-staged": "^7.2.2",
+    "parcel-bundler": "^1.9.7",
+    "prettier": "^1.14.2",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,css,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "scripts": {
+    "start": "parcel ./public/index.html -p 4567"
+  }
 }
