@@ -164,6 +164,8 @@ export class BasicPicker extends React.Component {
 		this.darkenColor = null
 		this.lightenColor = null
 		this.brightenColor = null
+		this.saturateColor = null
+		this.desaturateColor = null
 
 		const color = new TinyColor(this.spinColor).spin(value)
 
