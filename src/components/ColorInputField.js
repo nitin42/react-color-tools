@@ -4,7 +4,7 @@ import { css } from 'emotion'
 
 const INPUT_COLOR_SCHEME = 'rgb(102, 102, 102)'
 
-// Edited and copied from react-color/EditableInput
+// Copied and edited from react-color/EditableInput
 export default class ColorInputField extends React.Component {
   state = {
     value: String(this.props.value).toUpperCase(),
