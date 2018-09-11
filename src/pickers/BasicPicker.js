@@ -275,6 +275,7 @@ export class BasicPicker extends React.PureComponent {
       )
     })
 
+  // This handler is used to update the image state. After the colors are extracted from the image, a image can be removed from the color block.
   updateKey = e => {
     if (e.which === 8) {
       this.setState({ image: null, showShades: false, showTints: false })
@@ -327,6 +328,7 @@ export class BasicPicker extends React.PureComponent {
       showTints: false
     })
 
+  // Generates shades or tints from the currently selected hue (color)
   generateSwatchesFromHue = (term, showShades, showTints) => {
     const colorBuffer = []
     const color = new Values(this.state.color.toHexString())
@@ -340,12 +342,16 @@ export class BasicPicker extends React.PureComponent {
     })
   }
 
+  // Shades - A hue lightened with white
   generateShades = e => this.generateSwatchesFromHue('shades', true, false)
 
+  // Tints - A hue darkened with black
   generateTints = e => this.generateSwatchesFromHue('tints', false, true)
 
+  // Update the color format (hsv, rgb, hex, or hsl)
   changeFormat = e => this.setState({ currentFormat: e.target.value })
 
+  // This handler reset the state tree of color picker. New swatches are generated, sliders are reset to defaults.
   resetColors = e =>
     this.setState({
       color: new TinyColor(this.props.color),
@@ -374,6 +380,7 @@ export class BasicPicker extends React.PureComponent {
       saturate
     } = this.state
 
+    // Get the color string with a specified color format
     const color = this.getColor(this.state.color)[currentFormat]
 
     // Set the background color of color picker according to the current theme
