@@ -75,7 +75,7 @@ ul {
  * />
  */
 
-export class BasicPicker extends React.Component {
+export class BasicPicker extends React.PureComponent {
   // Image upload icon
   imageIcon = null
   // Hidden input element for uploading an image
@@ -154,9 +154,25 @@ export class BasicPicker extends React.Component {
     document.removeEventListener('keydown', this.updateKey)
   }
 
-  handleSpin = e => {
-    const value = parseInt(e.target.value)
+  updateColorState = (value, color, operation) => {
+    value = parseInt(value)
 
+    const newColor = new TinyColor(color)[operation](value)
+
+    this.props.onChange && this.props.onChange(newColor.toHexString())
+    this.setState({ color: newColor, [operation]: value })
+  }
+
+  /**
+   * Below methods are used to handle color operations. Whenever an operation is performed on a color,
+   * it mutates the original state of the color. So we use instance properties to clear and set the
+   * currently active color state, and then apply the color operations to that color.
+   *
+   * TODO: Refactor this mess
+   */
+
+  // 'spin' operation spin (changes) the current hue
+  handleSpin = e => {
     if (this.spinColor === null) {
       this.spinColor = this.state.color.originalInput
     }
@@ -167,16 +183,11 @@ export class BasicPicker extends React.Component {
     this.saturateColor = null
     this.desaturateColor = null
 
-    const color = new TinyColor(this.spinColor).spin(value)
-
-    this.props.onChange && this.props.onChange(color.toHexString())
-
-    this.setState({ color, spin: value })
+    this.updateColorState(e.target.value, this.spinColor, 'spin')
   }
 
+  // 'saturation' describes the intensity (or purity) of a color
   handleSaturate = e => {
-    const value = parseInt(e.target.value)
-
     if (this.saturateColor === null) {
       this.saturateColor = this.state.color.originalInput
     }
@@ -187,16 +198,11 @@ export class BasicPicker extends React.Component {
     this.brightenColor = null
     this.desaturateColor = null
 
-    const color = new TinyColor(this.saturateColor).saturate(value)
-
-    this.props.onChange && this.props.onChange(color.toHexString())
-
-    this.setState({ color, saturate: value })
+    this.updateColorState(e.target.value, this.saturateColor, 'saturate')
   }
 
+  // 'desaturation' makes a color more muted (with black or grey)
   handleDesaturate = e => {
-    const value = parseInt(e.target.value)
-
     if (this.desaturateColor === null) {
       this.desaturateColor = this.state.color.originalInput
     }
@@ -207,16 +213,10 @@ export class BasicPicker extends React.Component {
     this.brightenColor = null
     this.saturateColor = null
 
-    const color = new TinyColor(this.desaturateColor).desaturate(value)
-
-    this.props.onChange && this.props.onChange(color.toHexString())
-
-    this.setState({ color, desaturate: value })
+    this.updateColorState(e.target.value, this.desaturateColor, 'desaturate')
   }
 
   handleBrighten = e => {
-    const value = parseInt(e.target.value)
-
     if (this.brightenColor === null) {
       this.brightenColor = this.state.color.originalInput
     }
@@ -227,16 +227,10 @@ export class BasicPicker extends React.Component {
     this.desaturateColor = null
     this.saturateColor = null
 
-    const color = new TinyColor(this.brightenColor).brighten(value)
-
-    this.props.onChange && this.props.onChange(color.toHexString())
-
-    this.setState({ color, brighten: value })
+    this.updateColorState(e.target.value, this.brightenColor, 'brighten')
   }
 
   handleDarken = e => {
-    const value = parseInt(e.target.value)
-
     if (this.darkenColor === null) {
       this.darkenColor = this.state.color.originalInput
     }
@@ -247,16 +241,10 @@ export class BasicPicker extends React.Component {
     this.desaturateColor = null
     this.saturateColor = null
 
-    const color = new TinyColor(this.darkenColor).darken(value)
-
-    this.props.onChange && this.props.onChange(color.toHexString())
-
-    this.setState({ color, darken: value })
+    this.updateColorState(e.target.value, this.darkenColor, 'darken')
   }
 
   handleLighten = e => {
-    const value = parseInt(e.target.value)
-
     if (this.lightenColor === null) {
       this.lightenColor = this.state.color.originalInput
     }
@@ -267,15 +255,11 @@ export class BasicPicker extends React.Component {
     this.desaturateColor = null
     this.saturateColor = null
 
-    const color = new TinyColor(this.lightenColor).lighten(value)
-
-    this.props.onChange && this.props.onChange(color.toHexString())
-
-    this.setState({ color, lighten: value })
+    this.updateColorState(e.target.value, this.lightenColor, 'lighten')
   }
 
   // outputs the color according to the color format
-  getFormat = color => ({
+  getColor = color => ({
     HSL: color.toHslString(),
     HEX: color.toHexString(),
     RGB: color.toRgbString(),
@@ -390,7 +374,7 @@ export class BasicPicker extends React.Component {
       saturate
     } = this.state
 
-    const color = this.getFormat(this.state.color)[currentFormat]
+    const color = this.getColor(this.state.color)[currentFormat]
 
     // Set the background color of color picker according to the current theme
     const bg = this.props.theme === 'dark' ? '#1f1f1f' : 'rgb(255, 255, 255)'
@@ -463,9 +447,7 @@ export class BasicPicker extends React.Component {
               <TintsGenerator generateTints={this.generateTints} />
               <ShadesGenerator generateShades={this.generateShades} />
               <Clipboard
-                copyColor={e => {
-                  navigator.clipboard.writeText(color)
-                }}
+                copyColor={e => navigator.clipboard.writeText(color)}
               />
               <Reset resetColors={this.resetColors} />
             </div>
