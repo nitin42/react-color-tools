@@ -118,6 +118,12 @@ export class BasicPicker extends React.PureComponent {
     showTools: false
   }
 
+  // Color conversion helpers. Exposing these as static methods is more convenient and keeps the component API minimal
+  static toRGB = color => new TinyColor(color).toRgbString()
+  static toHSL = color => new TinyColor(color).toHslString()
+  static toHSV = color => new TinyColor(color).toHsvString()
+  static toRGBPercent = color => new TinyColor(color).toPercentageRgbString()
+
   lightenColor = null
   brightenColor = null
   darkenColor = null
@@ -166,7 +172,7 @@ export class BasicPicker extends React.PureComponent {
   /**
    * Below methods are used to handle color operations. Whenever an operation is performed on a color,
    * it mutates the original state of the color. So we use instance properties to clear and set the
-   * currently active color state, and then apply the color operations to that color.
+   * currently active color state, and then apply the color operations w.r.t to the instance property (or current color value)
    *
    * TODO: Refactor this mess
    */
@@ -186,7 +192,7 @@ export class BasicPicker extends React.PureComponent {
     this.updateColorState(e.target.value, this.spinColor, 'spin')
   }
 
-  // 'saturation' describes the intensity (or purity) of a color
+  // 'saturation' controls the intensity (or purity) of a color
   handleSaturate = e => {
     if (this.saturateColor === null) {
       this.saturateColor = this.state.color.originalInput
@@ -302,7 +308,7 @@ export class BasicPicker extends React.PureComponent {
       i++
     }
 
-    // Remove shades and tints when new swatches are added
+    // Hide shades and tints when new swatches are added
     this.setState({
       swatches: [...newColors],
       showShades: false,

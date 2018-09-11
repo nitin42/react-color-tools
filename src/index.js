@@ -8,6 +8,10 @@ class App extends React.Component {
     color: '#f00'
   }
 
+  componentDidUpdate() {
+    console.log(BasicPicker.toHSL(this.state.color))
+  }
+
   render() {
     return (
       <div>
@@ -15,7 +19,7 @@ class App extends React.Component {
           color={this.state.color}
           onChange={color => this.setState({ color })}
           // onSwatchHover={color => this.setState({ color })}
-          theme="light"
+          theme="dark"
           showTools
           triangle={false}
         />
