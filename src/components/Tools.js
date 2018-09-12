@@ -16,6 +16,9 @@ const ColorSaturator = ({ value, onChange }) => (
           onChange={onChange}
           color={color}
         />
+        <label className="values" style={{ color }}>
+          {value}
+        </label>
       </React.Fragment>
     )}
   </Consumer>
@@ -35,6 +38,9 @@ const ColorDesaturator = ({ value, onChange }) => (
           onChange={onChange}
           color={color}
         />
+        <label className="values" style={{ color }}>
+          {value}
+        </label>
       </React.Fragment>
     )}
   </Consumer>
@@ -54,6 +60,9 @@ const ColorLightener = ({ value, onChange }) => (
           onChange={onChange}
           color={color}
         />
+        <label className="values" style={{ color }}>
+          {value}
+        </label>
       </React.Fragment>
     )}
   </Consumer>
@@ -73,6 +82,9 @@ const ColorBrightener = ({ value, onChange }) => (
           onChange={onChange}
           color={color}
         />
+        <label className="values" style={{ color }}>
+          {value}
+        </label>
       </React.Fragment>
     )}
   </Consumer>
@@ -92,6 +104,9 @@ const ColorDarkener = ({ color, value, onChange }) => (
           onChange={onChange}
           color={color}
         />
+        <label className="values" style={{ color }}>
+          {value}
+        </label>
       </React.Fragment>
     )}
   </Consumer>
@@ -111,6 +126,10 @@ const ColorSpinner = ({ color, onChange, value }) => (
           onChange={onChange}
           color={color}
         />
+        <label className="values" style={{ color }}>
+          {value}
+          <sup>&deg;</sup>
+        </label>
       </React.Fragment>
     )}
   </Consumer>

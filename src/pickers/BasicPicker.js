@@ -48,6 +48,14 @@ injectGlobal`
 	left: -5px;
 }
 
+.values {
+	display: inline-block;
+	width: 10px;
+	position: relative;
+	top: 3px;
+	left: 4px;
+}
+
 i:not(.icon) {
 	cursor: pointer;
 }
@@ -105,7 +113,8 @@ export class BasicPicker extends React.PureComponent {
     darken: 0,
     spin: 0,
     desaturate: 0,
-    saturate: 0
+    saturate: 0,
+    id: 0
   }
 
   static defaultProps = {
@@ -113,7 +122,7 @@ export class BasicPicker extends React.PureComponent {
     swatches: DEFAULT_SWATCHES,
     maxColors: MAX_COLORS,
     triangle: true,
-    width: '200px',
+    width: '220px',
     theme: 'light',
     showTools: false
   }
@@ -124,6 +133,7 @@ export class BasicPicker extends React.PureComponent {
   static toHSV = color => new TinyColor(color).toHsvString()
   static toRGBPercent = color => new TinyColor(color).toPercentageRgbString()
 
+  // Instance properties are used to store the color value on which the color operations will be applied.
   lightenColor = null
   brightenColor = null
   darkenColor = null
@@ -166,7 +176,26 @@ export class BasicPicker extends React.PureComponent {
     const newColor = new TinyColor(color)[operation](value)
 
     this.props.onChange && this.props.onChange(newColor.toHexString())
-    this.setState({ color: newColor, [operation]: value })
+    this.setState({ [operation]: value })
+  }
+
+  getBuffer = () => ({
+    SPIN: this.spinColor,
+    DESATURATE: this.desaturateColor,
+    SATURATE: this.saturateColor,
+    LIGHTEN: this.lightenColor,
+    BRIGHTEN: this.brightenColor,
+    DARKEN: this.darkenColor
+  })
+
+  clearColorBuffer = name => {
+    const bufferObj = this.getBuffer()
+
+    Object.keys(bufferObj).forEach(key => {
+      if (key !== name) {
+        bufferObj[key] = null
+      }
+    })
   }
 
   /**
@@ -186,8 +215,8 @@ export class BasicPicker extends React.PureComponent {
     this.darkenColor = null
     this.lightenColor = null
     this.brightenColor = null
-    this.saturateColor = null
     this.desaturateColor = null
+    this.saturateColor = null
 
     this.updateColorState(e.target.value, this.spinColor, 'spin')
   }
@@ -320,7 +349,39 @@ export class BasicPicker extends React.PureComponent {
     this.setState({ image: window.URL.createObjectURL(e.target.files[0]) })
 
   updateSwatch = color => {
-    this.setState({ color: new TinyColor(color) })
+    if (this.desaturateColor !== null) {
+      this.desaturateColor = null
+    }
+
+    if (this.saturateColor !== null) {
+      this.saturateColor = null
+    }
+
+    if (this.lightenColor !== null) {
+      this.lightenColor = null
+    }
+
+    if (this.darkenColor !== null) {
+      this.darkenColor = null
+    }
+
+    if (this.brightenColor !== null) {
+      this.brightenColor = null
+    }
+
+    if (this.spinColor !== null) {
+      this.spinColor = null
+    }
+
+    this.setState({
+      color: new TinyColor(color),
+      spin: 0,
+      saturate: 0,
+      desaturate: 0,
+      lighten: 0,
+      darken: 0,
+      brighten: 0
+    })
 
     this.props.onChange && this.props.onChange(color)
   }
@@ -357,12 +418,9 @@ export class BasicPicker extends React.PureComponent {
   // Update the color format (hsv, rgb, hex, or hsl)
   changeFormat = e => this.setState({ currentFormat: e.target.value })
 
-  // This handler reset the state tree of color picker. New swatches are generated, sliders are reset to defaults.
+  // Reset the shades and tints
   resetColors = e =>
     this.setState({
-      color: new TinyColor(this.props.color),
-      swatches: this.props.swatches,
-      image: null,
       shades: [],
       tints: [],
       showShades: false,
@@ -397,7 +455,7 @@ export class BasicPicker extends React.PureComponent {
       this.props.theme === 'dark' ? 'rgb(255, 255, 255)' : '#000A14'
 
     return (
-      <Container background={bg} width={this.props.width}>
+      <Container background={bg} width={'228px'}>
         {this.props.triangle &&
           this.state.image === null && (
             <Triangle color={this.state.color.toHexString()} />
@@ -450,8 +508,8 @@ export class BasicPicker extends React.PureComponent {
               className={css`
                 display: grid;
                 grid-template-columns: repeat(6, 1fr);
-                grid-gap: 18px;
-                justify-content: center;
+                grid-gap: 5px;
+                margin-right: -20px;
                 margin-top: 20px;
               `}
             >

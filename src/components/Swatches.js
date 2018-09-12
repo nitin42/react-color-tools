@@ -6,7 +6,13 @@ import Swatch from './Swatch'
 const ENTER_KEY = 13
 
 const Swatches = ({ swatches, updateSwatch, onSwatchHover }) => (
-  <div style={{ marginRight: -20 }}>
+  <div
+    className={css`
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      grid-gap: 5.3px;
+    `}
+  >
     {swatches.map((color, key) => (
       <span key={key}>
         <Swatch
