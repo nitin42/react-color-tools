@@ -13,15 +13,9 @@ import ActiveColor from '../components/ActiveColor'
 import Container from '../components/Container'
 import Image from '../components/Image'
 import Swatches from '../components/Swatches'
-import ImagePicker from '../components/ImagePicker'
-import PaletteGenerator from '../components/PaletteGenerator'
 import Triangle from '../components/Triangle'
 import ColorFormatPicker from '../components/ColorFormatPicker'
-import TintsGenerator from '../components/TintsGenerator'
-import ShadesGenerator from '../components/ShadesGenerator'
-import Clipboard from '../components/Clipboard'
-import Reset from '../components/Reset'
-import Tools from '../components/Tools'
+import { AdvanceTools, BasicTools } from '../components/Tools'
 
 const DARK_COLOR = '#1f1f1f'
 const LIGHT_COLOR = 'rgb(255, 255, 255)'
@@ -472,14 +466,18 @@ export class BasicPicker extends React.PureComponent {
                 margin-top: 20px;
               `}
             >
-              <ImagePicker uploadImage={this.uploadImage} />
-              <PaletteGenerator generateSwatches={this.generateSwatches} />
-              <TintsGenerator generateTints={this.generateTints} />
-              <ShadesGenerator generateShades={this.generateShades} />
-              <Clipboard
+              <BasicTools.ImagePicker uploadImage={this.uploadImage} />
+              <BasicTools.PaletteGenerator
+                generateSwatches={this.generateSwatches}
+              />
+              <BasicTools.TintsGenerator generateTints={this.generateTints} />
+              <BasicTools.ShadesGenerator
+                generateShades={this.generateShades}
+              />
+              <BasicTools.Clipboard
                 copyColor={e => navigator.clipboard.writeText(color)}
               />
-              <Reset resetColors={this.resetColors} />
+              <BasicTools.Reset resetColors={this.resetColors} />
             </div>
           </ColorProvider>
           {this.props.showTools ? (
@@ -487,37 +485,37 @@ export class BasicPicker extends React.PureComponent {
               <ColorProvider value={iconColor}>
                 <ul>
                   <li>
-                    <Tools.ColorSpinner
+                    <AdvanceTools.ColorSpinner
                       value={spin}
                       onChange={this.handleSpin}
                     />
                   </li>
                   <li>
-                    <Tools.ColorSaturator
+                    <AdvanceTools.ColorSaturator
                       value={saturate}
                       onChange={this.handleSaturate}
                     />
                   </li>
                   <li>
-                    <Tools.ColorDesaturator
+                    <AdvanceTools.ColorDesaturator
                       value={desaturate}
                       onChange={this.handleDesaturate}
                     />
                   </li>
                   <li>
-                    <Tools.ColorDarkener
+                    <AdvanceTools.ColorDarkener
                       value={darken}
                       onChange={this.handleDarken}
                     />
                   </li>
                   <li>
-                    <Tools.ColorLightener
+                    <AdvanceTools.ColorLightener
                       value={lighten}
                       onChange={this.handleLighten}
                     />
                   </li>
                   <li>
-                    <Tools.ColorBrightener
+                    <AdvanceTools.ColorBrightener
                       value={brighten}
                       onChange={this.handleBrighten}
                     />

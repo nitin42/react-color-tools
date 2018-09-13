@@ -15,7 +15,7 @@ class App extends React.Component {
           color={this.state.color}
           onChange={color => this.setState({ color })}
           // onSwatchHover={color => this.setState({ color })}
-          // theme="dark"
+          theme="dark"
           showTools
           triangle={false}
         />
