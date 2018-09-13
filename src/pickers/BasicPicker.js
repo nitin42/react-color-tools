@@ -5,10 +5,13 @@ import generateColors from 'randomcolor'
 import { TinyColor } from '@ctrl/tinycolor'
 import Values from 'values.js'
 
+import { Provider as ColorProvider } from '../utils/context'
+
 import ColorInput from '../components/ColorInputField'
 import ColorBlock from '../components/ColorBlock'
 import ActiveColor from '../components/ActiveColor'
 import Container from '../components/Container'
+import Image from '../components/Image'
 import Swatches from '../components/Swatches'
 import ImagePicker from '../components/ImagePicker'
 import PaletteGenerator from '../components/PaletteGenerator'
@@ -20,7 +23,8 @@ import Clipboard from '../components/Clipboard'
 import Reset from '../components/Reset'
 import Tools from '../components/Tools'
 
-import { Provider } from '../utils/context'
+const DARK_COLOR = '#1f1f1f'
+const LIGHT_COLOR = 'rgb(255, 255, 255)'
 
 const DEFAULT_SWATCHES = [
   '#5a80b4',
@@ -398,11 +402,10 @@ export class BasicPicker extends React.PureComponent {
     const color = this.getColor(this.state.color)[currentFormat]
 
     // Set the background color of color picker according to the current theme
-    const bg = this.props.theme === 'dark' ? '#1f1f1f' : 'rgb(255, 255, 255)'
+    const bg = this.props.theme === 'dark' ? DARK_COLOR : LIGHT_COLOR
 
     // Set icon color according to the current theme
-    const iconColor =
-      this.props.theme === 'dark' ? 'rgb(255, 255, 255)' : '#000A14'
+    const iconColor = this.props.theme === 'dark' ? LIGHT_COLOR : DARK_COLOR
 
     return (
       <Container background={bg} width={'228px'}>
@@ -411,15 +414,15 @@ export class BasicPicker extends React.PureComponent {
             <Triangle color={this.state.color.toHexString()} />
           )}
         {this.state.image === null ? (
-          <ColorBlock color={this.state.color}>
+          <ColorBlock
+            color={
+              currentFormat === 'HSV' ? this.state.color.toHexString() : color
+            }
+          >
             <ActiveColor color={color} />
           </ColorBlock>
         ) : (
-          <img
-            src={this.state.image}
-            alt="image"
-            style={{ width: this.props.width }}
-          />
+          <Image src={this.state.image} />
         )}
         {image && (
           <ColorExtractor
@@ -453,7 +456,7 @@ export class BasicPicker extends React.PureComponent {
             changeFormat={this.changeFormat}
             renderFormats={this.renderFormats}
           />
-          <Provider value={iconColor}>
+          <ColorProvider value={iconColor}>
             <div
               className={css`
                 display: grid;
@@ -472,10 +475,10 @@ export class BasicPicker extends React.PureComponent {
               />
               <Reset resetColors={this.resetColors} />
             </div>
-          </Provider>
+          </ColorProvider>
           {this.props.showTools ? (
             <div>
-              <Provider value={iconColor}>
+              <ColorProvider value={iconColor}>
                 <ul>
                   <li>
                     <Tools.ColorSpinner
@@ -514,7 +517,7 @@ export class BasicPicker extends React.PureComponent {
                     />
                   </li>
                 </ul>
-              </Provider>
+              </ColorProvider>
             </div>
           ) : null}
         </div>
