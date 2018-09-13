@@ -171,8 +171,10 @@ export class BasicPicker extends React.PureComponent {
   }
 
   updateColorState = (value, color, operation) => {
-    value = parseInt(value)
+    // This clears all the color buffers except the buffer which is currently being used to persist the original color
+    this.clearColorBuffer(operation)
 
+    value = parseInt(value)
     const newColor = new TinyColor(color)[operation](value)
 
     this.props.onChange && this.props.onChange(newColor.toHexString())
@@ -180,19 +182,24 @@ export class BasicPicker extends React.PureComponent {
   }
 
   getBuffer = () => ({
-    SPIN: this.spinColor,
-    DESATURATE: this.desaturateColor,
-    SATURATE: this.saturateColor,
-    LIGHTEN: this.lightenColor,
-    BRIGHTEN: this.brightenColor,
-    DARKEN: this.darkenColor
+    spin: this.spinColor,
+    desaturate: this.desaturateColor,
+    saturate: this.saturateColor,
+    lighten: this.lightenColor,
+    brighten: this.brightenColor,
+    darken: this.darkenColor
   })
 
-  clearColorBuffer = name => {
+  clearColorBuffer = currentBuffer => {
     const bufferObj = this.getBuffer()
 
     Object.keys(bufferObj).forEach(key => {
-      if (key !== name) {
+      if (currentBuffer && currentBuffer.length > 0) {
+        if (key !== currentBuffer) {
+          bufferObj[key] = null
+        }
+      } else {
+        // Reset all the buffers
         bufferObj[key] = null
       }
     })
@@ -212,12 +219,6 @@ export class BasicPicker extends React.PureComponent {
       this.spinColor = this.state.color.originalInput
     }
 
-    this.darkenColor = null
-    this.lightenColor = null
-    this.brightenColor = null
-    this.desaturateColor = null
-    this.saturateColor = null
-
     this.updateColorState(e.target.value, this.spinColor, 'spin')
   }
 
@@ -226,12 +227,6 @@ export class BasicPicker extends React.PureComponent {
     if (this.saturateColor === null) {
       this.saturateColor = this.state.color.originalInput
     }
-
-    this.darkenColor = null
-    this.lightenColor = null
-    this.spinColor = null
-    this.brightenColor = null
-    this.desaturateColor = null
 
     this.updateColorState(e.target.value, this.saturateColor, 'saturate')
   }
@@ -242,12 +237,6 @@ export class BasicPicker extends React.PureComponent {
       this.desaturateColor = this.state.color.originalInput
     }
 
-    this.darkenColor = null
-    this.lightenColor = null
-    this.spinColor = null
-    this.brightenColor = null
-    this.saturateColor = null
-
     this.updateColorState(e.target.value, this.desaturateColor, 'desaturate')
   }
 
@@ -255,12 +244,6 @@ export class BasicPicker extends React.PureComponent {
     if (this.brightenColor === null) {
       this.brightenColor = this.state.color.originalInput
     }
-
-    this.darkenColor = null
-    this.lightenColor = null
-    this.spinColor = null
-    this.desaturateColor = null
-    this.saturateColor = null
 
     this.updateColorState(e.target.value, this.brightenColor, 'brighten')
   }
@@ -270,12 +253,6 @@ export class BasicPicker extends React.PureComponent {
       this.darkenColor = this.state.color.originalInput
     }
 
-    this.brightenColor = null
-    this.lightenColor = null
-    this.spinColor = null
-    this.desaturateColor = null
-    this.saturateColor = null
-
     this.updateColorState(e.target.value, this.darkenColor, 'darken')
   }
 
@@ -283,12 +260,6 @@ export class BasicPicker extends React.PureComponent {
     if (this.lightenColor === null) {
       this.lightenColor = this.state.color.originalInput
     }
-
-    this.brightenColor = null
-    this.darkenColor = null
-    this.spinColor = null
-    this.desaturateColor = null
-    this.saturateColor = null
 
     this.updateColorState(e.target.value, this.lightenColor, 'lighten')
   }
@@ -349,32 +320,11 @@ export class BasicPicker extends React.PureComponent {
     this.setState({ image: window.URL.createObjectURL(e.target.files[0]) })
 
   updateSwatch = color => {
-    if (this.desaturateColor !== null) {
-      this.desaturateColor = null
-    }
-
-    if (this.saturateColor !== null) {
-      this.saturateColor = null
-    }
-
-    if (this.lightenColor !== null) {
-      this.lightenColor = null
-    }
-
-    if (this.darkenColor !== null) {
-      this.darkenColor = null
-    }
-
-    if (this.brightenColor !== null) {
-      this.brightenColor = null
-    }
-
-    if (this.spinColor !== null) {
-      this.spinColor = null
-    }
+    this.clearColorBuffer()
 
     this.setState({
       color: new TinyColor(color),
+      // Reset all the values for the newly selected swatch
       spin: 0,
       saturate: 0,
       desaturate: 0,
