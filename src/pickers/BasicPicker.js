@@ -194,6 +194,15 @@ export class BasicPicker extends React.PureComponent {
     darken: this.darkenColor
   })
 
+  clearAllBuffers = () => {
+    this.spinColor = null
+    this.saturateColor = null
+    this.desaturateColor = null
+    this.lightenColor = null
+    this.darkenColor = null
+    this.brightenColor = null
+  }
+
   clearColorBuffer = currentBuffer => {
     const bufferObj = this.getBuffer()
 
@@ -202,9 +211,6 @@ export class BasicPicker extends React.PureComponent {
         if (key !== currentBuffer) {
           bufferObj[key] = null
         }
-      } else {
-        // Reset all the buffers
-        bufferObj[key] = null
       }
     })
   }
@@ -324,7 +330,7 @@ export class BasicPicker extends React.PureComponent {
     this.setState({ image: window.URL.createObjectURL(e.target.files[0]) })
 
   updateSwatch = color => {
-    this.clearColorBuffer()
+    this.clearAllBuffers()
 
     this.setState({
       color: new TinyColor(color),

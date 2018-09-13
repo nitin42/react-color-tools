@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { css } from 'emotion'
 
 const INPUT_COLOR_SCHEME = 'rgb(102, 102, 102)'

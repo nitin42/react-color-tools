@@ -8,9 +8,11 @@ const ActiveColor = ({ color }) => (
   <div
     className={css`
       font-size: 18px;
-      color: ${getContrastingColor(color)};
       position: relative;
     `}
+    style={{
+      color: getContrastingColor(color)
+    }}
   >
     {color}
   </div>
