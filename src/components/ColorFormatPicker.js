@@ -3,8 +3,8 @@ import { css } from 'emotion'
 import PropTypes from 'prop-types'
 
 const renderFormats = formats =>
-  formats.map((format, key) => (
-    <option value={format} key={key}>
+  formats.map(format => (
+    <option value={format} key={format}>
       {format}
     </option>
   ))
@@ -39,8 +39,8 @@ const ColorFormatPicker = ({ changeFormat, formats }) => (
 )
 
 ColorFormatPicker.propTypes = {
-  formats: PropTypes.arrayOf(PropTypes.string),
-  changeFormat: PropTypes.func
+  formats: PropTypes.arrayOf(PropTypes.string).isRequired,
+  changeFormat: PropTypes.func.isRequired
 }
 
 export default ColorFormatPicker

@@ -18,18 +18,17 @@ class ColorInputField extends React.Component {
       if (input === document.activeElement) {
         this.setState({ blurValue: String(nextProps.value).toUpperCase() })
       } else {
-        this.setState({
+        this.setState(state => ({
           value: String(nextProps.value).toUpperCase(),
-          blurValue:
-            !this.state.blurValue && String(nextProps.value).toUpperCase()
-        })
+          blurValue: !state.blurValue && String(nextProps.value).toUpperCase()
+        }))
       }
     }
   }
 
   handleBlur = () => {
     if (this.state.blurValue) {
-      this.setState({ value: this.state.blurValue, blurValue: null })
+      this.setState(state => ({ value: state.blurValue, blurValue: null }))
     }
   }
 
@@ -45,7 +44,7 @@ class ColorInputField extends React.Component {
     const number = Number(stringValue.replace(/%/g, ''))
 
     if (!isNaN(number)) {
-      const amount = this.props.arrowOffset || 1
+      const amount = 1
 
       if (e.keyCode === 38) {
         this.props.onChange && this.props.onChange(number + amount, e)
@@ -85,6 +84,7 @@ class ColorInputField extends React.Component {
           outline: none;
           font-size: 12px;
         `}
+        /* eslint-disable no-return-assign */
         ref={input => (this.input = input)}
         value={this.state.value}
         onKeyDown={this.handleKeyDown}
@@ -97,9 +97,16 @@ class ColorInputField extends React.Component {
   }
 }
 
+ColorInputField.defaultProps = {
+  value: '',
+  onChange: () => {},
+  placeholder: ''
+}
+
 ColorInputField.propTypes = {
   value: PropTypes.string,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  placeholder: PropTypes.string
 }
 
 export default ColorInputField

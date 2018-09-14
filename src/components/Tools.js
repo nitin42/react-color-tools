@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 import Slider from './Slider'
 import { Consumer } from '../utils/context'
 
+const ENTER_KEY = 13
+
 const HOC = Comp => props => (
   <Consumer>{color => <Comp color={color} {...props} />}</Consumer>
 )
@@ -124,7 +126,12 @@ ImagePicker.propTypes = {
 }
 
 const PaletteGenerator = HOC(({ color, generateSwatches }) => (
-  <span title="Palette generator" onClick={generateSwatches}>
+  <span
+    tabIndex={0}
+    title="Palette generator"
+    onClick={generateSwatches}
+    onKeyDown={e => (e.keyCode === ENTER_KEY ? generateSwatches(e) : null)}
+  >
     <i id="image-icon" className="fas fa-palette" style={{ color }} />
   </span>
 ))
@@ -135,7 +142,12 @@ PaletteGenerator.propTypes = {
 }
 
 const ShadesGenerator = HOC(({ color, generateShades }) => (
-  <span title="shade picker" onClick={generateShades}>
+  <span
+    tabIndex={0}
+    title="shade picker"
+    onClick={generateShades}
+    onKeyDown={e => (e.keyCode === ENTER_KEY ? generateShades(e) : null)}
+  >
     <i id="image-icon" className="fas fa-adjust" style={{ color }} />
   </span>
 ))
@@ -146,7 +158,12 @@ ShadesGenerator.propTypes = {
 }
 
 const Reset = HOC(({ color, resetColors }) => (
-  <span title="reset colors" onClick={resetColors}>
+  <span
+    tabIndex={0}
+    title="reset colors"
+    onClick={resetColors}
+    onKeyDown={e => (e.keyCode === ENTER_KEY ? resetColors(e) : null)}
+  >
     <i
       id="image-icon"
       className="fas fa-arrow-alt-circle-left"
@@ -161,7 +178,12 @@ Reset.propTypes = {
 }
 
 const TintsGenerator = HOC(({ color, generateTints }) => (
-  <span title="tint picker" onClick={generateTints}>
+  <span
+    tabIndex={0}
+    title="tint picker"
+    onClick={generateTints}
+    onKeyDown={e => (e.keyCode === ENTER_KEY ? generateTints(e) : null)}
+  >
     <i id="image-icon" className="fas fa-tint" style={{ color }} />
   </span>
 ))
@@ -172,7 +194,12 @@ TintsGenerator.propTypes = {
 }
 
 const Clipboard = HOC(({ color, copyColor }) => (
-  <span title="clipboard" onClick={copyColor}>
+  <span
+    tabIndex={0}
+    title="clipboard"
+    onClick={copyColor}
+    onKeyDown={e => (e.keyCode === ENTER_KEY ? copyColor(e) : null)}
+  >
     <i id="image-icon" className="fas fa-copy" style={{ color }} />
   </span>
 ))

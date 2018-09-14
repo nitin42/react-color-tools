@@ -33,12 +33,17 @@ const Slider = ({ min, max, value, onChange, color }) => (
   />
 )
 
+Slider.defaultProps = {
+  value: 0,
+  onChange: () => {}
+}
+
 Slider.propTypes = {
-  min: PropTypes.string,
-  max: PropTypes.string,
+  min: PropTypes.string.isRequired,
+  max: PropTypes.string.isRequired,
   value: PropTypes.number,
   onChange: PropTypes.func,
-  color: PropTypes.string
+  color: PropTypes.string.isRequired
 }
 
 export default Slider

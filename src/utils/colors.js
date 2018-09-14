@@ -26,6 +26,7 @@ function toState(data, oldHue) {
 
 // Copied from react-color/helpers/colors
 
+/* eslint-disable import/prefer-default-export */
 export function getContrastingColor(data) {
   if (!data) {
     return '#fff'

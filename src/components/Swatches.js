@@ -14,9 +14,9 @@ const Swatches = ({ swatches, updateSwatch, onSwatchHover }) => (
       grid-gap: 5.3px;
     `}
   >
-    {swatches.map((color, key) => (
+    {swatches.map(color => (
       <Swatch
-        key={key}
+        key={color}
         color={color}
         updateSwatch={e => updateSwatch(color, e)}
         updateSwatchOnKeyDown={e =>
@@ -28,8 +28,13 @@ const Swatches = ({ swatches, updateSwatch, onSwatchHover }) => (
   </div>
 )
 
+Swatches.defaultProps = {
+  updateSwatch: () => {},
+  onSwatchHover: () => {}
+}
+
 Swatches.propTypes = {
-  swatches: PropTypes.arrayOf(PropTypes.string),
+  swatches: PropTypes.arrayOf(PropTypes.string).isRequired,
   updateSwatch: PropTypes.func,
   onSwatchHover: PropTypes.func
 }

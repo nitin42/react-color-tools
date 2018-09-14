@@ -19,7 +19,7 @@ const Triangle = ({ color }) => (
 )
 
 Triangle.propTypes = {
-  color: PropTypes.string
+  color: PropTypes.string.isRequired
 }
 
 export default Triangle

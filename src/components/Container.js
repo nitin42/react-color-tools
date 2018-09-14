@@ -6,8 +6,8 @@ import PropTypes from 'prop-types'
 const Container = ({ children, width, background }) => (
   <div
     className={css`
-      width: ${width || '222px'};
-      background: ${background || 'rgb(255, 255, 255)'};
+      width: ${width};
+      background: ${background};
       box-shadow: rgba(0, 0, 0, 0.1) 0px 1px;
       border-radius: 6px;
       position: relative;
@@ -17,11 +17,16 @@ const Container = ({ children, width, background }) => (
   </div>
 )
 
+Container.defaultProps = {
+  width: '222px',
+  background: 'rgb(255, 255, 255)'
+}
+
 Container.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
-  ]),
+  ]).isRequired,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   background: PropTypes.string
 }

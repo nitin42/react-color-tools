@@ -39,52 +39,50 @@ const DEFAULT_COLOR = '#088da5'
 const MAX_COLORS = 64
 
 injectGlobal`
-.icon {
-	display: inline-block;
-	width: 20px;
-	position: relative;
-	top: 5px;
-	left: -5px;
-}
+  .icon {
+    display: inline-block;
+    width: 20px;
+    position: relative;
+    top: 5px;
+    left: -5px;
+  }
 
-.values {
-	display: inline-block;
-	width: 10px;
-	position: relative;
-	top: 3px;
-	left: 4px;
-}
+  .values {
+    display: inline-block;
+    width: 10px;
+    position: relative;
+    top: 3px;
+    left: 4px;
+  }
 
-i:not(.icon) {
-	cursor: pointer;
-}
+  i:not(.icon) {
+    cursor: pointer;
+  }
 
-ul {
-	display: grid;
-	justify-content: center;
-	grid-template-columns: 1fr;
-	grid-gap: 15px;
-	list-style: none;
-	margin-left: -28px;
-}
+  ul {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 1fr;
+    grid-gap: 15px;
+    list-style: none;
+    margin-left: -28px;
+  }
 `
 
-/**
- * API usage -
- *
- * <BasicPicker
- * 		color={DEFAULT_COLOR_IN_COLOR_BLOCK_AND_INPUT_FIELD} // Color to show in colorblock pane and input field
- * 		swatches={ARRAY_OF_SWATCHES} // array of swatches to show in the color picker
- * 		onChange={} // Invoked when the color is updated
- * 		onSwatchHover={} // Invoked on hover over the swatches
- * 		maxColors={} // use this prop to control amount of palette generated from the swatches the when an image is uploaded
- * 		theme="dark_or_light"
- * />
- */
+export default class BasicPicker extends React.PureComponent {
+  // Color conversion helpers. Exposing these as static methods is
+  // more convenient and keeps the component API minimal
+  static toRGB = color => new TinyColor(color).toRgbString()
 
-export class BasicPicker extends React.PureComponent {
+  static toHSL = color => new TinyColor(color).toHslString()
+
+  static toHSV = color => new TinyColor(color).toHsvString()
+
+  static toRGBPercent = color => new TinyColor(color).toPercentageRgbString()
+
   // Image upload icon
   imageIcon = null
+
   // Hidden input element for uploading an image
   uploadElement = null
 
@@ -112,8 +110,7 @@ export class BasicPicker extends React.PureComponent {
     darken: 0,
     spin: 0,
     desaturate: 0,
-    saturate: 0,
-    id: 0
+    saturate: 0
   }
 
   static defaultProps = {
@@ -121,13 +118,16 @@ export class BasicPicker extends React.PureComponent {
     swatches: DEFAULT_SWATCHES,
     maxColors: MAX_COLORS,
     triangle: true,
-    width: '220px',
     theme: 'light',
-    showTools: false
+    showTools: false,
+    onChange: () => {},
+    onSwatchHover: () => {}
   }
 
   static propTypes = {
     color: PropTypes.string,
+    onChange: PropTypes.func,
+    onSwatchHover: PropTypes.func,
     swatches: PropTypes.arrayOf(PropTypes.string),
     maxColors: PropTypes.number,
     triangle: PropTypes.bool,
@@ -135,18 +135,18 @@ export class BasicPicker extends React.PureComponent {
     showTools: PropTypes.bool
   }
 
-  // Color conversion helpers. Exposing these as static methods is more convenient and keeps the component API minimal
-  static toRGB = color => new TinyColor(color).toRgbString()
-  static toHSL = color => new TinyColor(color).toHslString()
-  static toHSV = color => new TinyColor(color).toHsvString()
-  static toRGBPercent = color => new TinyColor(color).toPercentageRgbString()
-
-  // Instance properties are used to store the color value on which the color operations will be applied.
+  // Instance properties are used to store the color value on
+  // which the color operations will be applied.
   lightenColor = null
+
   brightenColor = null
+
   darkenColor = null
+
   spinColor = null
+
   desaturateColor = null
+
   saturateColor = null
 
   componentDidMount() {
@@ -159,7 +159,7 @@ export class BasicPicker extends React.PureComponent {
     document.addEventListener('keydown', this.updateKey)
   }
 
-  componentDidUpdate(oldProps, oldState) {
+  componentDidUpdate(oldProps) {
     // This is invoked only when we are working with actual API of this component
 
     if (oldProps.color !== this.props.color) {
@@ -179,14 +179,15 @@ export class BasicPicker extends React.PureComponent {
   }
 
   updateColorState = (value, color, operation) => {
-    // This clears all the color buffers except the buffer which is currently being used to persist the original color
+    // This clears all the color buffers except the buffer which is
+    // currently being used to persist the original color
     this.clearColorBuffer(operation)
 
-    value = parseInt(value)
-    const newColor = new TinyColor(color)[operation](value)
+    const newValue = parseInt(value)
+    const newColor = new TinyColor(color)[operation](newValue)
 
     this.props.onChange && this.props.onChange(newColor.toHexString())
-    this.setState({ [operation]: value })
+    this.setState({ [operation]: newValue })
   }
 
   getBuffer = () => ({
@@ -220,9 +221,11 @@ export class BasicPicker extends React.PureComponent {
   }
 
   /**
-   * Below methods are used to handle color operations. Whenever an operation is performed on a color,
-   * it mutates the original state of the color. So we use instance properties to clear and set the
-   * currently active color state, and then apply the color operations w.r.t to the instance property (or current color value)
+   * Below methods are used to handle color operations. Whenever an
+   * operation is performed on a color, it mutates the original state
+   * of the color. So we use instance properties to clear and set the
+   * currently active color state, and then apply the color operations
+   * w.r.t to the instance property (or current color value)
    *
    * TODO: Refactor this mess
    */
@@ -286,7 +289,8 @@ export class BasicPicker extends React.PureComponent {
     HSV: color.toHsvString()
   })
 
-  // This handler is used to update the image state. After the colors are extracted from the image, a image can be removed from the color block.
+  // This handler is used to update the image state. After the colors
+  // are extracted from the image, a image can be removed from the color block.
   updateKey = e => {
     if (e.which === 8) {
       this.setState({ image: null, showShades: false, showTints: false })
@@ -302,7 +306,7 @@ export class BasicPicker extends React.PureComponent {
   }
 
   // Randomly generate new swatches
-  generateSwatches = e => {
+  generateSwatches = () => {
     let i = 0
 
     // Each swatch should be different
@@ -310,7 +314,7 @@ export class BasicPicker extends React.PureComponent {
 
     while (i < 12) {
       newColors.add(generateColors())
-      i++
+      i += 1
     }
 
     // Hide shades and tints when new swatches are added
@@ -359,22 +363,22 @@ export class BasicPicker extends React.PureComponent {
 
     this.setState({
       [term]: [...colorBuffer],
-      showShades: showShades,
-      showTints: showTints
+      showShades,
+      showTints
     })
   }
 
   // Shades - A hue lightened with white
-  generateShades = e => this.generateSwatchesFromHue('shades', true, false)
+  generateShades = () => this.generateSwatchesFromHue('shades', true, false)
 
   // Tints - A hue darkened with black
-  generateTints = e => this.generateSwatchesFromHue('tints', false, true)
+  generateTints = () => this.generateSwatchesFromHue('tints', false, true)
 
   // Update the color format (hsv, rgb, hex, or hsl)
-  changeFormat = e => this.setState({ currentFormat: e.target.value })
+  changeFormat = () => this.setState({ currentFormat: e.target.value })
 
   // Reset the shades and tints
-  resetColors = e =>
+  resetColors = () =>
     this.setState({
       shades: [],
       tints: [],
@@ -410,7 +414,7 @@ export class BasicPicker extends React.PureComponent {
     const iconColor = this.props.theme === 'dark' ? LIGHT_COLOR : DARK_COLOR
 
     return (
-      <Container background={bg} width={'228px'}>
+      <Container background={bg} width="228px">
         {this.props.triangle &&
           this.state.image === null && (
             <Triangle color={this.state.color.toHexString()} />
@@ -477,7 +481,7 @@ export class BasicPicker extends React.PureComponent {
                 generateShades={this.generateShades}
               />
               <BasicTools.Clipboard
-                copyColor={e => navigator.clipboard.writeText(color)}
+                copyColor={() => navigator.clipboard.writeText(color)}
               />
               <BasicTools.Reset resetColors={this.resetColors} />
             </div>

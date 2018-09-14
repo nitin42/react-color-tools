@@ -1,8 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import { BasicPicker } from './pickers/BasicPicker'
+import BasicPicker from './pickers/BasicPicker'
 
+/* eslint-disable */
 class App extends React.Component {
   state = {
     color: '#f00'

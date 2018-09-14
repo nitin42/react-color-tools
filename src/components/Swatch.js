@@ -9,6 +9,7 @@ const Swatch = ({
   updateSwatchOnKeyDown
 }) => (
   <div
+    role="swatch"
     className={css`
       background: ${color};
       height: 22px;
@@ -28,12 +29,19 @@ const Swatch = ({
     onClick={updateSwatch}
     onKeyDown={updateSwatchOnKeyDown}
     onMouseOver={onSwatchHover}
+    onFocus={onSwatchHover}
     tabIndex={0}
   />
 )
 
+Swatch.defaultProps = {
+  updateSwatch: () => {},
+  onSwatchHover: () => {},
+  updateSwatchOnKeyDown: () => {}
+}
+
 Swatch.propTypes = {
-  color: PropTypes.string,
+  color: PropTypes.string.isRequired,
   updateSwatch: PropTypes.func,
   onSwatchHover: PropTypes.func,
   updateSwatchOnKeyDown: PropTypes.func
