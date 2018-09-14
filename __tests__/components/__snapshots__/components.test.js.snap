@@ -1,0 +1,377 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render a list of swatches 1`] = `
+<div
+  className="css-8fj3tt"
+>
+  <div
+    className="css-14g5nes"
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    onMouseOver={[Function]}
+    tabIndex={0}
+    title="red"
+  />
+  <div
+    className="css-pa4qu5"
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    onMouseOver={[Function]}
+    tabIndex={0}
+    title="blue"
+  />
+  <div
+    className="css-8tbn6u"
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    onMouseOver={[Function]}
+    tabIndex={0}
+    title="purple"
+  />
+  <div
+    className="css-1o54mkk"
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    onMouseOver={[Function]}
+    tabIndex={0}
+    title="green"
+  />
+  <div
+    className="css-18dp5ae"
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    onMouseOver={[Function]}
+    tabIndex={0}
+    title="brown"
+  />
+  <div
+    style={
+      Object {
+        "clear": "both",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`should render advanced color tools 1`] = `
+Array [
+  <span
+    title="color brightener"
+  >
+    <i
+      className="fas fa-sun icon"
+      style={
+        Object {
+          "color": "#eeee",
+        }
+      }
+    />
+    <input
+      className="css-qvm90c"
+      max="100"
+      min="10"
+      onChange={[Function]}
+      type="range"
+      value={0}
+    />
+    <label
+      className="values"
+      style={
+        Object {
+          "color": "#eeee",
+        }
+      }
+    >
+      0
+    </label>
+  </span>,
+  <span
+    title="color darkener"
+  >
+    <i
+      className="fas fa-moon icon"
+      style={
+        Object {
+          "color": "#eeee",
+        }
+      }
+    />
+    <input
+      className="css-qvm90c"
+      max="100"
+      min="10"
+      onChange={[Function]}
+      type="range"
+      value={20}
+    />
+    <label
+      className="values"
+      style={
+        Object {
+          "color": "#eeee",
+        }
+      }
+    >
+      20
+    </label>
+  </span>,
+  <span
+    title="color desaturator"
+  >
+    <i
+      className="fas fa-fill icon"
+      style={
+        Object {
+          "color": "#eeee",
+        }
+      }
+    />
+    <input
+      className="css-qvm90c"
+      max="100"
+      min="10"
+      onChange={[Function]}
+      type="range"
+      value={50}
+    />
+    <label
+      className="values"
+      style={
+        Object {
+          "color": "#eeee",
+        }
+      }
+    >
+      50
+    </label>
+  </span>,
+  <span
+    title="color lightener"
+  >
+    <i
+      className="far fa-moon icon"
+      style={
+        Object {
+          "color": "#eeee",
+        }
+      }
+    />
+    <input
+      className="css-qvm90c"
+      max="100"
+      min="10"
+      onChange={[Function]}
+      type="range"
+      value={10}
+    />
+    <label
+      className="values"
+      style={
+        Object {
+          "color": "#eeee",
+        }
+      }
+    >
+      10
+    </label>
+  </span>,
+  <span
+    title="color saturator"
+  >
+    <i
+      className="fas fa-star-half-alt icon"
+      style={
+        Object {
+          "color": "#eeee",
+        }
+      }
+    />
+    <input
+      className="css-qvm90c"
+      max="100"
+      min="10"
+      onChange={[Function]}
+      type="range"
+      value={20}
+    />
+    <label
+      className="values"
+      style={
+        Object {
+          "color": "#eeee",
+        }
+      }
+    >
+      20
+    </label>
+  </span>,
+  <span
+    title="color spin"
+  >
+    <i
+      className="fas fa-sync-alt icon"
+      style={
+        Object {
+          "color": "#eeee",
+        }
+      }
+    />
+    <input
+      className="css-qvm90c"
+      max="360"
+      min="-360"
+      onChange={[Function]}
+      type="range"
+      value={-120}
+    />
+    <label
+      className="values"
+      style={
+        Object {
+          "color": "#eeee",
+        }
+      }
+    >
+      -120
+      <sup>
+        °
+      </sup>
+    </label>
+  </span>,
+]
+`;
+
+exports[`should render basic color tools 1`] = `
+Array [
+  <span
+    onClick={[Function]}
+    title="tint picker"
+  >
+    <i
+      className="fas fa-tint"
+      id="image-icon"
+      style={
+        Object {
+          "color": "#f00",
+        }
+      }
+    />
+  </span>,
+  <span
+    onClick={[Function]}
+    title="shade picker"
+  >
+    <i
+      className="fas fa-adjust"
+      id="image-icon"
+      style={
+        Object {
+          "color": "#f00",
+        }
+      }
+    />
+  </span>,
+  <span
+    onClick={[Function]}
+    title="Palette generator"
+  >
+    <i
+      className="fas fa-palette"
+      id="image-icon"
+      style={
+        Object {
+          "color": "#f00",
+        }
+      }
+    />
+  </span>,
+  <span
+    title="Image picker"
+  >
+    <input
+      accept="image/*"
+      id="uploader"
+      onChange={[Function]}
+      style={
+        Object {
+          "display": "none",
+        }
+      }
+      type="file"
+    />
+    <i
+      className="fas fa-image"
+      id="image-icon"
+      style={
+        Object {
+          "color": "#f00",
+        }
+      }
+    />
+  </span>,
+  <span
+    onClick={[Function]}
+    title="reset colors"
+  >
+    <i
+      className="fas fa-arrow-alt-circle-left"
+      id="image-icon"
+      style={
+        Object {
+          "color": "#f00",
+        }
+      }
+    />
+  </span>,
+  <span
+    onClick={[Function]}
+    title="clipboard"
+  >
+    <i
+      className="fas fa-copy"
+      id="image-icon"
+      style={
+        Object {
+          "color": "#f00",
+        }
+      }
+    />
+  </span>,
+]
+`;
+
+exports[`should render the active color code with auto contrast 1`] = `
+<div
+  className="css-numl8c"
+  style={
+    Object {
+      "color": "#fff",
+    }
+  }
+>
+  #f00
+</div>
+`;
+
+exports[`should render the color block with a color code and children 1`] = `
+<div
+  className="css-3ef40x"
+  style={
+    Object {
+      "background": "#f00",
+    }
+  }
+>
+  <div
+    className="css-numl8c"
+    style={
+      Object {
+        "color": "#fff",
+      }
+    }
+  >
+    #f00
+  </div>
+</div>
+`;

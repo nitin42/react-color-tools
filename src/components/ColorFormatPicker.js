@@ -1,7 +1,16 @@
 import React from 'react'
 import { css } from 'emotion'
 
-const ColorFormatPicker = ({ changeFormat, renderFormats }) => (
+const renderFormats = formats =>
+  formats.map((format, key) => {
+    return (
+      <option value={format} key={key}>
+        {format}
+      </option>
+    )
+  })
+
+const ColorFormatPicker = ({ changeFormat, formats }) => (
   <div
     className={css`
       display: flex;
@@ -25,7 +34,7 @@ const ColorFormatPicker = ({ changeFormat, renderFormats }) => (
       name="formats"
       onChange={changeFormat}
     >
-      {renderFormats()}
+      {renderFormats(formats)}
     </select>
   </div>
 )

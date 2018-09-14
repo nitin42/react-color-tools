@@ -276,15 +276,6 @@ export class BasicPicker extends React.PureComponent {
     HSV: color.toHsvString()
   })
 
-  renderFormats = () =>
-    this.state.formats.map((format, key) => {
-      return (
-        <option value={format} key={key}>
-          {format}
-        </option>
-      )
-    })
-
   // This handler is used to update the image state. After the colors are extracted from the image, a image can be removed from the color block.
   updateKey = e => {
     if (e.which === 8) {
@@ -395,7 +386,8 @@ export class BasicPicker extends React.PureComponent {
       spin,
       lighten,
       desaturate,
-      saturate
+      saturate,
+      formats
     } = this.state
 
     // Get the color string with a specified color format
@@ -454,7 +446,7 @@ export class BasicPicker extends React.PureComponent {
           <ColorInput value={color} onChange={this.props.onChange} />
           <ColorFormatPicker
             changeFormat={this.changeFormat}
-            renderFormats={this.renderFormats}
+            formats={formats}
           />
           <ColorProvider value={iconColor}>
             <div
