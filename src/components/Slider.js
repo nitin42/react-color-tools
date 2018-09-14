@@ -1,5 +1,6 @@
 import React from 'react'
 import { css } from 'emotion'
+import PropTypes from 'prop-types'
 
 const Slider = ({ min, max, value, onChange, color }) => (
   <input
@@ -31,5 +32,13 @@ const Slider = ({ min, max, value, onChange, color }) => (
     onChange={onChange}
   />
 )
+
+Slider.propTypes = {
+  min: PropTypes.string,
+  max: PropTypes.string,
+  value: PropTypes.number,
+  onChange: PropTypes.func,
+  color: PropTypes.string
+}
 
 export default Slider

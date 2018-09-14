@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import Slider from './Slider'
 import { Consumer } from '../utils/context'
 
@@ -116,17 +118,32 @@ const ImagePicker = HOC(({ color, uploadImage }) => (
   </span>
 ))
 
+ImagePicker.propTypes = {
+  color: PropTypes.string,
+  uploadImage: PropTypes.func
+}
+
 const PaletteGenerator = HOC(({ color, generateSwatches }) => (
   <span title="Palette generator" onClick={generateSwatches}>
     <i id="image-icon" className="fas fa-palette" style={{ color }} />
   </span>
 ))
 
+PaletteGenerator.propTypes = {
+  color: PropTypes.string,
+  generateSwatches: PropTypes.func
+}
+
 const ShadesGenerator = HOC(({ color, generateShades }) => (
   <span title="shade picker" onClick={generateShades}>
     <i id="image-icon" className="fas fa-adjust" style={{ color }} />
   </span>
 ))
+
+ShadesGenerator.propTypes = {
+  color: PropTypes.string,
+  generateShades: PropTypes.func
+}
 
 const Reset = HOC(({ color, resetColors }) => (
   <span title="reset colors" onClick={resetColors}>
@@ -138,17 +155,32 @@ const Reset = HOC(({ color, resetColors }) => (
   </span>
 ))
 
+Reset.propTypes = {
+  color: PropTypes.string,
+  resetColors: PropTypes.func
+}
+
 const TintsGenerator = HOC(({ color, generateTints }) => (
   <span title="tint picker" onClick={generateTints}>
     <i id="image-icon" className="fas fa-tint" style={{ color }} />
   </span>
 ))
 
+TintsGenerator.propTypes = {
+  color: PropTypes.string,
+  generateTints: PropTypes.func
+}
+
 const Clipboard = HOC(({ color, copyColor }) => (
   <span title="clipboard" onClick={copyColor}>
     <i id="image-icon" className="fas fa-copy" style={{ color }} />
   </span>
 ))
+
+Clipboard.propTypes = {
+  color: PropTypes.string,
+  copyColor: PropTypes.func
+}
 
 const AdvanceTools = {
   ColorSaturator,
@@ -158,6 +190,14 @@ const AdvanceTools = {
   ColorDarkener,
   ColorSpinner
 }
+
+Object.keys(AdvanceTools).forEach(tool => {
+  AdvanceTools[tool].propTypes = {
+    color: PropTypes.string,
+    value: PropTypes.number,
+    onChange: PropTypes.func
+  }
+})
 
 const BasicTools = {
   TintsGenerator,

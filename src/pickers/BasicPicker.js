@@ -4,6 +4,7 @@ import { ColorExtractor } from 'react-color-extractor'
 import generateColors from 'randomcolor'
 import { TinyColor } from '@ctrl/tinycolor'
 import Values from 'values.js'
+import PropTypes from 'prop-types'
 
 import { Provider as ColorProvider } from '../utils/context'
 
@@ -123,6 +124,15 @@ export class BasicPicker extends React.PureComponent {
     width: '220px',
     theme: 'light',
     showTools: false
+  }
+
+  static propTypes = {
+    color: PropTypes.string,
+    swatches: PropTypes.arrayOf(PropTypes.string),
+    maxColors: PropTypes.number,
+    triangle: PropTypes.bool,
+    theme: PropTypes.string,
+    showTools: PropTypes.bool
   }
 
   // Color conversion helpers. Exposing these as static methods is more convenient and keeps the component API minimal

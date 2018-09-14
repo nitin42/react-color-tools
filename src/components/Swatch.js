@@ -1,15 +1,16 @@
 import React from 'react'
 import { css } from 'emotion'
+import PropTypes from 'prop-types'
 
 const Swatch = ({
-  value,
+  color,
   updateSwatch,
   onSwatchHover,
   updateSwatchOnKeyDown
 }) => (
   <div
     className={css`
-      background: ${value};
+      background: ${color};
       height: 22px;
       width: 22px;
       cursor: pointer;
@@ -20,15 +21,22 @@ const Swatch = ({
       margin-bottom: 10px;
       border-radius: 4px;
       &:focus {
-        box-shadow: ${value} 0px 0px 4px;
+        box-shadow: ${color} 0px 0px 4px;
       }
     `}
-    title={value}
+    title={color}
     onClick={updateSwatch}
     onKeyDown={updateSwatchOnKeyDown}
     onMouseOver={onSwatchHover}
     tabIndex={0}
   />
 )
+
+Swatch.propTypes = {
+  color: PropTypes.string,
+  updateSwatch: PropTypes.func,
+  onSwatchHover: PropTypes.func,
+  updateSwatchOnKeyDown: PropTypes.func
+}
 
 export default Swatch

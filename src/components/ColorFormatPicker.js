@@ -1,14 +1,13 @@
 import React from 'react'
 import { css } from 'emotion'
+import PropTypes from 'prop-types'
 
 const renderFormats = formats =>
-  formats.map((format, key) => {
-    return (
-      <option value={format} key={key}>
-        {format}
-      </option>
-    )
-  })
+  formats.map((format, key) => (
+    <option value={format} key={key}>
+      {format}
+    </option>
+  ))
 
 const ColorFormatPicker = ({ changeFormat, formats }) => (
   <div
@@ -38,5 +37,10 @@ const ColorFormatPicker = ({ changeFormat, formats }) => (
     </select>
   </div>
 )
+
+ColorFormatPicker.propTypes = {
+  formats: PropTypes.arrayOf(PropTypes.string),
+  changeFormat: PropTypes.func
+}
 
 export default ColorFormatPicker

@@ -1,10 +1,11 @@
 import React from 'react'
 import { css } from 'emotion'
+import PropTypes from 'prop-types'
 
 const INPUT_COLOR_SCHEME = 'rgb(102, 102, 102)'
 
 // Copied and edited from react-color/EditableInput
-export default class ColorInputField extends React.Component {
+class ColorInputField extends React.Component {
   state = {
     value: String(this.props.value).toUpperCase(),
     blurValue: String(this.props.value).toUpperCase()
@@ -95,3 +96,10 @@ export default class ColorInputField extends React.Component {
     )
   }
 }
+
+ColorInputField.propTypes = {
+  value: PropTypes.string,
+  onChange: PropTypes.func
+}
+
+export default ColorInputField

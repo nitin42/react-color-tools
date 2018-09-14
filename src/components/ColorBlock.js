@@ -1,5 +1,6 @@
 import React from 'react'
 import { css } from 'emotion'
+import PropTypes from 'prop-types'
 
 // Displays a color block with the active color hex code
 const ColorBlock = ({ color, children }) => (
@@ -17,5 +18,13 @@ const ColorBlock = ({ color, children }) => (
     {children}
   </div>
 )
+
+ColorBlock.propTypes = {
+  color: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]).isRequired
+}
 
 export default ColorBlock

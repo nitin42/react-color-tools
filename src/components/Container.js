@@ -1,5 +1,6 @@
 import React from 'react'
 import { css } from 'emotion'
+import PropTypes from 'prop-types'
 
 // Main color picker container
 const Container = ({ children, width, background }) => (
@@ -11,11 +12,18 @@ const Container = ({ children, width, background }) => (
       border-radius: 6px;
       position: relative;
     `}
-    width={width}
-    background={background}
   >
     {children}
   </div>
 )
+
+Container.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]),
+  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  background: PropTypes.string
+}
 
 export default Container

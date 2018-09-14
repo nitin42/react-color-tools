@@ -1,5 +1,6 @@
 import React from 'react'
 import { css } from 'emotion'
+import PropTypes from 'prop-types'
 
 const Triangle = ({ color }) => (
   <div
@@ -16,5 +17,9 @@ const Triangle = ({ color }) => (
     `}
   />
 )
+
+Triangle.propTypes = {
+  color: PropTypes.string
+}
 
 export default Triangle

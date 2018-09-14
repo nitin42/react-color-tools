@@ -1,5 +1,6 @@
 import React from 'react'
 import { css } from 'emotion'
+import PropTypes from 'prop-types'
 
 import Swatch from './Swatch'
 
@@ -16,7 +17,7 @@ const Swatches = ({ swatches, updateSwatch, onSwatchHover }) => (
     {swatches.map((color, key) => (
       <Swatch
         key={key}
-        value={color}
+        color={color}
         updateSwatch={e => updateSwatch(color, e)}
         updateSwatchOnKeyDown={e =>
           e.keyCode === ENTER_KEY ? updateSwatch(color, e) : null
@@ -24,8 +25,13 @@ const Swatches = ({ swatches, updateSwatch, onSwatchHover }) => (
         onSwatchHover={e => onSwatchHover && onSwatchHover(color, e)}
       />
     ))}
-    <div style={{ clear: 'both' }} />
   </div>
 )
+
+Swatches.propTypes = {
+  swatches: PropTypes.arrayOf(PropTypes.string),
+  updateSwatch: PropTypes.func,
+  onSwatchHover: PropTypes.func
+}
 
 export default Swatches

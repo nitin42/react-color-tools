@@ -1,5 +1,6 @@
 import React from 'react'
 import { css } from 'emotion'
+import PropTypes from 'prop-types'
 
 import { getContrastingColor } from '../utils/colors'
 
@@ -17,5 +18,9 @@ const ActiveColor = ({ color }) => (
     {color}
   </div>
 )
+
+ActiveColor.propTypes = {
+  color: PropTypes.string.isRequired
+}
 
 export default ActiveColor
