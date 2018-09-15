@@ -58,6 +58,10 @@ injectGlobal`
     cursor: pointer;
   }
 
+  span:focus > i {
+    outline: none;
+  }
+
   ul {
     display: grid;
     justify-content: center;
@@ -126,7 +130,8 @@ export default class BasicPicker extends React.PureComponent {
 
   static propTypes = {
     color: PropTypes.string,
-    onChange: PropTypes.func.isRequired,
+    /* eslint-disable react/require-default-props */
+    onChange: PropTypes.func,
     onSwatchHover: PropTypes.func,
     swatches: PropTypes.arrayOf(PropTypes.string),
     maxColors: PropTypes.number,
