@@ -18,11 +18,11 @@ const Swatches = ({ swatches, updateSwatch, onSwatchHover }) => (
       <Swatch
         key={color}
         color={color}
-        updateSwatch={e => updateSwatch(color, e)}
+        updateSwatch={e => updateSwatch(color)}
         updateSwatchOnKeyDown={e =>
-          e.keyCode === ENTER_KEY ? updateSwatch(color, e) : null
+          e.keyCode === ENTER_KEY ? updateSwatch(color) : null
         }
-        onSwatchHover={e => onSwatchHover && onSwatchHover(color, e)}
+        onSwatchHover={e => onSwatchHover && onSwatchHover(color)}
       />
     ))}
   </div>

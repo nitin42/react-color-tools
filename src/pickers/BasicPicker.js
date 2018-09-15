@@ -121,7 +121,6 @@ export default class BasicPicker extends React.PureComponent {
     theme: 'light',
     // Color tools are disabled by default
     showTools: false,
-    onChange: () => {},
     onSwatchHover: () => {}
   }
 
@@ -160,10 +159,8 @@ export default class BasicPicker extends React.PureComponent {
     document.addEventListener('keydown', this.updateKey)
   }
 
-  componentDidUpdate(oldProps) {
-    // This is invoked only when we are working with actual API of this component
-
-    if (oldProps.color !== this.props.color) {
+  componentDidUpdate(prevProps) {
+    if (prevProps.color !== this.props.color) {
       const color = new TinyColor(this.props.color)
 
       // Check if its a valid hex and then update the color
@@ -177,6 +174,15 @@ export default class BasicPicker extends React.PureComponent {
   componentWillUnmount() {
     this.imageIcon.removeEventListener('click', this.simulateClick)
     document.removeEventListener('keydown', this.updateKey)
+  }
+
+  // default onChange handler for color input field
+  defaultOnChange = color => {
+    const newColor = new TinyColor(color)
+
+    if (newColor.isValid) {
+      this.setState({ color: newColor })
+    }
   }
 
   updateColorState = (value, color, operation) => {
@@ -200,7 +206,7 @@ export default class BasicPicker extends React.PureComponent {
     darken: this.darkenColor
   })
 
-  clearAllBuffers = () => {
+  clearAllColorBuffers = () => {
     this.spinColor = null
     this.saturateColor = null
     this.desaturateColor = null
@@ -329,28 +335,38 @@ export default class BasicPicker extends React.PureComponent {
   uploadImage = e =>
     this.setState({ image: window.URL.createObjectURL(e.target.files[0]) })
 
+  // Updates the hue state
   updateSwatch = color => {
-    this.clearAllBuffers()
+    // If tools are active, then reset color instance properties.
+    if (this.props.showTools) {
+      this.clearAllColorBuffers()
 
-    this.setState({
-      color: new TinyColor(color),
-      // Reset all the values for the newly selected swatch
-      spin: 0,
-      saturate: 0,
-      desaturate: 0,
-      lighten: 0,
-      darken: 0,
-      brighten: 0
-    })
+      this.setState({
+        color: new TinyColor(color),
+        // Reset all the values for the newly selected swatch
+        spin: 0,
+        saturate: 0,
+        desaturate: 0,
+        lighten: 0,
+        darken: 0,
+        brighten: 0
+      })
+    } else {
+      this.setState({
+        color: new TinyColor(color)
+      })
+    }
 
     this.props.onChange && this.props.onChange(color)
   }
 
-  // disable shades and tints when colors are extracted from an image
+  // Handler to update swatches when colors are extracted from an image
   updateSwatches = swatches =>
     this.setState({
       swatches: [...swatches],
+      // Also update the current color
       color: new TinyColor(swatches[0]),
+      // Hide the shades and tints
       showShades: false,
       showTints: false
     })
@@ -378,7 +394,7 @@ export default class BasicPicker extends React.PureComponent {
   // Update the color format (hsv, rgb, hex, or hsl)
   changeFormat = e => this.setState({ currentFormat: e.target.value })
 
-  // Reset the shades and tints
+  // Reset the shades and tints, and displays the previous swatches
   resetColors = () =>
     this.setState({
       shades: [],
@@ -456,7 +472,10 @@ export default class BasicPicker extends React.PureComponent {
               onSwatchHover={this.props.onSwatchHover}
             />
           )}
-          <ColorInput value={color} onChange={this.props.onChange} />
+          <ColorInput
+            value={color}
+            onChange={this.props.onChange || this.defaultOnChange}
+          />
           <ColorFormatPicker
             changeFormat={this.changeFormat}
             formats={formats}
