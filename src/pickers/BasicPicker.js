@@ -292,7 +292,7 @@ export default class BasicPicker extends React.PureComponent {
   // are extracted from the image, a image can be removed from the color block.
   updateKey = e => {
     if (e.which === 8) {
-      this.setState({ image: null, showShades: false, showTints: false })
+      this.setState({ image: null })
     }
   }
 
@@ -320,7 +320,9 @@ export default class BasicPicker extends React.PureComponent {
     this.setState({
       swatches: [...newColors],
       showShades: false,
-      showTints: false
+      showTints: false,
+      tints: [],
+      shades: []
     })
   }
 
@@ -359,7 +361,9 @@ export default class BasicPicker extends React.PureComponent {
       color: new TinyColor(swatches[0]),
       // Hide the shades and tints
       showShades: false,
-      showTints: false
+      showTints: false,
+      tints: [],
+      shades: []
     })
 
   // Generates shades or tints from the currently selected hue (color)
