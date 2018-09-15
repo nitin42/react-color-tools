@@ -58,7 +58,7 @@ injectGlobal`
     cursor: pointer;
   }
 
-  span:focus > i {
+  span:focus {
     outline: none;
   }
 
@@ -108,7 +108,6 @@ export default class BasicPicker extends React.PureComponent {
     // Color format options
     formats: ['HEX', 'HSV', 'RGB', 'HSL'],
     // Color manipulation values
-    lighten: 0,
     brighten: 0,
     darken: 0,
     spin: 0,
@@ -142,8 +141,6 @@ export default class BasicPicker extends React.PureComponent {
 
   // Instance properties are used to store the color value on
   // which the color operations will be applied.
-  lightenColor = null
-
   brightenColor = null
 
   darkenColor = null
@@ -206,7 +203,6 @@ export default class BasicPicker extends React.PureComponent {
     spin: this.spinColor,
     desaturate: this.desaturateColor,
     saturate: this.saturateColor,
-    lighten: this.lightenColor,
     brighten: this.brightenColor,
     darken: this.darkenColor
   })
@@ -215,7 +211,6 @@ export default class BasicPicker extends React.PureComponent {
     this.spinColor = null
     this.saturateColor = null
     this.desaturateColor = null
-    this.lightenColor = null
     this.darkenColor = null
     this.brightenColor = null
   }
@@ -285,14 +280,6 @@ export default class BasicPicker extends React.PureComponent {
     this.updateColorState(e.target.value, this.darkenColor, 'darken')
   }
 
-  handleLighten = e => {
-    if (this.lightenColor === null) {
-      this.lightenColor = this.state.color.originalInput
-    }
-
-    this.updateColorState(e.target.value, this.lightenColor, 'lighten')
-  }
-
   // outputs the color according to the color format
   getColor = color => ({
     HSL: color.toHslString(),
@@ -352,7 +339,6 @@ export default class BasicPicker extends React.PureComponent {
         spin: 0,
         saturate: 0,
         desaturate: 0,
-        lighten: 0,
         darken: 0,
         brighten: 0
       })
@@ -420,7 +406,6 @@ export default class BasicPicker extends React.PureComponent {
       darken,
       brighten,
       spin,
-      lighten,
       desaturate,
       saturate,
       formats
@@ -537,12 +522,6 @@ export default class BasicPicker extends React.PureComponent {
                     <AdvanceTools.ColorDarkener
                       value={darken}
                       onChange={this.handleDarken}
-                    />
-                  </li>
-                  <li>
-                    <AdvanceTools.ColorLightener
-                      value={lighten}
-                      onChange={this.handleLighten}
                     />
                   </li>
                   <li>

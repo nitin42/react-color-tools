@@ -42,22 +42,6 @@ const ColorDesaturator = HOC(({ color, value, onChange }) => (
   </span>
 ))
 
-const ColorLightener = HOC(({ color, value, onChange }) => (
-  <span title="color lightener">
-    <i className="far fa-moon icon" style={{ color }} />
-    <Slider
-      min="10"
-      max="100"
-      value={value}
-      onChange={onChange}
-      color={color}
-    />
-    <label className="values" style={{ color }}>
-      {value}
-    </label>
-  </span>
-))
-
 const ColorBrightener = HOC(({ color, value, onChange }) => (
   <span title="color brightener">
     <i className="fas fa-sun icon" style={{ color }} />
@@ -212,7 +196,6 @@ Clipboard.propTypes = {
 const AdvanceTools = {
   ColorSaturator,
   ColorDesaturator,
-  ColorLightener,
   ColorBrightener,
   ColorDarkener,
   ColorSpinner
