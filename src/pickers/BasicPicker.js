@@ -10,7 +10,6 @@ import { Provider as ColorProvider } from '../utils/context'
 
 import ColorInput from '../components/ColorInputField'
 import ColorBlock from '../components/ColorBlock'
-import ActiveColor from '../components/ActiveColor'
 import Container from '../components/Container'
 import Image from '../components/Image'
 import Swatches from '../components/Swatches'
@@ -70,8 +69,7 @@ injectGlobal`
 `
 
 export default class BasicPicker extends React.PureComponent {
-  // Color conversion helpers. Exposing these as static methods is
-  // more convenient and keeps the component API minimal
+  // Color conversion helpers
   static toRGB = color => new TinyColor(color).toRgbString()
 
   static toHSL = color => new TinyColor(color).toHslString()
@@ -104,7 +102,8 @@ export default class BasicPicker extends React.PureComponent {
     // Current color format selected
     currentFormat: 'HEX',
     // Color format options
-    formats: ['HSL', 'HSV', 'RGB', 'HEX'],
+    formats: ['HEX', 'HSV', 'RGB', 'HSL'],
+    // Color manipulation values
     lighten: 0,
     brighten: 0,
     darken: 0,
@@ -116,9 +115,11 @@ export default class BasicPicker extends React.PureComponent {
   static defaultProps = {
     color: DEFAULT_COLOR,
     swatches: DEFAULT_SWATCHES,
+    // Max amount of colors from which palettes will be generated (from the image)
     maxColors: MAX_COLORS,
     triangle: true,
     theme: 'light',
+    // Color tools are disabled by default
     showTools: false,
     onChange: () => {},
     onSwatchHover: () => {}
@@ -187,7 +188,7 @@ export default class BasicPicker extends React.PureComponent {
     const newColor = new TinyColor(color)[operation](newValue)
 
     this.props.onChange && this.props.onChange(newColor.toHexString())
-    this.setState({ [operation]: newValue })
+    this.setState({ [operation]: newValue, color: newColor })
   }
 
   getBuffer = () => ({
@@ -375,7 +376,7 @@ export default class BasicPicker extends React.PureComponent {
   generateTints = () => this.generateSwatchesFromHue('tints', false, true)
 
   // Update the color format (hsv, rgb, hex, or hsl)
-  changeFormat = () => this.setState({ currentFormat: e.target.value })
+  changeFormat = e => this.setState({ currentFormat: e.target.value })
 
   // Reset the shades and tints
   resetColors = () =>
@@ -421,12 +422,10 @@ export default class BasicPicker extends React.PureComponent {
           )}
         {this.state.image === null ? (
           <ColorBlock
-            color={
-              currentFormat === 'HSV' ? this.state.color.toHexString() : color
-            }
-          >
-            <ActiveColor color={color} />
-          </ColorBlock>
+            colorState={this.state.color}
+            color={color}
+            currentFormat={currentFormat}
+          />
         ) : (
           <Image src={this.state.image} />
         )}
