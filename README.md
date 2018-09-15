@@ -1,12 +1,23 @@
-# react-color-plus
+# react-color-tools
 
-WORK IN PROGRESS
+> A set of tools for working with colors
 
-## TODO
+## Table of contents
 
-- [x] Design
-- [x] Refactor
-- [x] Picker should operate without any props
-- [x] Analyse the behaviour
-- [x] Testing
-- [] Documentation
+- [Introduction]()
+
+- [Features]()
+
+- [Types of tools]()
+
+- [Install]()
+
+- [Usage]()
+
+- [Documentation]()
+
+- [Resources]()
+
+- [Contributing]()
+
+- [License]()
