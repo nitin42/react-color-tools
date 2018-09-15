@@ -6,7 +6,7 @@ WORK IN PROGRESS
 
 - [x] Design
 - [x] Refactor
-- [] Picker should operate without any props
-- [] Analyse the behaviour
-- [] Testing
+- [x] Picker should operate without any props
+- [x] Analyse the behaviour
+- [x] Testing
 - [] Documentation
