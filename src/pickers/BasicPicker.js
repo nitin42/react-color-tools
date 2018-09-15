@@ -34,6 +34,7 @@ const DEFAULT_SWATCHES = [
   '#2f9d66',
   '#daa520'
 ]
+
 const DEFAULT_COLOR = '#088da5'
 const MAX_COLORS = 64
 

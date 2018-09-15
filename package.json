@@ -14,6 +14,7 @@
     "randomcolor": "^0.5.3",
     "react-color-extractor": "^1.1.2",
     "react-emotion": "^9.2.8",
+    "tinygradient": "^0.4.1",
     "values.js": "^1.0.3"
   },
   "devDependencies": {
