@@ -18,11 +18,12 @@ const Swatches = ({ swatches, updateSwatch, onSwatchHover }) => (
       <Swatch
         key={color}
         color={color}
-        updateSwatch={e => updateSwatch(color)}
+        updateSwatch={() => updateSwatch(color)}
         updateSwatchOnKeyDown={e =>
+          /* eslint-disable no-unused-vars */
           e.keyCode === ENTER_KEY ? updateSwatch(color) : null
         }
-        onSwatchHover={e => onSwatchHover && onSwatchHover(color)}
+        onSwatchHover={() => onSwatchHover && onSwatchHover(color)}
       />
     ))}
   </div>

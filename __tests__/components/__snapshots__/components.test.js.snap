@@ -2,54 +2,57 @@
 
 exports[`should render a list of swatches 1`] = `
 <div
-  className="css-8fj3tt"
+  className="css-w1azp9"
 >
   <div
     className="css-14g5nes"
     onClick={[Function]}
+    onFocus={[Function]}
     onKeyDown={[Function]}
     onMouseOver={[Function]}
+    role="swatch"
     tabIndex={0}
     title="red"
   />
   <div
     className="css-pa4qu5"
     onClick={[Function]}
+    onFocus={[Function]}
     onKeyDown={[Function]}
     onMouseOver={[Function]}
+    role="swatch"
     tabIndex={0}
     title="blue"
   />
   <div
     className="css-8tbn6u"
     onClick={[Function]}
+    onFocus={[Function]}
     onKeyDown={[Function]}
     onMouseOver={[Function]}
+    role="swatch"
     tabIndex={0}
     title="purple"
   />
   <div
     className="css-1o54mkk"
     onClick={[Function]}
+    onFocus={[Function]}
     onKeyDown={[Function]}
     onMouseOver={[Function]}
+    role="swatch"
     tabIndex={0}
     title="green"
   />
   <div
     className="css-18dp5ae"
     onClick={[Function]}
+    onFocus={[Function]}
     onKeyDown={[Function]}
     onMouseOver={[Function]}
+    role="swatch"
     tabIndex={0}
     title="brown"
-  />
-  <div
-    style={
-      Object {
-        "clear": "both",
-      }
-    }
   />
 </div>
 `;
@@ -246,6 +249,8 @@ exports[`should render basic color tools 1`] = `
 Array [
   <span
     onClick={[Function]}
+    onKeyDown={[Function]}
+    tabIndex={0}
     title="tint picker"
   >
     <i
@@ -260,6 +265,8 @@ Array [
   </span>,
   <span
     onClick={[Function]}
+    onKeyDown={[Function]}
+    tabIndex={0}
     title="shade picker"
   >
     <i
@@ -274,6 +281,8 @@ Array [
   </span>,
   <span
     onClick={[Function]}
+    onKeyDown={[Function]}
+    tabIndex={0}
     title="Palette generator"
   >
     <i
@@ -312,6 +321,8 @@ Array [
   </span>,
   <span
     onClick={[Function]}
+    onKeyDown={[Function]}
+    tabIndex={0}
     title="reset colors"
   >
     <i
@@ -326,6 +337,8 @@ Array [
   </span>,
   <span
     onClick={[Function]}
+    onKeyDown={[Function]}
+    tabIndex={0}
     title="clipboard"
   >
     <i
@@ -341,19 +354,6 @@ Array [
 ]
 `;
 
-exports[`should render the active color code with auto contrast 1`] = `
-<div
-  className="css-numl8c"
-  style={
-    Object {
-      "color": "#fff",
-    }
-  }
->
-  #f00
-</div>
-`;
-
 exports[`should render the color block with a color code and children 1`] = `
 <div
   className="css-3ef40x"
@@ -364,7 +364,29 @@ exports[`should render the color block with a color code and children 1`] = `
   }
 >
   <div
-    className="css-numl8c"
+    className="css-1uaa0vj"
+    style={
+      Object {
+        "color": "#fff",
+      }
+    }
+  >
+    #f00
+  </div>
+</div>
+`;
+
+exports[`should render the color block with hex color when the current format is HSV 1`] = `
+<div
+  className="css-3ef40x"
+  style={
+    Object {
+      "background": "#ff0000",
+    }
+  }
+>
+  <div
+    className="css-1uaa0vj"
     style={
       Object {
         "color": "#fff",

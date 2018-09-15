@@ -1,7 +1,7 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
+import { TinyColor } from '@ctrl/tinycolor'
 
-import ActiveColor from '../../src/components/ActiveColor'
 import ColorBlock from '../../src/components/ColorBlock'
 import Swatches from '../../src/components/Swatches'
 import { AdvanceTools, BasicTools } from '../../src/components/Tools'
@@ -10,18 +10,22 @@ import { Provider } from '../../src/utils/context'
 
 const noop = () => {}
 
-it('should render the active color code with auto contrast', () => {
-  const App = () => <ActiveColor color={'#f00'} />
+it('should render the color block with a color code and children', () => {
+  const App = () => (
+    <ColorBlock colorState={new TinyColor('#f00')} color={'#f00'} />
+  )
 
   const tree = renderer.create(<App />).toJSON()
   expect(tree).toMatchSnapshot()
 })
 
-it('should render the color block with a color code and children', () => {
+it('should render the color block with hex color when the current format is HSV', () => {
   const App = () => (
-    <ColorBlock color={'#f00'}>
-      <ActiveColor color={'#f00'} />
-    </ColorBlock>
+    <ColorBlock
+      colorState={new TinyColor('#f00')}
+      currentFormat={'HSV'}
+      color={'#f00'}
+    />
   )
 
   const tree = renderer.create(<App />).toJSON()

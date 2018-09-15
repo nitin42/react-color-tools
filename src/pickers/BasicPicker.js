@@ -126,7 +126,7 @@ export default class BasicPicker extends React.PureComponent {
 
   static propTypes = {
     color: PropTypes.string,
-    onChange: PropTypes.func,
+    onChange: PropTypes.func.isRequired,
     onSwatchHover: PropTypes.func,
     swatches: PropTypes.arrayOf(PropTypes.string),
     maxColors: PropTypes.number,
@@ -432,6 +432,8 @@ export default class BasicPicker extends React.PureComponent {
 
     return (
       <Container background={bg} width="228px">
+        {/* eslint-disable operator-linebreak */}
+        {/* eslint-disable indent */}
         {this.props.triangle &&
           this.state.image === null && (
             <Triangle color={this.state.color.toHexString()} />

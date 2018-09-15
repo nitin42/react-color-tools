@@ -57,7 +57,8 @@
     "formatall": "find src -name '*.js' | xargs prettier --write --no-semi --single-quote",
     "test:watch": "jest --watch",
     "test": "jest",
-    "lint": "eslint ./src"
+    "lint": "eslint ./src",
+    "validate": "yarn formatall && yarn lint && yarn test"
   },
   "jest": {
     "testEnvironment": "node"
