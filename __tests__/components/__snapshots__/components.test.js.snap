@@ -150,36 +150,6 @@ Array [
     </label>
   </span>,
   <span
-    title="color lightener"
-  >
-    <i
-      className="far fa-moon icon"
-      style={
-        Object {
-          "color": "#eeee",
-        }
-      }
-    />
-    <input
-      className="css-qvm90c"
-      max="100"
-      min="10"
-      onChange={[Function]}
-      type="range"
-      value={10}
-    />
-    <label
-      className="values"
-      style={
-        Object {
-          "color": "#eeee",
-        }
-      }
-    >
-      10
-    </label>
-  </span>,
-  <span
     title="color saturator"
   >
     <i

@@ -73,7 +73,6 @@ it('should render advanced color tools', () => {
       <AdvanceTools.ColorBrightener value={0} onChange={noop} />
       <AdvanceTools.ColorDarkener value={20} onChange={noop} />
       <AdvanceTools.ColorDesaturator value={50} onChange={noop} />
-      <AdvanceTools.ColorLightener value={10} onChange={noop} />
       <AdvanceTools.ColorSaturator value={20} onChange={noop} />
       <AdvanceTools.ColorSpinner value={-120} onChange={noop} />
     </Provider>
