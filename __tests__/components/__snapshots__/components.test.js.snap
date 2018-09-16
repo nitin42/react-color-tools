@@ -306,10 +306,12 @@ Array [
     />
   </span>,
   <span
+    aria-label="Copied"
+    className="no-tooltip"
+    id="clipboard"
     onClick={[Function]}
     onKeyDown={[Function]}
     tabIndex={0}
-    title="clipboard"
   >
     <i
       className="fas fa-copy"
