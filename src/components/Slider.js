@@ -2,7 +2,7 @@ import React from 'react'
 import { css } from 'emotion'
 import PropTypes from 'prop-types'
 
-const Slider = ({ min, max, value, onChange, color }) => (
+const Slider = ({ min, max, value, onChange, color, ...rest }) => (
   <input
     className={css`
       -webkit-appearance: none;
@@ -30,6 +30,7 @@ const Slider = ({ min, max, value, onChange, color }) => (
     max={max}
     value={value}
     onChange={onChange}
+    {...rest}
   />
 )
 

@@ -2,17 +2,21 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import BasicPicker from './pickers/BasicPicker'
+import GradientPicker from './pickers/GradientPicker'
+import { css } from 'emotion'
 
 /* eslint-disable */
 class App extends React.Component {
   state = {
-    color: '#f00'
+    color: '#f00',
+    gradient: ''
   }
 
   render() {
     return (
       <div>
-        <BasicPicker
+        <GradientPicker getGradient={gradient => this.setState({ gradient })} />
+        {/* <BasicPicker
           // color={this.state.color}
           // onChange={color => {
           //   this.setState({ color })
@@ -21,8 +25,16 @@ class App extends React.Component {
           theme="light"
           showTools
           // triangle={false}
-        />
-        {/* <h2 style={{ color: this.state.color }}>React Color Picker</h2> */}
+        /> */}
+        <h2
+          className={css`
+            background: ${this.state.gradient};
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+          `}
+        >
+          React Gradient Picker
+        </h2>
       </div>
     )
   }
