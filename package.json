@@ -1,14 +1,13 @@
 {
-  "name": "react-color-plus",
+  "name": "react-color-tools",
   "version": "1.0.0",
-  "description": "A collection of advance color pickers created with react-color primitives",
+  "description": "A collection of tools for manipulating colors",
   "main": "index.js",
   "author": "Nitin Tulswani",
   "license": "MIT",
   "dependencies": {
     "@ctrl/tinycolor": "^2.2.0",
     "emotion": "^9.2.8",
-    "primer-tooltips": "^1.5.7",
     "prop-types": "^15.6.2",
     "randomcolor": "^0.5.3",
     "react-color-extractor": "^1.1.2",
