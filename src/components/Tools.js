@@ -6,6 +6,8 @@ import { Consumer } from '../utils/context'
 
 const ENTER_KEY = 13
 
+const TOOLTIP_CLASSNAME = `tooltipped tooltipped-ne tooltipped-align-left-1 tooltipped-no-delay border p-2 mb-2 mr-2 float-left`
+
 const HOC = Comp => props => (
   <Consumer>{color => <Comp color={color} {...props} />}</Consumer>
 )
@@ -177,12 +179,14 @@ TintsGenerator.propTypes = {
   generateTints: PropTypes.func
 }
 
-const Clipboard = HOC(({ color, copyColor }) => (
+const Clipboard = HOC(({ color, copyColor, showMsg }) => (
   <span
     tabIndex={0}
-    title="clipboard"
+    id="clipboard"
     onClick={copyColor}
     onKeyDown={e => (e.keyCode === ENTER_KEY ? copyColor(e) : null)}
+    className={showMsg ? TOOLTIP_CLASSNAME : 'no-tooltip'}
+    aria-label="Copied"
   >
     <i id="image-icon" className="fas fa-copy" style={{ color }} />
   </span>

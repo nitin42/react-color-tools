@@ -17,6 +17,8 @@ import Triangle from '../components/Triangle'
 import ColorFormatPicker from '../components/ColorFormatPicker'
 import { AdvanceTools, BasicTools } from '../components/Tools'
 
+import '../styles/tooltip.css'
+
 const DARK_COLOR = '#1f1f1f'
 const LIGHT_COLOR = 'rgb(255, 255, 255)'
 
@@ -89,6 +91,9 @@ export default class BasicPicker extends React.PureComponent {
   // Hidden input element for uploading an image
   uploadElement = null
 
+  // Clipboard icon
+  clipboardIcon = null
+
   state = {
     // Current block, active and input field color (or hue)
     color: new TinyColor(this.props.color),
@@ -113,7 +118,9 @@ export default class BasicPicker extends React.PureComponent {
     darken: 0,
     spin: 0,
     desaturate: 0,
-    saturate: 0
+    saturate: 0,
+    // Show or hide color copied msg
+    showMsg: false
   }
 
   static defaultProps = {
@@ -155,8 +162,11 @@ export default class BasicPicker extends React.PureComponent {
   componentDidMount() {
     this.uploadElement = document.getElementById('uploader')
     this.imageIcon = document.getElementById('image-icon')
+    this.clipboardIcon = document.getElementById('clipboard')
 
     this.imageIcon.addEventListener('click', this.simulateClick)
+    this.clipboardIcon.addEventListener('mouseleave', this.hideMsg)
+    this.clipboardIcon.addEventListener('blur', this.hideMsg)
 
     // Attach a listener for deleting the image (if any) from the color block
     document.addEventListener('keydown', this.updateKey)
@@ -176,8 +186,12 @@ export default class BasicPicker extends React.PureComponent {
 
   componentWillUnmount() {
     this.imageIcon.removeEventListener('click', this.simulateClick)
+    this.clipboardIcon.removeEventListener('mouseleave', this.hideMsg)
+    this.clipboardIcon.removeEventListener('blur', this.hideMsg)
     document.removeEventListener('keydown', this.updateKey)
   }
+
+  hideMsg = () => this.setState({ showMsg: false })
 
   // default onChange handler for color input field
   defaultOnChange = color => {
@@ -496,7 +510,12 @@ export default class BasicPicker extends React.PureComponent {
                 generateShades={this.generateShades}
               />
               <BasicTools.Clipboard
-                copyColor={() => navigator.clipboard.writeText(color)}
+                copyColor={() => {
+                  navigator.clipboard.writeText(color)
+                  // Show tooltip
+                  this.setState({ showMsg: true })
+                }}
+                showMsg={this.state.showMsg}
               />
               <BasicTools.Reset resetColors={this.resetColors} />
             </div>
