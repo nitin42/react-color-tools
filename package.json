@@ -57,7 +57,8 @@
     "test:watch": "jest --watch",
     "test": "jest",
     "lint": "eslint ./src",
-    "validate": "yarn formatall && yarn lint && yarn test"
+    "validate": "yarn formatall && yarn lint && yarn test",
+    "reset": "rm -rf dist && rm -rf .cache"
   },
   "jest": {
     "testEnvironment": "node"

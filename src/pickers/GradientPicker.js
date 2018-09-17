@@ -10,7 +10,6 @@ import Slider from '../components/Slider'
 import { BasicTools } from '../components/Tools'
 
 const DARK_COLOR = '#1f1f1f'
-
 const DEFAULT_COLOR_ONE = '#81FFEF'
 const DEFAULT_COLOR_TWO = '#F067B4'
 
@@ -26,10 +25,10 @@ injectGlobal`
 `
 
 // Colors should be sorted by the color stops
-// TODO: This throws an error when both the color stop values are equal. Refactor or create an issue at tinygradient
 const createGradient = colors =>
   gradient(
     colors.sort((a, b) => {
+      // We need to shift the value of one color stop because, tinygradient throws an error when two stops are equal.
       if (a.pos && b.pos && a.pos === b.pos) {
         a.pos += 0.01
       }
@@ -55,16 +54,18 @@ const ColorBlock = ({ gradient }) => (
 const ColorStop = ({ color, onChangeColor, value, onChangeStop }) => (
   <div>
     <ColorInputField value={color} onChange={onChangeColor} />
-    <label className="label">Stop</label>
-    <Slider
-      min="0"
-      max="10"
-      step="0.01"
-      value={value}
-      onChange={onChangeStop}
-      color={DARK_COLOR}
-      style={{ marginTop: 10, marginBottom: 10 }}
-    />
+    <span>
+      <label className="label">Stops</label>
+      <Slider
+        min="0"
+        max="10"
+        step="0.01"
+        value={value}
+        onChange={onChangeStop}
+        color={DARK_COLOR}
+        style={{ marginTop: 10, marginBottom: 10 }}
+      />
+    </span>
   </div>
 )
 
@@ -74,10 +75,10 @@ export default class GradientPicker extends React.Component {
 
   state = {
     // Returns a gradient object
-    gradient: gradient(DEFAULT_COLOR_ONE, DEFAULT_COLOR_TWO),
+    gradient: gradient(this.props.colorOne, this.props.colorTwo),
     // Default colors
-    colorOne: DEFAULT_COLOR_ONE,
-    colorTwo: DEFAULT_COLOR_TWO,
+    colorOne: this.props.colorOne,
+    colorTwo: this.props.colorTwo,
     // Color position stops
     // Color stops are stopping points in a gradient that show a specific color
     // at the exact location we set.
@@ -93,7 +94,7 @@ export default class GradientPicker extends React.Component {
     getGradient: gradient => {}
   }
 
-  static defaultProps = {
+  static propTypes = {
     colorOne: PropTypes.string,
     colorTwo: PropTypes.string,
     getGradient: PropTypes.func
@@ -108,16 +109,6 @@ export default class GradientPicker extends React.Component {
     this.clipboardIcon.addEventListener('blur', this.hideMsg)
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.colorOne !== this.state.colorOne) {
-      this.validateAndUpdateColor(prevState, this.state.colorOne)
-    }
-
-    if (prevState.colorTwo !== this.state.colorTwo) {
-      this.validateAndUpdateColor(prevState, this.state.colorTwo)
-    }
-  }
-
   componentWillUnmount() {
     this.clipboardIcon.removeEventListener('mouseleave', this.hideMsg)
     this.clipboardIcon.removeEventListener('blur', this.hideMsg)
@@ -125,6 +116,7 @@ export default class GradientPicker extends React.Component {
 
   hideMsg = () => this.setState({ showMsg: false })
 
+  // Validate the color in color input field and create the gradient using that color
   validateAndUpdateColor = (prevState, color) => {
     const newColor = new TinyColor(color)
 
@@ -134,6 +126,7 @@ export default class GradientPicker extends React.Component {
           gradient: gradient(color, prevState.colorTwo)
         },
         () => {
+          // Invoke the callback with new gradient
           this.props.getGradient(this.state.gradient.css())
         }
       )
@@ -176,9 +169,41 @@ export default class GradientPicker extends React.Component {
     )
   }
 
-  updateColorOne = color => this.setState({ colorOne: color })
+  updateColorOne = color => {
+    this.setState({ colorOne: color })
 
-  updateColorTwo = color => this.setState({ colorTwo: color })
+    const newColor = new TinyColor(color)
+
+    if (newColor.isValid()) {
+      this.setState(
+        {
+          gradient: gradient(color, this.state.colorTwo)
+        },
+        () => {
+          // Invoke the callback with new gradient
+          this.props.getGradient(this.state.gradient.css())
+        }
+      )
+    }
+  }
+
+  updateColorTwo = color => {
+    this.setState({ colorTwo: color })
+
+    const newColor = new TinyColor(color)
+
+    if (newColor.isValid()) {
+      this.setState(
+        {
+          gradient: gradient(this.state.colorOne, color)
+        },
+        () => {
+          // Invoke the callback with new gradient
+          this.props.getGradient(this.state.gradient.css())
+        }
+      )
+    }
+  }
 
   render() {
     const {
@@ -210,6 +235,7 @@ export default class GradientPicker extends React.Component {
             className={css`
               display: flex;
               justify-content: center;
+              margin-top: 10px;
             `}
           >
             <BasicTools.Clipboard

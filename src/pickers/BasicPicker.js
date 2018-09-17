@@ -175,7 +175,6 @@ export default class BasicPicker extends React.PureComponent {
   componentDidUpdate(prevProps) {
     if (prevProps.color !== this.props.color) {
       const color = new TinyColor(this.props.color)
-
       // Check if its a valid hex and then update the color
       // on changing the color input field, it only updates the color block if the hex code is valid
       if (color.isValid) {
@@ -203,10 +202,6 @@ export default class BasicPicker extends React.PureComponent {
   }
 
   updateColorState = (value, color, operation) => {
-    // This clears all the color buffers except the buffer which is
-    // currently being used to persist the original color
-    this.clearColorBuffer(operation)
-
     const newValue = parseInt(value)
     const newColor = new TinyColor(color)[operation](newValue)
 
@@ -214,32 +209,12 @@ export default class BasicPicker extends React.PureComponent {
     this.setState({ [operation]: newValue, color: newColor })
   }
 
-  getBuffer = () => ({
-    spin: this.spinColor,
-    desaturate: this.desaturateColor,
-    saturate: this.saturateColor,
-    brighten: this.brightenColor,
-    darken: this.darkenColor
-  })
-
   clearAllColorBuffers = () => {
     this.spinColor = null
     this.saturateColor = null
     this.desaturateColor = null
     this.darkenColor = null
     this.brightenColor = null
-  }
-
-  clearColorBuffer = currentBuffer => {
-    const bufferObj = this.getBuffer()
-
-    Object.keys(bufferObj).forEach(key => {
-      if (currentBuffer && currentBuffer.length > 0) {
-        if (key !== currentBuffer) {
-          bufferObj[key] = null
-        }
-      }
-    })
   }
 
   /**
@@ -258,6 +233,11 @@ export default class BasicPicker extends React.PureComponent {
       this.spinColor = this.state.color.originalInput
     }
 
+    this.saturateColor = null
+    this.desaturateColor = null
+    this.brightenColor = null
+    this.darkenColor = null
+
     this.updateColorState(e.target.value, this.spinColor, 'spin')
   }
 
@@ -266,6 +246,11 @@ export default class BasicPicker extends React.PureComponent {
     if (this.saturateColor === null) {
       this.saturateColor = this.state.color.originalInput
     }
+
+    this.spinColor = null
+    this.desaturateColor = null
+    this.brightenColor = null
+    this.darkenColor = null
 
     this.updateColorState(e.target.value, this.saturateColor, 'saturate')
   }
@@ -276,6 +261,11 @@ export default class BasicPicker extends React.PureComponent {
       this.desaturateColor = this.state.color.originalInput
     }
 
+    this.saturateColor = null
+    this.spinColor = null
+    this.brightenColor = null
+    this.darkenColor = null
+
     this.updateColorState(e.target.value, this.desaturateColor, 'desaturate')
   }
 
@@ -284,6 +274,11 @@ export default class BasicPicker extends React.PureComponent {
       this.brightenColor = this.state.color.originalInput
     }
 
+    this.saturateColor = null
+    this.desaturateColor = null
+    this.spinColor = null
+    this.darkenColor = null
+
     this.updateColorState(e.target.value, this.brightenColor, 'brighten')
   }
 
@@ -291,6 +286,11 @@ export default class BasicPicker extends React.PureComponent {
     if (this.darkenColor === null) {
       this.darkenColor = this.state.color.originalInput
     }
+
+    this.saturateColor = null
+    this.desaturateColor = null
+    this.brightenColor = null
+    this.spinColor = null
 
     this.updateColorState(e.target.value, this.darkenColor, 'darken')
   }

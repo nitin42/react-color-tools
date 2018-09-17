@@ -1,40 +1,47 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+import { css } from 'emotion'
 import BasicPicker from './pickers/BasicPicker'
 import GradientPicker from './pickers/GradientPicker'
-import { css } from 'emotion'
+
+const DEFAULT_COLOR_ONE = '#81FFEF'
+const DEFAULT_COLOR_TWO = '#F067B4'
+
+const PickerBasic = props => <BasicPicker {...props} />
+
+const PickerGradient = props => <GradientPicker {...props} />
 
 /* eslint-disable */
 class App extends React.Component {
   state = {
-    color: '#f00',
+    color: 'hotpink',
     gradient: ''
   }
 
   render() {
     return (
       <div>
-        <GradientPicker getGradient={gradient => this.setState({ gradient })} />
-        {/* <BasicPicker
-          // color={this.state.color}
-          // onChange={color => {
-          //   this.setState({ color })
-          // }}
-          // onSwatchHover={color => this.setState({ color })}
-          theme="light"
-          showTools
-          // triangle={false}
-        /> */}
-        <h2
+        {/* <PickerBasic
+					color={this.state.color}
+					onChange={color => {
+						this.setState({ color })
+					}}
+					showTools
+					swatches={['red', 'green']}
+					triangle={false}
+				/> */}
+        <PickerGradient getGradient={gradient => this.setState({ gradient })} />
+        <h1
           className={css`
+            display: inline-block;
             background: ${this.state.gradient};
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
           `}
         >
-          React Gradient Picker
-        </h2>
+          Introduction
+        </h1>
       </div>
     )
   }
