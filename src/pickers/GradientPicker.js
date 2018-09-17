@@ -44,8 +44,10 @@ injectGlobal`
 const createGradient = colors =>
   gradient(
     colors.sort((a, b) => {
-      // We need to shift the value of either color stop because tinygradient throws an error when two stops are equal.
+      // We need to shift the value of either color stop because tinygradient
+      // throws an error when two stops are equal.
       if (a.pos && b.pos && a.pos === b.pos) {
+        /* eslint-disable no-param-reassign */
         a.pos += 0.01
       }
 
@@ -53,7 +55,7 @@ const createGradient = colors =>
     })
   )
 
-const ColorBlock = ({ gradient }) => (
+const ColorBlock = ({ gradient: gradientCss }) => (
   <div
     className={css`
       display: flex;
@@ -63,9 +65,13 @@ const ColorBlock = ({ gradient }) => (
       height: 110px;
       border-radius: 6px 6px 0px 0px;
     `}
-    style={{ background: gradient }}
+    style={{ background: gradientCss }}
   />
 )
+
+ColorBlock.propTypes = {
+  gradient: PropTypes.string.isRequired
+}
 
 const ColorStop = ({
   color: inputColor,
@@ -96,6 +102,13 @@ const ColorStop = ({
   </Consumer>
 )
 
+ColorStop.propTypes = {
+  color: PropTypes.string.isRequired,
+  onChangeColor: PropTypes.func.isRequired,
+  value: PropTypes.number.isRequired,
+  onChangeStop: PropTypes.func.isRequired
+}
+
 export default class GradientPicker extends React.Component {
   // Clipboard icon element
   clipboardIcon = null
@@ -117,8 +130,10 @@ export default class GradientPicker extends React.Component {
   static defaultProps = {
     colorOne: DEFAULT_COLOR_ONE,
     colorTwo: DEFAULT_COLOR_TWO,
-    // Returns a css gradient string. It is invoked on every operation (setting stop values, or updating the color input field)
-    getGradient: gradient => {},
+    // Returns a css gradient string. It is invoked on every operation like
+    // (setting stop values, or updating the color input field)
+    /* eslint-disable no-unused-vars */
+    getGradient: grad => {},
     theme: 'light'
   }
 
@@ -147,6 +162,8 @@ export default class GradientPicker extends React.Component {
 
   setColorStopOne = pos => {
     // Only set the stop property if it's non-zero
+    /* eslint-disable operator-linebreak */
+
     const colorOne =
       pos !== 0 ? { color: this.state.colorOne, pos } : this.state.colorOne
     const colorTwo =
@@ -159,6 +176,7 @@ export default class GradientPicker extends React.Component {
   }
 
   setColorStopTwo = pos => {
+    /* eslint-disable operator-linebreak */
     const colorOne =
       pos !== 0 ? { color: this.state.colorOne, pos: 0.2 } : this.state.colorOne
 
@@ -213,9 +231,9 @@ export default class GradientPicker extends React.Component {
 
     if (newColor.isValid()) {
       this.setState(
-        {
-          gradient: gradient(color, this.state.colorTwo)
-        },
+        state => ({
+          gradient: gradient(color, state.colorTwo)
+        }),
         this.propCallback
       )
     }
@@ -228,9 +246,9 @@ export default class GradientPicker extends React.Component {
 
     if (newColor.isValid()) {
       this.setState(
-        {
-          gradient: gradient(this.state.colorOne, color)
-        },
+        state => ({
+          gradient: gradient(state.colorOne, color)
+        }),
         this.propCallback
       )
     }
@@ -251,7 +269,7 @@ export default class GradientPicker extends React.Component {
 
   render() {
     const {
-      gradient,
+      gradient: grad,
       colorOne,
       colorTwo,
       colorStopOne,
@@ -269,7 +287,7 @@ export default class GradientPicker extends React.Component {
 
     return (
       <Container background={bg} width="170px">
-        <ColorBlock gradient={gradient.css()} />
+        <ColorBlock gradient={grad.css()} />
         <ColorProvider value={iconColor}>
           <div style={{ padding: 10 }}>
             <ColorStop
@@ -294,7 +312,7 @@ export default class GradientPicker extends React.Component {
               <BasicTools.Clipboard
                 showMsg={showMsg}
                 copyColor={() => {
-                  navigator.clipboard.writeText(gradient.css())
+                  navigator.clipboard.writeText(grad.css())
                   this.setState({ showMsg: true })
                 }}
               />

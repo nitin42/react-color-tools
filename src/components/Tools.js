@@ -6,6 +6,7 @@ import { Consumer } from '../utils/context'
 
 const ENTER_KEY = 13
 
+/* eslint-disable operator-linebreak */
 const TOOLTIP_CLASSNAME =
   'tooltipped tooltipped-ne tooltipped-align-left-1 tooltipped-no-delay border p-2 mb-2 mr-2 float-left'
 
