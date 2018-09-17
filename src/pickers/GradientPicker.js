@@ -11,9 +11,13 @@ import Slider from '../components/Slider'
 import { BasicTools } from '../components/Tools'
 import { Provider as ColorProvider, Consumer } from '../utils/context'
 
+const DARK_COLOR = '#1f1f1f'
+const DEFAULT_COLOR_ONE = '#81FFEF'
+const DEFAULT_COLOR_TWO = '#F067B4'
+const LIGHT_COLOR = 'rgb(255, 255, 255)'
+
 const randomColors = () => {
   let i = 0
-
   const newColors = new Set()
 
   while (i < 3) {
@@ -23,11 +27,6 @@ const randomColors = () => {
 
   return newColors
 }
-
-const DARK_COLOR = '#1f1f1f'
-const DEFAULT_COLOR_ONE = '#81FFEF'
-const DEFAULT_COLOR_TWO = '#F067B4'
-const LIGHT_COLOR = 'rgb(255, 255, 255)'
 
 injectGlobal`
   .label {
@@ -45,7 +44,7 @@ injectGlobal`
 const createGradient = colors =>
   gradient(
     colors.sort((a, b) => {
-      // We need to shift the value of either color stop because, tinygradient throws an error when two stops are equal.
+      // We need to shift the value of either color stop because tinygradient throws an error when two stops are equal.
       if (a.pos && b.pos && a.pos === b.pos) {
         a.pos += 0.01
       }
@@ -98,7 +97,7 @@ const ColorStop = ({
 )
 
 export default class GradientPicker extends React.Component {
-  // Clipboard icon
+  // Clipboard icon element
   clipboardIcon = null
 
   state = {
@@ -119,17 +118,19 @@ export default class GradientPicker extends React.Component {
     colorOne: DEFAULT_COLOR_ONE,
     colorTwo: DEFAULT_COLOR_TWO,
     // Returns a css gradient string. It is invoked on every operation (setting stop values, or updating the color input field)
-    getGradient: gradient => {}
+    getGradient: gradient => {},
+    theme: 'light'
   }
 
   static propTypes = {
     colorOne: PropTypes.string,
     colorTwo: PropTypes.string,
-    getGradient: PropTypes.func
+    getGradient: PropTypes.func,
+    theme: PropTypes.string
   }
 
   componentDidMount() {
-    this.props.getGradient(this.state.gradient.css())
+    this.propCallback()
 
     this.clipboardIcon = document.getElementById('clipboard')
 
@@ -179,11 +180,13 @@ export default class GradientPicker extends React.Component {
     // color stop position value should be between 0 and 1
     const pos = this.state[color] / 10
 
+    // Create the gradient depending on the color stop value
     if (color === 'colorStopOne') {
       const { colorOne, colorTwo } = this.setColorStopOne(pos)
 
-      this.setState({ gradient: createGradient([colorOne, colorTwo]) }, () =>
-        this.props.getGradient(this.state.gradient.css())
+      this.setState(
+        { gradient: createGradient([colorOne, colorTwo]) },
+        this.propCallback
       )
     } else if (color === 'colorStopTwo') {
       const { colorOne, colorTwo } = this.setColorStopTwo(pos)
@@ -195,9 +198,13 @@ export default class GradientPicker extends React.Component {
     }
   }
 
+  // Create the gradient when the color stop value for color changes
+
   updateStopOne = e => this.updateColorStop(e, 'colorStopOne')
 
   updateStopTwo = e => this.updateColorStop(e, 'colorStopTwo')
+
+  // Create the gradient when the either color changes
 
   updateColorOne = color => {
     this.setState({ colorOne: color })
@@ -229,7 +236,8 @@ export default class GradientPicker extends React.Component {
     }
   }
 
-  generateGradient = e => {
+  // Generate different color inputs and create a gradient using those input values
+  generateGradient = () => {
     const iterator = randomColors().values()
 
     const colorOne = iterator.next().value
@@ -251,11 +259,13 @@ export default class GradientPicker extends React.Component {
       showMsg
     } = this.state
 
+    const { theme } = this.props
+
     // Set the background color of color picker according to the current theme
-    const bg = this.props.theme === 'dark' ? DARK_COLOR : LIGHT_COLOR
+    const bg = theme === 'dark' ? DARK_COLOR : LIGHT_COLOR
 
     // Set icon color according to the current theme
-    const iconColor = this.props.theme === 'dark' ? LIGHT_COLOR : DARK_COLOR
+    const iconColor = theme === 'dark' ? LIGHT_COLOR : DARK_COLOR
 
     return (
       <Container background={bg} width="170px">

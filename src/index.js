@@ -32,7 +32,7 @@ class App extends React.Component {
 					triangle={false}
 				/> */}
         <PickerGradient
-          theme="light"
+          theme="dark"
           getGradient={gradient => this.setState({ gradient })}
         />
         <h1
