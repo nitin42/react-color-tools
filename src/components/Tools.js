@@ -198,6 +198,21 @@ Clipboard.propTypes = {
   copyColor: PropTypes.func
 }
 
+const GradientGenerator = HOC(({ color, generateGradient }) => (
+  <span
+    tabIndex={0}
+    onClick={generateGradient}
+    onKeyDown={e => (e.keyCode === ENTER_KEY ? generateGradient(e) : null)}
+  >
+    <i className="fas fa-plus-square" style={{ color }} />
+  </span>
+))
+
+GradientGenerator.propTypes = {
+  color: PropTypes.string,
+  generateGradient: PropTypes.func
+}
+
 const AdvanceTools = {
   ColorSaturator,
   ColorDesaturator,
@@ -220,7 +235,8 @@ const BasicTools = {
   Reset,
   ImagePicker,
   PaletteGenerator,
-  Clipboard
+  Clipboard,
+  GradientGenerator
 }
 
 export { AdvanceTools, BasicTools }

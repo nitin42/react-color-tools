@@ -31,7 +31,10 @@ class App extends React.Component {
 					swatches={['red', 'green']}
 					triangle={false}
 				/> */}
-        <PickerGradient getGradient={gradient => this.setState({ gradient })} />
+        <PickerGradient
+          theme="light"
+          getGradient={gradient => this.setState({ gradient })}
+        />
         <h1
           className={css`
             display: inline-block;
