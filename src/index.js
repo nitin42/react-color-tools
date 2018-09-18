@@ -13,6 +13,13 @@ const PickerBasic = props => <BasicPicker {...props} />
 
 const PickerGradient = props => <GradientPicker {...props} />
 
+const directions = {
+  one: 'farthest-corner ellipse at top left',
+  two: 'ellipse at center',
+  three: 'at top-left',
+  four: 'at right'
+}
+
 /* eslint-disable */
 class App extends React.Component {
   state = {
@@ -23,18 +30,12 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        {/* <PickerBasic
-					color={this.state.color}
-					onChange={color => {
-						this.setState({ color })
-					}}
-					showTools
-					swatches={['red', 'green']}
-					triangle={false}
-				/> */}
         <PickerGradient
-          theme="dark"
+          theme="light"
           getGradient={gradient => this.setState({ gradient })}
+          mode="linear"
+          direction="to bottom"
+          reverse={true}
         />
         <h1
           className={css`

@@ -65,7 +65,7 @@ const ColorBlock = ({ gradient: gradientCss }) => (
       height: 110px;
       border-radius: 6px 6px 0px 0px;
     `}
-    style={{ background: gradientCss }}
+    style={{ backgroundImage: gradientCss }}
   />
 )
 
@@ -115,7 +115,9 @@ export default class GradientPicker extends React.Component {
 
   state = {
     // Returns a gradient object
-    gradient: gradient(this.props.colorOne, this.props.colorTwo),
+    gradient: this.props.reverse
+      ? gradient(this.props.colorOne, this.props.colorTwo).reverse()
+      : gradient(this.props.colorOne, this.props.colorTwo),
     // Default colors
     colorOne: this.props.colorOne,
     colorTwo: this.props.colorTwo,
@@ -130,18 +132,26 @@ export default class GradientPicker extends React.Component {
   static defaultProps = {
     colorOne: DEFAULT_COLOR_ONE,
     colorTwo: DEFAULT_COLOR_TWO,
+    // When set to true, reverse the gradient
+    reverse: false,
     // Returns a css gradient string. It is invoked on every operation like
     // (setting stop values, or updating the color input field)
     /* eslint-disable no-unused-vars */
     getGradient: grad => {},
     theme: 'light'
+    // These defaults are built-in in tinygradient module
+    // mode: linear
+    // direction: to right
   }
 
   static propTypes = {
     colorOne: PropTypes.string,
     colorTwo: PropTypes.string,
     getGradient: PropTypes.func,
-    theme: PropTypes.string
+    theme: PropTypes.string,
+    mode: PropTypes.oneOf(['linear', 'radial']),
+    direction: PropTypes.string,
+    reverse: PropTypes.bool
   }
 
   componentDidMount() {
@@ -189,7 +199,16 @@ export default class GradientPicker extends React.Component {
     }
   }
 
-  propCallback = () => this.props.getGradient(this.state.gradient.css())
+  propCallback = () =>
+    this.props.reverse
+      ? this.props.getGradient(
+          this.state.gradient
+            .reverse()
+            .css(this.props.mode, this.props.direction)
+        )
+      : this.props.getGradient(
+          this.state.gradient.css(this.props.mode, this.props.direction)
+        )
 
   updateColorStop = (e, color) => {
     const value = parseInt(e.target.value)
