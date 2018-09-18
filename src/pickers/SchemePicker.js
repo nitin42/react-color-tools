@@ -1,6 +1,6 @@
 import React from 'react'
 import TinyColor from 'tinycolor2'
-import { css, injectGlobal } from 'emotion'
+import { css } from 'emotion'
 import PropTypes from 'prop-types'
 
 import Container from '../components/Container'
@@ -9,69 +9,25 @@ import Swatches from '../components/Swatches'
 import ColorInputField from '../components/ColorInputField'
 import ColorFormatPicker from '../components/ColorFormatPicker'
 import { BasicTools } from '../components/Tools'
-
-const BigPalette = ({ color, updatePalette }) => (
-  <div
-    className={css`
-      background: ${color};
-      width: 50px;
-      height: 100px;
-      border-radius: 1px;
-    `}
-    onClick={e => updatePalette(color)}
-  />
-)
-
-const SmallPalette = ({ color, updatePalette }) => (
-  <div
-    className={css`
-      background: ${color};
-      width: 25px;
-      height: 25px;
-      border-radius: 2px;
-    `}
-    onClick={e => updatePalette(color)}
-  />
-)
-
-const Palettes = ({ schemes, small, updatePalette }) => (
-  <div
-    className={css`
-      display: grid;
-      grid-template-columns: repeat(40, ${small ? '25px' : '50px'});
-      grid-gap: 3px;
-      margin-top: 10px;
-      overflow: scroll;
-      width: 100%;
-      height: ${small ? '34px' : '108px'};
-    `}
-  >
-    {schemes
-      .reverse()
-      .map(
-        (scheme, i) =>
-          small ? (
-            <SmallPalette
-              updatePalette={updatePalette}
-              color={scheme}
-              key={i}
-            />
-          ) : (
-            <BigPalette updatePalette={updatePalette} color={scheme} key={i} />
-          )
-      )}
-  </div>
-)
+import { Palettes } from '../components/Palettes'
 
 export default class SchemePicker extends React.Component {
   state = {
+    // Input color
     color: new TinyColor(this.props.color).toHexString(),
-    schemes: [],
+    // Palettes for the input color
+    palettes: [],
+    // Palettes options
     formats: [
+      // Monochromatic generates various shades, tints or tones of a hue
       'Monochromatic',
+      // Generates the colors which are side by side on the color wheel
       'Analogous',
+      // Any color on the color wheel plus the two which flank its complement
       'Split Complement',
+      // Any three colors that are evenly spaced on the color wheel
       'Triad',
+      // Two complementary pairs of colors
       'Tetrad'
     ],
     currentFormat: 'Monochromatic'
@@ -124,7 +80,7 @@ export default class SchemePicker extends React.Component {
 
     newSchemes.forEach(scheme => uniqueSchemes.add(scheme))
 
-    this.setState(state => ({ schemes: [...uniqueSchemes] }))
+    this.setState(state => ({ palettes: [...uniqueSchemes] }))
   }
 
   changeFormat = e => this.setState({ currentFormat: e.target.value })
@@ -142,7 +98,7 @@ export default class SchemePicker extends React.Component {
   }
 
   render() {
-    const { schemes, color, swatches, formats } = this.state
+    const { palettes, color, swatches, formats } = this.state
 
     return (
       <Container width="200px">
@@ -153,7 +109,7 @@ export default class SchemePicker extends React.Component {
             onChange={this.props.onChange || this.defaultOnChange}
           />
           <Palettes
-            schemes={schemes}
+            schemes={palettes}
             small={true}
             updatePalette={this.updatePalette}
           />
