@@ -203,9 +203,10 @@ const GradientGenerator = HOC(({ color, generateGradient }) => (
   <span
     tabIndex={0}
     onClick={generateGradient}
+    title="Gradient generator"
     onKeyDown={e => (e.keyCode === ENTER_KEY ? generateGradient(e) : null)}
   >
-    <i className="fas fa-plus-square" style={{ color }} />
+    <i className="fas fa-redo-alt" style={{ color }} />
   </span>
 ))
 
