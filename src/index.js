@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom'
 import { css } from 'emotion'
 import BasicPicker from './pickers/BasicPicker'
 import GradientPicker from './pickers/GradientPicker'
+import SchemePicker from './pickers/SchemePicker'
 
 const DEFAULT_COLOR_ONE = '#81FFEF'
 const DEFAULT_COLOR_TWO = '#F067B4'
@@ -30,23 +31,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <PickerGradient
-          theme="light"
-          getGradient={gradient => this.setState({ gradient })}
-          mode="linear"
-          direction="to bottom"
-          reverse={true}
-        />
-        <h1
-          className={css`
-            display: inline-block;
-            background: ${this.state.gradient};
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-          `}
-        >
-          Introduction
-        </h1>
+        <SchemePicker color={DEFAULT_COLOR_ONE} />
       </div>
     )
   }

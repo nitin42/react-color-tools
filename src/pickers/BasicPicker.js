@@ -143,7 +143,7 @@ export default class BasicPicker extends React.PureComponent {
     swatches: PropTypes.arrayOf(PropTypes.string),
     maxColors: PropTypes.number,
     triangle: PropTypes.bool,
-    theme: PropTypes.string,
+    theme: PropTypes.oneOf(['light, dark']),
     showTools: PropTypes.bool
   }
 
