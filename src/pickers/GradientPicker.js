@@ -16,6 +16,7 @@ const DEFAULT_COLOR_ONE = '#81FFEF'
 const DEFAULT_COLOR_TWO = '#F067B4'
 const LIGHT_COLOR = 'rgb(255, 255, 255)'
 
+// Returns a set of random colors (this is used in generating different gradients)
 const randomColors = () => {
   let i = 0
   const newColors = new Set()
@@ -141,14 +142,15 @@ export default class GradientPicker extends React.Component {
     theme: 'light'
     // These defaults are built-in in tinygradient module
     // mode: linear
-    // direction: to right
+    // direction: to right,
   }
 
   static propTypes = {
     colorOne: PropTypes.string,
     colorTwo: PropTypes.string,
     getGradient: PropTypes.func,
-    theme: PropTypes.string,
+    theme: PropTypes.oneOf(['light', 'dark']),
+    /* eslint-disable react/require-default-props */
     mode: PropTypes.oneOf(['linear', 'radial']),
     direction: PropTypes.string,
     reverse: PropTypes.bool
@@ -199,6 +201,7 @@ export default class GradientPicker extends React.Component {
     }
   }
 
+  /* eslint-disable indent */
   propCallback = () =>
     this.props.reverse
       ? this.props.getGradient(
