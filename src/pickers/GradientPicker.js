@@ -215,8 +215,6 @@ export default class GradientPicker extends React.Component {
 
   updateColorStop = (e, color) => {
     const value = parseInt(e.target.value)
-    this.setState({ [color]: value })
-
     // color stop position value should be between 0 and 1
     const pos = this.state[color] / 10
 
@@ -225,14 +223,14 @@ export default class GradientPicker extends React.Component {
       const { colorOne, colorTwo } = this.setColorStopOne(pos)
 
       this.setState(
-        { gradient: createGradient([colorOne, colorTwo]) },
+        { gradient: createGradient([colorOne, colorTwo]), [color]: value },
         this.propCallback
       )
     } else if (color === 'colorStopTwo') {
       const { colorOne, colorTwo } = this.setColorStopTwo(pos)
 
       this.setState(
-        { gradient: createGradient([colorOne, colorTwo]) },
+        { gradient: createGradient([colorOne, colorTwo]), [color]: value },
         this.propCallback
       )
     }
