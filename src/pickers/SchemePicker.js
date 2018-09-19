@@ -1,5 +1,5 @@
 import React from 'react'
-import TinyColor from 'tinycolor2'
+import { TinyColor } from '@ctrl/tinycolor'
 import { css } from 'emotion'
 import PropTypes from 'prop-types'
 
@@ -30,39 +30,96 @@ export default class SchemePicker extends React.Component {
       // Two complementary pairs of colors
       'Tetrad'
     ],
-    currentFormat: 'Monochromatic'
+    currentFormat: 'Monochromatic',
+    preservePreviousPalettes: false
   }
 
   static defaultProps = {
     monochromaticSchemes: 30,
-    analogousSchemes: 30
+    analogousSchemes: 30,
+    color: '#F067B4',
+    theme: 'light'
   }
 
   static propTypes = {
     monochromaticSchemes: PropTypes.number,
-    analogousSchemes: PropTypes.number
+    analogousSchemes: PropTypes.number,
+    color: PropTypes.string,
+    onChange: PropTypes.func,
+    theme: PropTypes.oneOf(['light', 'dark'])
   }
 
   componentDidMount() {
-    this.generateSchemes(this.props.color, this.state)
+    this.generateSchemes(this.props.color)
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.color !== this.props.color) {
-      const color = new TinyColor(this.props.color)
-      // Check if its a valid hex and then update the color
-      // on changing the color input field, it only updates the color block if the hex code is valid
-      if (color.isValid()) {
-        this.generateSchemes(color.toHexString())
-        this.setState({ color: color.toHexString() })
+    if (
+      this.props.color !== prevProps.color &&
+      !this.state.preservePreviousPalettes
+    ) {
+      const newColor = new TinyColor(this.props.color)
+
+      if (newColor.isValid) {
+        this.setState(
+          { color: newColor.toHexString(), preservePreviousPalettes: false },
+          () => this.generateSchemes(newColor.toHexString())
+        )
       }
     }
 
+    if (
+      this.state.color !== prevState.color &&
+      !this.state.preservePreviousPalettes
+    ) {
+      const newColor = new TinyColor(this.state.color)
+
+      if (newColor.isValid) {
+        this.setState({ color: newColor.toHexString() }, () =>
+          this.generateSchemes(newColor.toHexString())
+        )
+      }
+    }
+
+    if (
+      this.props.color !== prevProps.color &&
+      this.state.preservePreviousPalettes
+    ) {
+      this.setState({
+        palettes: [...prevState.palettes],
+        preservePreviousPalettes: false
+      })
+    }
+
     if (prevState.currentFormat !== this.state.currentFormat) {
-      this.generateSchemes(this.state.color, this.state)
+      this.generateSchemes(this.state.color)
     }
   }
 
+  // Set the count for palette that will be generated
+  setPalettesCount = format => {
+    if (
+      format === 'Split Complement' ||
+      format === 'Tetrad' ||
+      format === 'Triad'
+    ) {
+      return null
+    }
+    if (
+      this.props.monochromaticSchemes &&
+      typeof this.props.monochromaticSchemes === 'number'
+    ) {
+      return this.props.monochromaticSchemes
+    }
+    if (
+      this.props.analogousSchemes &&
+      typeof this.props.monochromaticSchemes === 'number'
+    ) {
+      return this.props.analogousSchemes
+    }
+  }
+
+  // Generate new color schemes based on the color input and current format state
   generateSchemes = (color, newState = this.state) => {
     const newSchemes = new TinyColor(color)
       [
@@ -70,30 +127,45 @@ export default class SchemePicker extends React.Component {
           .split(' ')
           .join('')
           .toLowerCase()
-      ](30)
+      ](this.setPalettesCount(newState.currentFormat))
       .map(c => c.toHexString())
-    // TinyColor appends the original color at the end of the array which is something we don't want to render
-    newSchemes.splice(newSchemes - 1, 1)
+      .reverse() // We render the colors from light to dark, so reverse the color schemes.
 
-    // All the color schemes should be unique, so we are using a Set!
+    // All the color schemes should be unique
     const uniqueSchemes = new Set()
 
     newSchemes.forEach(scheme => uniqueSchemes.add(scheme))
 
-    this.setState(state => ({ palettes: [...uniqueSchemes] }))
+    this.setState({ palettes: [...uniqueSchemes] })
   }
 
-  changeFormat = e => this.setState({ currentFormat: e.target.value })
+  // Change the format for generating different schemes
+  changeFormat = e =>
+    this.setState({
+      currentFormat: e.target.value,
+      preservePreviousPalettes: false
+    })
 
-  updatePalette = color => this.setState({ color })
+  // Click handler for a palette
+  updatePalette = color => {
+    // Preserve the old palettes while updating color state
+    // Only generate new palettes when the format changes or color input is updated
+    this.setState({ color, preservePreviousPalettes: true })
+
+    this.props.onChange && this.props.onChange(color)
+  }
 
   // default onChange handler for color input field
   defaultOnChange = color => {
     const newColor = new TinyColor(color)
 
-    if (newColor.isValid()) {
-      this.setState({ color: newColor.toHexString() })
-      this.generateSchemes(newColor.toHexString())
+    if (newColor.isValid) {
+      // Update the color input value
+      // Also generate the new schemes based on the new color input
+      this.setState(
+        { color: newColor.toHexString(), preservePreviousPalettes: false },
+        () => this.generateSchemes(newColor.toHexString())
+      )
     }
   }
 
@@ -108,11 +180,7 @@ export default class SchemePicker extends React.Component {
             value={color}
             onChange={this.props.onChange || this.defaultOnChange}
           />
-          <Palettes
-            schemes={palettes}
-            small={true}
-            updatePalette={this.updatePalette}
-          />
+          <Palettes schemes={palettes} updatePalette={this.updatePalette} />
           <ColorFormatPicker
             top={5}
             formats={formats}

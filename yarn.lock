@@ -5507,16 +5507,6 @@ pretty-format@^23.6.0:
     ansi-regex "^3.0.0"
     ansi-styles "^3.2.0"
 
-primer-support@4.6.0:
-  version "4.6.0"
-  resolved "https://registry.npmjs.org/primer-support/-/primer-support-4.6.0.tgz#42ad30ebea31f7fabb529127b32864d6cbfc2b3c"
-
-primer-tooltips@^1.5.7:
-  version "1.5.7"
-  resolved "https://registry.npmjs.org/primer-tooltips/-/primer-tooltips-1.5.7.tgz#67efd695d6042aca585a3dcc275594c5d8d7135b"
-  dependencies:
-    primer-support "4.6.0"
-
 private@^0.1.6, private@^0.1.8:
   version "0.1.8"
   resolved "https://registry.npmjs.org/private/-/private-0.1.8.tgz#2381edb3689f7a53d653190060fcf822d2f368ff"
@@ -5686,9 +5676,19 @@ react-emotion@^9.2.8:
     babel-plugin-emotion "^9.2.8"
     create-emotion-styled "^9.2.8"
 
+react-gradient-scroll-indicator@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.npmjs.org/react-gradient-scroll-indicator/-/react-gradient-scroll-indicator-1.0.1.tgz#f3c054942a1b3c9b383d402d56b55f3b9efa89db"
+  dependencies:
+    style-it "^2.0.0"
+
 react-is@^16.4.2, react-is@^16.5.1:
   version "16.5.1"
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.5.1.tgz#c6e8734fd548a22e1cef4fd0833afbeb433b85ee"
+
+react-lib-adler32@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.npmjs.org/react-lib-adler32/-/react-lib-adler32-1.0.1.tgz#01f7a0e24fe715580aadb8a827c39a850e1ccc4e"
 
 react-test-renderer@^16.0.0-0, react-test-renderer@^16.5.1:
   version "16.5.1"
@@ -6438,6 +6438,12 @@ strip-eof@^1.0.0:
 strip-json-comments@~2.0.1:
   version "2.0.1"
   resolved "https://registry.npmjs.org/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
+
+style-it@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.npmjs.org/style-it/-/style-it-2.0.0.tgz#59ba2bcd53aadc8c29ca7a51f816b774efc961eb"
+  dependencies:
+    react-lib-adler32 "^1.0.0"
 
 stylehacks@^4.0.0:
   version "4.0.0"

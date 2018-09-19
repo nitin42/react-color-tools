@@ -31,7 +31,13 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <SchemePicker color={DEFAULT_COLOR_ONE} />
+        <SchemePicker
+          color={this.state.color}
+          onChange={color => {
+            this.setState({ color })
+          }}
+        />
+        <h1 style={{ color: this.state.color }}>SCHEME PICKER</h1>
       </div>
     )
   }
