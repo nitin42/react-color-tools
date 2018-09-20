@@ -5,7 +5,6 @@ import ReactDOM from 'react-dom'
 import { css } from 'emotion'
 import BasicPicker from './pickers/BasicPicker'
 import GradientPicker from './pickers/GradientPicker'
-import SchemePicker from './pickers/SchemePicker'
 
 const DEFAULT_COLOR_ONE = '#81FFEF'
 const DEFAULT_COLOR_TWO = '#F067B4'
@@ -31,13 +30,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <SchemePicker
-          color={this.state.color}
-          onChange={color => {
-            this.setState({ color })
-          }}
-        />
-        <h1 style={{ color: this.state.color }}>SCHEME PICKER</h1>
+        <PickerGradient />
       </div>
     )
   }
