@@ -30,7 +30,8 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <PickerGradient />
+        <h1 style={{ color: this.state.color }}>Color Picker Components</h1>
+        <BasicPicker showTools />
       </div>
     )
   }

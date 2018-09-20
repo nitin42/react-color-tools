@@ -1,8 +1,36 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'react-emotion'
 
 import Slider from './Slider'
 import { Consumer } from '../utils/context'
+
+const StyledIcon = styled('i')`
+  display: inline-block;
+  width: 20px;
+  position: relative;
+  top: 5px;
+  left: -5px;
+  color: ${props => props.color};
+`
+
+const StyledSpan = styled('span')`
+  outline: none;
+`
+
+const ToolsIcon = styled('i')`
+  cursor: pointer;
+  color: ${props => props.color};
+`
+
+const StyledLabel = styled('label')`
+  display: inline-block;
+  width: 10px;
+  position: relative;
+  top: 3px;
+  left: 4px;
+  color: ${props => props.color};
+`
 
 const ENTER_KEY = 13
 
@@ -15,8 +43,8 @@ const HOC = Comp => props => (
 )
 
 const ColorSaturator = HOC(({ color, value, onChange }) => (
-  <span title="color saturator">
-    <i className="fas fa-star-half-alt icon" style={{ color }} />
+  <StyledSpan title="color saturator">
+    <StyledIcon className="fas fa-star-half-alt" color={color} />
     <Slider
       min="10"
       max="100"
@@ -24,15 +52,13 @@ const ColorSaturator = HOC(({ color, value, onChange }) => (
       onChange={onChange}
       color={color}
     />
-    <label className="values" style={{ color }}>
-      {value}
-    </label>
-  </span>
+    <StyledLabel color={color}>{value}</StyledLabel>
+  </StyledSpan>
 ))
 
 const ColorDesaturator = HOC(({ color, value, onChange }) => (
-  <span title="color desaturator">
-    <i className="fas fa-fill icon" style={{ color }} />
+  <StyledSpan title="color desaturator">
+    <StyledIcon className="fas fa-fill" color={color} />
     <Slider
       min="10"
       max="100"
@@ -40,15 +66,13 @@ const ColorDesaturator = HOC(({ color, value, onChange }) => (
       onChange={onChange}
       color={color}
     />
-    <label className="values" style={{ color }}>
-      {value}
-    </label>
-  </span>
+    <StyledLabel color={color}>{value}</StyledLabel>
+  </StyledSpan>
 ))
 
 const ColorBrightener = HOC(({ color, value, onChange }) => (
-  <span title="color brightener">
-    <i className="fas fa-sun icon" style={{ color }} />
+  <StyledSpan title="color brightener">
+    <StyledIcon className="fas fa-sun" color={color} />
     <Slider
       min="10"
       max="100"
@@ -56,15 +80,13 @@ const ColorBrightener = HOC(({ color, value, onChange }) => (
       onChange={onChange}
       color={color}
     />
-    <label className="values" style={{ color }}>
-      {value}
-    </label>
-  </span>
+    <StyledLabel color={color}>{value}</StyledLabel>
+  </StyledSpan>
 ))
 
 const ColorDarkener = HOC(({ color, value, onChange }) => (
-  <span title="color darkener">
-    <i className="fas fa-moon icon" style={{ color }} />
+  <StyledSpan title="color darkener">
+    <StyledIcon className="fas fa-moon" color={color} />
     <Slider
       min="10"
       max="100"
@@ -72,15 +94,13 @@ const ColorDarkener = HOC(({ color, value, onChange }) => (
       onChange={onChange}
       color={color}
     />
-    <label className="values" style={{ color }}>
-      {value}
-    </label>
-  </span>
+    <StyledLabel color={color}>{value}</StyledLabel>
+  </StyledSpan>
 ))
 
 const ColorSpinner = HOC(({ color, onChange, value }) => (
-  <span title="color spin">
-    <i className="fas fa-sync-alt icon" style={{ color }} />
+  <StyledSpan title="color spin">
+    <StyledIcon className="fas fa-sync-alt" color={color} />
     <Slider
       min="-360"
       max="360"
@@ -88,15 +108,15 @@ const ColorSpinner = HOC(({ color, onChange, value }) => (
       onChange={onChange}
       color={color}
     />
-    <label className="values" style={{ color }}>
+    <StyledLabel color={color}>
       {value}
       <sup>&deg;</sup>
-    </label>
-  </span>
+    </StyledLabel>
+  </StyledSpan>
 ))
 
 const ImagePicker = HOC(({ color, uploadImage }) => (
-  <span title="Image picker">
+  <StyledSpan title="Image picker">
     <input
       id="uploader"
       style={{ display: 'none' }}
@@ -104,8 +124,8 @@ const ImagePicker = HOC(({ color, uploadImage }) => (
       accept="image/*"
       onChange={uploadImage}
     />
-    <i id="image-icon" className="fas fa-image" style={{ color }} />
-  </span>
+    <ToolsIcon id="image-icon" className="fas fa-image" color={color} />
+  </StyledSpan>
 ))
 
 ImagePicker.propTypes = {
@@ -114,14 +134,14 @@ ImagePicker.propTypes = {
 }
 
 const PaletteGenerator = HOC(({ color, generateSwatches }) => (
-  <span
+  <StyledSpan
     tabIndex={0}
     title="Palette generator"
     onClick={generateSwatches}
     onKeyDown={e => (e.keyCode === ENTER_KEY ? generateSwatches(e) : null)}
   >
-    <i id="image-icon" className="fas fa-palette" style={{ color }} />
-  </span>
+    <ToolsIcon id="image-icon" className="fas fa-palette" color={color} />
+  </StyledSpan>
 ))
 
 PaletteGenerator.propTypes = {
@@ -130,14 +150,14 @@ PaletteGenerator.propTypes = {
 }
 
 const ShadesGenerator = HOC(({ color, generateShades }) => (
-  <span
+  <StyledSpan
     tabIndex={0}
     title="shade picker"
     onClick={generateShades}
     onKeyDown={e => (e.keyCode === ENTER_KEY ? generateShades(e) : null)}
   >
-    <i id="image-icon" className="fas fa-adjust" style={{ color }} />
-  </span>
+    <ToolsIcon id="image-icon" className="fas fa-adjust" color={color} />
+  </StyledSpan>
 ))
 
 ShadesGenerator.propTypes = {
@@ -146,18 +166,18 @@ ShadesGenerator.propTypes = {
 }
 
 const Reset = HOC(({ color, resetColors }) => (
-  <span
+  <StyledSpan
     tabIndex={0}
     title="reset colors"
     onClick={resetColors}
     onKeyDown={e => (e.keyCode === ENTER_KEY ? resetColors(e) : null)}
   >
-    <i
+    <ToolsIcon
       id="image-icon"
       className="fas fa-arrow-alt-circle-left"
-      style={{ color }}
+      color={color}
     />
-  </span>
+  </StyledSpan>
 ))
 
 Reset.propTypes = {
@@ -166,14 +186,14 @@ Reset.propTypes = {
 }
 
 const TintsGenerator = HOC(({ color, generateTints }) => (
-  <span
+  <StyledSpan
     tabIndex={0}
     title="tint picker"
     onClick={generateTints}
     onKeyDown={e => (e.keyCode === ENTER_KEY ? generateTints(e) : null)}
   >
-    <i id="image-icon" className="fas fa-tint" style={{ color }} />
-  </span>
+    <ToolsIcon id="image-icon" className="fas fa-tint" color={color} />
+  </StyledSpan>
 ))
 
 TintsGenerator.propTypes = {
@@ -182,7 +202,7 @@ TintsGenerator.propTypes = {
 }
 
 const Clipboard = HOC(({ color, copyColor, showMsg }) => (
-  <span
+  <StyledSpan
     tabIndex={0}
     id="clipboard"
     onClick={copyColor}
@@ -190,8 +210,8 @@ const Clipboard = HOC(({ color, copyColor, showMsg }) => (
     className={showMsg ? TOOLTIP_CLASSNAME : 'no-tooltip'}
     aria-label="Copied"
   >
-    <i id="image-icon" className="fas fa-copy" style={{ color }} />
-  </span>
+    <ToolsIcon id="image-icon" className="fas fa-copy" color={color} />
+  </StyledSpan>
 ))
 
 Clipboard.propTypes = {
@@ -200,14 +220,14 @@ Clipboard.propTypes = {
 }
 
 const GradientGenerator = HOC(({ color, generateGradient }) => (
-  <span
+  <StyledSpan
     tabIndex={0}
     onClick={generateGradient}
     title="Gradient generator"
     onKeyDown={e => (e.keyCode === ENTER_KEY ? generateGradient(e) : null)}
   >
-    <i className="fas fa-redo-alt" style={{ color }} />
-  </span>
+    <ToolsIcon className="fas fa-redo-alt" color={color} />
+  </StyledSpan>
 ))
 
 GradientGenerator.propTypes = {

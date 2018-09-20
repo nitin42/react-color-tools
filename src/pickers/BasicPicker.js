@@ -1,10 +1,10 @@
 import React from 'react'
-import { css, injectGlobal } from 'emotion'
 import { ColorExtractor } from 'react-color-extractor'
 import generateColors from 'randomcolor'
 import { TinyColor } from '@ctrl/tinycolor'
 import Values from 'values.js'
 import PropTypes from 'prop-types'
+import styled from 'react-emotion'
 
 import { Provider as ColorProvider } from '../utils/context'
 
@@ -40,39 +40,22 @@ const DEFAULT_SWATCHES = [
 const DEFAULT_COLOR = '#088da5'
 const MAX_COLORS = 64
 
-injectGlobal`
-  .icon {
-    display: inline-block;
-    width: 20px;
-    position: relative;
-    top: 5px;
-    left: -5px;
-  }
+const StyledList = styled('ul')`
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 1fr;
+  grid-gap: 15px;
+  list-style: none;
+  margin-left: -28px;
+`
 
-  .values {
-    display: inline-block;
-    width: 10px;
-    position: relative;
-    top: 3px;
-    left: 4px;
-  }
-
-  i:not(.icon) {
-    cursor: pointer;
-  }
-
-  span:focus {
-    outline: none;
-  }
-
-  ul {
-    display: grid;
-    justify-content: center;
-    grid-template-columns: 1fr;
-    grid-gap: 15px;
-    list-style: none;
-    margin-left: -28px;
-  }
+const ToolsContainer = styled('div')`
+  display: grid;
+  grid-template-columns: ${props =>
+    `repeat(${props.columns || 6}, ${props.size || '1fr'})`};
+  grid-gap: ${props => props.gap || '5px'};
+  margin-right: -20px;
+  margin-top: 20px;
 `
 
 export default class BasicPicker extends React.PureComponent {
@@ -143,7 +126,7 @@ export default class BasicPicker extends React.PureComponent {
     swatches: PropTypes.arrayOf(PropTypes.string),
     maxColors: PropTypes.number,
     triangle: PropTypes.bool,
-    theme: PropTypes.oneOf(['light, dark']),
+    theme: PropTypes.oneOf(['light', 'dark']),
     showTools: PropTypes.bool
   }
 
@@ -178,7 +161,15 @@ export default class BasicPicker extends React.PureComponent {
       // Check if its a valid hex and then update the color
       // on changing the color input field, it only updates the color block if the hex code is valid
       if (color.isValid) {
-        this.setState({ color })
+        this.setState({ color }, () => {
+          if (this.state.showTints) {
+            this.generateTints()
+          }
+
+          if (this.state.showShades) {
+            this.generateShades()
+          }
+        })
       }
     }
   }
@@ -197,7 +188,15 @@ export default class BasicPicker extends React.PureComponent {
     const newColor = new TinyColor(color)
 
     if (newColor.isValid) {
-      this.setState({ color: newColor })
+      this.setState({ color: newColor }, () => {
+        if (this.state.showTints) {
+          this.generateTints()
+        }
+
+        if (this.state.showShades) {
+          this.generateShades()
+        }
+      })
     }
   }
 
@@ -492,15 +491,7 @@ export default class BasicPicker extends React.PureComponent {
             formats={formats}
           />
           <ColorProvider value={iconColor}>
-            <div
-              className={css`
-                display: grid;
-                grid-template-columns: repeat(6, 1fr);
-                grid-gap: 5px;
-                margin-right: -20px;
-                margin-top: 20px;
-              `}
-            >
+            <ToolsContainer>
               <BasicTools.ImagePicker uploadImage={this.uploadImage} />
               <BasicTools.PaletteGenerator
                 generateSwatches={this.generateSwatches}
@@ -518,12 +509,12 @@ export default class BasicPicker extends React.PureComponent {
                 showMsg={this.state.showMsg}
               />
               <BasicTools.Reset resetColors={this.resetColors} />
-            </div>
+            </ToolsContainer>
           </ColorProvider>
           {this.props.showTools ? (
             <div>
               <ColorProvider value={iconColor}>
-                <ul>
+                <StyledList>
                   <li>
                     <AdvanceTools.ColorSpinner
                       value={spin}
@@ -554,7 +545,7 @@ export default class BasicPicker extends React.PureComponent {
                       onChange={this.handleBrighten}
                     />
                   </li>
-                </ul>
+                </StyledList>
               </ColorProvider>
             </div>
           ) : null}
