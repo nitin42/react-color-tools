@@ -201,10 +201,10 @@ TintsGenerator.propTypes = {
   generateTints: PropTypes.func
 }
 
-const Clipboard = HOC(({ color, copyColor, showMsg }) => (
+const Clipboard = HOC(({ color, copyColor, showMsg, id = 'clipboard' }) => (
   <StyledSpan
     tabIndex={0}
-    id="clipboard"
+    id={id}
     onClick={copyColor}
     onKeyDown={e => (e.keyCode === ENTER_KEY ? copyColor(e) : null)}
     className={showMsg ? TOOLTIP_CLASSNAME : 'no-tooltip'}

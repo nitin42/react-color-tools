@@ -159,7 +159,7 @@ export default class GradientPicker extends React.Component {
   componentDidMount() {
     this.propCallback()
 
-    this.clipboardIcon = document.getElementById('clipboard')
+    this.clipboardIcon = document.getElementById('gradient-clipboard')
 
     this.clipboardIcon.addEventListener('mouseleave', this.hideMsg)
     this.clipboardIcon.addEventListener('blur', this.hideMsg)
@@ -330,6 +330,7 @@ export default class GradientPicker extends React.Component {
               `}
             >
               <BasicTools.Clipboard
+                id="gradient-clipboard"
                 showMsg={showMsg}
                 copyColor={() => {
                   navigator.clipboard.writeText(grad.css())

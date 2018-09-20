@@ -32,6 +32,7 @@ class App extends React.Component {
       <div>
         <h1 style={{ color: this.state.color }}>Color Picker Components</h1>
         <BasicPicker showTools />
+        <GradientPicker />
       </div>
     )
   }
