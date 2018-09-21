@@ -15,7 +15,8 @@ import {
   LIGHT_COLOR,
   DEFAULT_COLOR_ONE,
   DEFAULT_COLOR_TWO,
-  GRADIENT_CONTAINER_WIDTH
+  GRADIENT_CONTAINER_WIDTH,
+  DEFAULT_COLOR_STOP
 } from '../utils/constants'
 import { randomColors } from '../utils/colors'
 
@@ -108,12 +109,14 @@ export default class GradientPicker extends React.Component {
     gradient: this.props.reverse
       ? gradient(this.props.colorOne, this.props.colorTwo).reverse()
       : gradient(this.props.colorOne, this.props.colorTwo),
-    // Default colors
+    // Default colors for creating a gradient
     colorOne: this.props.colorOne,
     colorTwo: this.props.colorTwo,
     // Color stops are stopping points in a gradient that show a specific color
     // at the exact location we set.
+    // Stop loc. for color one
     colorStopOne: 0,
+    // Stop loc. for color two
     colorStopTwo: 0,
     // Show copy msg
     showMsg: false
@@ -168,7 +171,9 @@ export default class GradientPicker extends React.Component {
     const colorOne =
       pos !== 0 ? { color: this.state.colorOne, pos } : this.state.colorOne
     const colorTwo =
-      pos !== 0 ? { color: this.state.colorTwo, pos: 0.2 } : this.state.colorTwo
+      pos !== 0
+        ? { color: this.state.colorTwo, pos: DEFAULT_COLOR_STOP }
+        : this.state.colorTwo
 
     return {
       colorOne,
@@ -179,7 +184,9 @@ export default class GradientPicker extends React.Component {
   setColorStopTwo = pos => {
     /* eslint-disable operator-linebreak */
     const colorOne =
-      pos !== 0 ? { color: this.state.colorOne, pos: 0.2 } : this.state.colorOne
+      pos !== 0
+        ? { color: this.state.colorOne, pos: DEFAULT_COLOR_STOP }
+        : this.state.colorOne
 
     const colorTwo =
       pos !== 0 ? { color: this.state.colorTwo, pos } : this.state.colorTwo
@@ -207,7 +214,7 @@ export default class GradientPicker extends React.Component {
     // color stop position value should be between 0 and 1
     const pos = this.state[color] / 10
 
-    // Create the gradient depending on the color stop value
+    // Create the gradient depending on the color stop value and color state
     if (color === 'colorStopOne') {
       const { colorOne, colorTwo } = this.setColorStopOne(pos)
 
