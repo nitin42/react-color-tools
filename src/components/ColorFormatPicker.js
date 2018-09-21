@@ -9,12 +9,12 @@ const renderFormats = formats =>
     </option>
   ))
 
-const ColorFormatPicker = ({ changeFormat, formats, top }) => (
+const ColorFormatPicker = ({ changeFormat, formats }) => (
   <div
     className={css`
       display: flex;
       justify-content: center;
-      margin-top: ${top || '15px'};
+      margin-top: 15px;
     `}
   >
     <select
