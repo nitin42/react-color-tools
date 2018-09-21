@@ -60,15 +60,12 @@ exports[`should render a list of swatches 1`] = `
 exports[`should render advanced color tools 1`] = `
 Array [
   <span
+    className="css-1v5ga19"
     title="color brightener"
   >
     <i
-      className="fas fa-sun icon"
-      style={
-        Object {
-          "color": "#eeee",
-        }
-      }
+      className="fas fa-sun css-1makrmg"
+      color="#eeee"
     />
     <input
       className="css-qvm90c"
@@ -79,26 +76,19 @@ Array [
       value={0}
     />
     <label
-      className="values"
-      style={
-        Object {
-          "color": "#eeee",
-        }
-      }
+      className="css-142tcgl"
+      color="#eeee"
     >
       0
     </label>
   </span>,
   <span
+    className="css-1v5ga19"
     title="color darkener"
   >
     <i
-      className="fas fa-moon icon"
-      style={
-        Object {
-          "color": "#eeee",
-        }
-      }
+      className="fas fa-moon css-1makrmg"
+      color="#eeee"
     />
     <input
       className="css-qvm90c"
@@ -109,26 +99,19 @@ Array [
       value={20}
     />
     <label
-      className="values"
-      style={
-        Object {
-          "color": "#eeee",
-        }
-      }
+      className="css-142tcgl"
+      color="#eeee"
     >
       20
     </label>
   </span>,
   <span
+    className="css-1v5ga19"
     title="color desaturator"
   >
     <i
-      className="fas fa-fill icon"
-      style={
-        Object {
-          "color": "#eeee",
-        }
-      }
+      className="fas fa-fill css-1makrmg"
+      color="#eeee"
     />
     <input
       className="css-qvm90c"
@@ -139,26 +122,19 @@ Array [
       value={50}
     />
     <label
-      className="values"
-      style={
-        Object {
-          "color": "#eeee",
-        }
-      }
+      className="css-142tcgl"
+      color="#eeee"
     >
       50
     </label>
   </span>,
   <span
+    className="css-1v5ga19"
     title="color saturator"
   >
     <i
-      className="fas fa-star-half-alt icon"
-      style={
-        Object {
-          "color": "#eeee",
-        }
-      }
+      className="fas fa-star-half-alt css-1makrmg"
+      color="#eeee"
     />
     <input
       className="css-qvm90c"
@@ -169,26 +145,19 @@ Array [
       value={20}
     />
     <label
-      className="values"
-      style={
-        Object {
-          "color": "#eeee",
-        }
-      }
+      className="css-142tcgl"
+      color="#eeee"
     >
       20
     </label>
   </span>,
   <span
+    className="css-1v5ga19"
     title="color spin"
   >
     <i
-      className="fas fa-sync-alt icon"
-      style={
-        Object {
-          "color": "#eeee",
-        }
-      }
+      className="fas fa-sync-alt css-1makrmg"
+      color="#eeee"
     />
     <input
       className="css-qvm90c"
@@ -199,12 +168,8 @@ Array [
       value={-120}
     />
     <label
-      className="values"
-      style={
-        Object {
-          "color": "#eeee",
-        }
-      }
+      className="css-142tcgl"
+      color="#eeee"
     >
       -120
       <sup>
@@ -218,54 +183,46 @@ Array [
 exports[`should render basic color tools 1`] = `
 Array [
   <span
+    className="css-1v5ga19"
     onClick={[Function]}
     onKeyDown={[Function]}
     tabIndex={0}
     title="tint picker"
   >
     <i
-      className="fas fa-tint"
+      className="fas fa-tint css-iprkew"
+      color="#f00"
       id="image-icon"
-      style={
-        Object {
-          "color": "#f00",
-        }
-      }
     />
   </span>,
   <span
+    className="css-1v5ga19"
     onClick={[Function]}
     onKeyDown={[Function]}
     tabIndex={0}
     title="shade picker"
   >
     <i
-      className="fas fa-adjust"
+      className="fas fa-adjust css-iprkew"
+      color="#f00"
       id="image-icon"
-      style={
-        Object {
-          "color": "#f00",
-        }
-      }
     />
   </span>,
   <span
+    className="css-1v5ga19"
     onClick={[Function]}
     onKeyDown={[Function]}
     tabIndex={0}
     title="Palette generator"
   >
     <i
-      className="fas fa-palette"
+      className="fas fa-palette css-iprkew"
+      color="#f00"
       id="image-icon"
-      style={
-        Object {
-          "color": "#f00",
-        }
-      }
     />
   </span>,
   <span
+    className="css-1v5ga19"
     title="Image picker"
   >
     <input
@@ -280,47 +237,36 @@ Array [
       type="file"
     />
     <i
-      className="fas fa-image"
+      className="fas fa-image css-iprkew"
+      color="#f00"
       id="image-icon"
-      style={
-        Object {
-          "color": "#f00",
-        }
-      }
     />
   </span>,
   <span
+    className="css-1v5ga19"
     onClick={[Function]}
     onKeyDown={[Function]}
     tabIndex={0}
     title="reset colors"
   >
     <i
-      className="fas fa-arrow-alt-circle-left"
+      className="fas fa-arrow-alt-circle-left css-iprkew"
+      color="#f00"
       id="image-icon"
-      style={
-        Object {
-          "color": "#f00",
-        }
-      }
     />
   </span>,
   <span
     aria-label="Copied"
-    className="no-tooltip"
+    className="no-tooltip css-1v5ga19"
     id="clipboard"
     onClick={[Function]}
     onKeyDown={[Function]}
     tabIndex={0}
   >
     <i
-      className="fas fa-copy"
+      className="fas fa-copy css-iprkew"
+      color="#f00"
       id="image-icon"
-      style={
-        Object {
-          "color": "#f00",
-        }
-      }
     />
   </span>,
 ]
