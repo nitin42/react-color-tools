@@ -6,8 +6,6 @@ import Values from 'values.js'
 import PropTypes from 'prop-types'
 import styled from 'react-emotion'
 
-import { Provider as ColorProvider } from '../utils/context'
-
 import ColorInput from '../components/ColorInputField'
 import ColorBlock from '../components/ColorBlock'
 import Container from '../components/Container'
@@ -17,35 +15,18 @@ import Triangle from '../components/Triangle'
 import ColorFormatPicker from '../components/ColorFormatPicker'
 import { AdvanceTools, BasicTools } from '../components/Tools'
 
+import { Provider as ColorProvider } from '../utils/context'
+import {
+  DEFAULT_SWATCHES,
+  DEFAULT_COLOR,
+  DARK_COLOR,
+  LIGHT_COLOR,
+  COLOR_CONTAINER_WIDTH,
+  MAX_COLORS
+} from '../utils/constants'
+
 // Copied from primer/primer-tooltips/build
 import '../styles/tooltip.css'
-
-// DARK THEME
-const DARK_COLOR = '#1f1f1f'
-// LIGHT THEME
-const LIGHT_COLOR = 'rgb(255, 255, 255)'
-
-const DEFAULT_SWATCHES = [
-  '#5a80b4',
-  '#40e0d0',
-  '#088da5',
-  '#f6546a',
-  '#cac8a0',
-  '#0079cf',
-  '#ffa6ca',
-  '#03ec13',
-  '#3999dc',
-  '#e1c9ec',
-  '#2f9d66',
-  '#daa520'
-]
-
-// DEFAULT COLOR INPUT
-const DEFAULT_COLOR = '#088da5'
-// REQUIRED FOR GENERATING SWATCHES FROM AN IMAGE
-const MAX_COLORS = 64
-// WIDTH OF THE COLOR PICKER
-const COLOR_CONTAINER_WIDTH = '228px'
 
 const StyledList = styled('ul')`
   display: grid;

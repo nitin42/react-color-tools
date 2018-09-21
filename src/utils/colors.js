@@ -1,4 +1,5 @@
 import { TinyColor } from '@ctrl/tinycolor'
+import generateColors from 'randomcolor'
 
 // Copied from react-color/helpers/colors
 
@@ -37,4 +38,17 @@ export function getContrastingColor(data) {
   }
   const yiq = (col.rgb.r * 299 + col.rgb.g * 587 + col.rgb.b * 114) / 1000
   return yiq >= 128 ? '#000' : '#fff'
+}
+
+// Returns a set of random colors (this is used in generating different gradients)
+export const randomColors = () => {
+  let i = 0
+  const newColors = new Set()
+
+  while (i < 3) {
+    newColors.add(generateColors())
+    i += 1
+  }
+
+  return newColors
 }

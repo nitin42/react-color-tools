@@ -1,44 +1,33 @@
 import React from 'react'
-import { css, injectGlobal } from 'emotion'
 import gradient from 'tinygradient'
 import PropTypes from 'prop-types'
-import TinyColor from 'tinycolor2'
-import generateColors from 'randomcolor'
+import TinyColor from '@ctrl/tinycolor'
+import styled, { css } from 'react-emotion'
 
 import Container from '../components/Container'
 import ColorInputField from '../components/ColorInputField'
 import Slider from '../components/Slider'
 import { BasicTools } from '../components/Tools'
+
 import { Provider as ColorProvider, Consumer } from '../utils/context'
+import {
+  DARK_COLOR,
+  LIGHT_COLOR,
+  DEFAULT_COLOR_ONE,
+  DEFAULT_COLOR_TWO,
+  GRADIENT_CONTAINER_WIDTH
+} from '../utils/constants'
+import { randomColors } from '../utils/colors'
 
-const DARK_COLOR = '#1f1f1f'
-const DEFAULT_COLOR_ONE = '#81FFEF'
-const DEFAULT_COLOR_TWO = '#F067B4'
-const LIGHT_COLOR = 'rgb(255, 255, 255)'
-
-// Returns a set of random colors (this is used in generating different gradients)
-const randomColors = () => {
-  let i = 0
-  const newColors = new Set()
-
-  while (i < 3) {
-    newColors.add(generateColors())
-    i += 1
-  }
-
-  return newColors
-}
-
-injectGlobal`
-  .label {
-    display: inline-block;
-    width: 80px;
-    position: relative;
-    top: 3px;
-    left: 4px;
-    font-size: 14px;
-    margin-bottom: 5px;
-  }
+const StyledLabel = styled('label')`
+  display: inline-block;
+  width: 80px;
+  position: relative;
+  top: 3px;
+  left: 4px;
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: ${props => props.color};
 `
 
 // Colors should be sorted by the color stops position values
@@ -85,9 +74,9 @@ const ColorStop = ({
       <div>
         <ColorInputField value={inputColor} onChange={onChangeColor} />
         <span>
-          <label className="label" style={{ color }}>
+          <StyledLabel color={color} className="label">
             Stops
-          </label>
+          </StyledLabel>
           <Slider
             min="0"
             max="10"
@@ -249,7 +238,7 @@ export default class GradientPicker extends React.Component {
 
     const newColor = new TinyColor(color)
 
-    if (newColor.isValid()) {
+    if (newColor.isValid) {
       this.setState(
         state => ({
           gradient: gradient(color, state.colorTwo)
@@ -264,7 +253,7 @@ export default class GradientPicker extends React.Component {
 
     const newColor = new TinyColor(color)
 
-    if (newColor.isValid()) {
+    if (newColor.isValid) {
       this.setState(
         state => ({
           gradient: gradient(state.colorOne, color)
@@ -306,7 +295,7 @@ export default class GradientPicker extends React.Component {
     const iconColor = theme === 'dark' ? LIGHT_COLOR : DARK_COLOR
 
     return (
-      <Container background={bg} width="170px">
+      <Container background={bg} width={GRADIENT_CONTAINER_WIDTH}>
         <ColorBlock gradient={grad.css()} />
         <ColorProvider value={iconColor}>
           <div style={{ padding: 10 }}>

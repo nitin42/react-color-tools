@@ -29,14 +29,22 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1 style={{ color: this.state.color }}>Color Picker Components</h1>
-        <BasicPicker
-          color={this.state.color}
-          onChange={color => this.setState({ color })}
-          maxColors={45}
+        <GradientPicker
           theme="light"
-          showTools
+          mode="linear"
+          direction="to top"
+          reverse
+          getGradient={gradient => this.setState({ gradient })}
         />
+        <h1
+          className={css`
+            background-image: ${this.state.gradient};
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+          `}
+        >
+          Color Picker Components
+        </h1>
       </div>
     )
   }
