@@ -2,7 +2,9 @@
   "name": "react-color-tools",
   "version": "1.0.0",
   "description": "A collection of tools for manipulating colors",
-  "main": "index.js",
+  "main": "build/react-color-tools.js",
+  "module": "build/react-color-tools.es.js",
+  "unpkg": "build/react-color-tools.min.js",
   "author": "Nitin Tulswani",
   "license": "MIT",
   "dependencies": {
@@ -12,34 +14,27 @@
     "randomcolor": "^0.5.3",
     "react-color-extractor": "^1.1.2",
     "react-emotion": "^9.2.10",
-    "react-gradient-scroll-indicator": "^1.0.1",
     "tinygradient": "^0.4.1",
     "values.js": "^1.0.3"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-eslint": "^9.0.0",
-    "babel-jest": "^23.6.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
-    "enzyme": "^3.6.0",
-    "enzyme-adapter-react-16": "^1.5.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.0",
     "husky": "^1.0.0-rc.13",
-    "jsdom": "^12.0.0",
     "lint-staged": "^7.2.2",
     "parcel-bundler": "^1.9.7",
     "prettier": "^1.14.2",
     "react": "^16.4.2",
-    "react-dom": "^16.4.2",
-    "react-test-renderer": "^16.5.1",
-    "regenerator-runtime": "^0.12.1"
+    "react-dom": "^16.4.2"
   },
   "husky": {
     "hooks": {
@@ -55,8 +50,6 @@
   "scripts": {
     "start": "parcel ./public/index.html -p 4567",
     "formatall": "find src -name '*.js' | xargs prettier --write --no-semi --single-quote",
-    "test:watch": "jest --watch",
-    "test": "jest",
     "lint": "eslint ./src",
     "validate": "yarn formatall && yarn lint && yarn test",
     "reset": "rm -rf dist && rm -rf .cache"

@@ -1,7 +1,7 @@
 import React from 'react'
 import gradient from 'tinygradient'
 import PropTypes from 'prop-types'
-import TinyColor from '@ctrl/tinycolor'
+import { TinyColor } from '@ctrl/tinycolor'
 import styled, { css } from 'react-emotion'
 
 import Container from '../components/Container'
