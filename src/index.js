@@ -20,7 +20,6 @@ const directions = {
   four: 'at right'
 }
 
-/* eslint-disable */
 class App extends React.Component {
   state = {
     color: 'hotpink',
@@ -31,8 +30,13 @@ class App extends React.Component {
     return (
       <div>
         <h1 style={{ color: this.state.color }}>Color Picker Components</h1>
-        <BasicPicker showTools />
-        <GradientPicker />
+        <BasicPicker
+          color={this.state.color}
+          onChange={color => this.setState({ color })}
+          maxColors={45}
+          theme="light"
+          showTools
+        />
       </div>
     )
   }

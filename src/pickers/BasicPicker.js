@@ -17,9 +17,12 @@ import Triangle from '../components/Triangle'
 import ColorFormatPicker from '../components/ColorFormatPicker'
 import { AdvanceTools, BasicTools } from '../components/Tools'
 
+// Copied from primer/primer-tooltips/build
 import '../styles/tooltip.css'
 
+// DARK THEME
 const DARK_COLOR = '#1f1f1f'
+// LIGHT THEME
 const LIGHT_COLOR = 'rgb(255, 255, 255)'
 
 const DEFAULT_SWATCHES = [
@@ -37,8 +40,12 @@ const DEFAULT_SWATCHES = [
   '#daa520'
 ]
 
+// DEFAULT COLOR INPUT
 const DEFAULT_COLOR = '#088da5'
+// REQUIRED FOR GENERATING SWATCHES FROM AN IMAGE
 const MAX_COLORS = 64
+// WIDTH OF THE COLOR PICKER
+const COLOR_CONTAINER_WIDTH = '228px'
 
 const StyledList = styled('ul')`
   display: grid;
@@ -97,10 +104,15 @@ export default class BasicPicker extends React.PureComponent {
     // Color format options
     formats: ['HEX', 'HSV', 'RGB', 'HSL'],
     // Color manipulation values
+    // Brightens the currently selected color by an amount
     brighten: 0,
+    // Darkens the currently selected color by an amount
     darken: 0,
+    // spin operation spins (changes) the current hue
     spin: 0,
+    // desaturation makes a color more muted (with black or grey)
     desaturate: 0,
+    // saturation controls the intensity (or purity) of a color
     saturate: 0,
     // Show or hide color copied msg
     showMsg: false
@@ -114,8 +126,7 @@ export default class BasicPicker extends React.PureComponent {
     triangle: true,
     theme: 'light',
     // Color tools are disabled by default
-    showTools: false,
-    onSwatchHover: () => {}
+    showTools: false
   }
 
   static propTypes = {
@@ -130,7 +141,7 @@ export default class BasicPicker extends React.PureComponent {
     showTools: PropTypes.bool
   }
 
-  // Instance properties are used to store the color value on
+  // Instance properties are used to store the color state on
   // which the color operations will be applied.
   brightenColor = null
 
@@ -161,15 +172,7 @@ export default class BasicPicker extends React.PureComponent {
       // Check if its a valid hex and then update the color
       // on changing the color input field, it only updates the color block if the hex code is valid
       if (color.isValid) {
-        this.setState({ color }, () => {
-          if (this.state.showTints) {
-            this.generateTints()
-          }
-
-          if (this.state.showShades) {
-            this.generateShades()
-          }
-        })
+        this.setState({ color })
       }
     }
   }
@@ -188,15 +191,7 @@ export default class BasicPicker extends React.PureComponent {
     const newColor = new TinyColor(color)
 
     if (newColor.isValid) {
-      this.setState({ color: newColor }, () => {
-        if (this.state.showTints) {
-          this.generateTints()
-        }
-
-        if (this.state.showShades) {
-          this.generateShades()
-        }
-      })
+      this.setState({ color: newColor })
     }
   }
 
@@ -226,7 +221,6 @@ export default class BasicPicker extends React.PureComponent {
    * TODO: Refactor this mess
    */
 
-  // 'spin' operation spin (changes) the current hue
   handleSpin = e => {
     if (this.spinColor === null) {
       this.spinColor = this.state.color.originalInput
@@ -240,7 +234,6 @@ export default class BasicPicker extends React.PureComponent {
     this.updateColorState(e.target.value, this.spinColor, 'spin')
   }
 
-  // 'saturation' controls the intensity (or purity) of a color
   handleSaturate = e => {
     if (this.saturateColor === null) {
       this.saturateColor = this.state.color.originalInput
@@ -254,7 +247,6 @@ export default class BasicPicker extends React.PureComponent {
     this.updateColorState(e.target.value, this.saturateColor, 'saturate')
   }
 
-  // 'desaturation' makes a color more muted (with black or grey)
   handleDesaturate = e => {
     if (this.desaturateColor === null) {
       this.desaturateColor = this.state.color.originalInput
@@ -306,6 +298,7 @@ export default class BasicPicker extends React.PureComponent {
   // are extracted from the image, a image can be removed from the color block.
   updateKey = e => {
     if (e.which === 8) {
+      // Remove the image from color block
       this.setState({ image: null })
     }
   }
@@ -439,21 +432,19 @@ export default class BasicPicker extends React.PureComponent {
     const iconColor = this.props.theme === 'dark' ? LIGHT_COLOR : DARK_COLOR
 
     return (
-      <Container background={bg} width="228px">
+      <Container background={bg} width={COLOR_CONTAINER_WIDTH}>
         {/* eslint-disable operator-linebreak */}
         {/* eslint-disable indent */}
         {this.props.triangle &&
-          this.state.image === null && (
-            <Triangle color={this.state.color.toHexString()} />
-          )}
-        {this.state.image === null ? (
+          image === null && <Triangle color={this.state.color.toHexString()} />}
+        {image === null ? (
           <ColorBlock
             colorState={this.state.color}
             color={color}
             currentFormat={currentFormat}
           />
         ) : (
-          <Image src={this.state.image} />
+          <Image src={image} />
         )}
         {image && (
           <ColorExtractor

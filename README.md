@@ -21,3 +21,13 @@
 - [Contributing]()
 
 - [License]()
+
+## TODO
+
+- Refactor color pickers
+
+- Improve build setup
+
+- Create documentation
+
+- Create examples
