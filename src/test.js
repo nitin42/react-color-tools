@@ -12,7 +12,15 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div
+        className={css`
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          margin-top: 30px;
+        `}
+      >
         <GradientPicker
           theme="light"
           mode="linear"

@@ -2,6 +2,10 @@
 
 > A set of tools for working with colors
 
+<p align="center">
+  <img src="./demo.gif" />
+</p>
+
 ## Table of contents
 
 - [Introduction](#introduction)
