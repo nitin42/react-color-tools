@@ -52,6 +52,8 @@ A little bit about different color terms and color harmonies that you will be us
   <img src="https://www.canva.com/learn/wp-content/uploads/2015/07/color-theory-1-tb-752x0.png" />
 </p>
 
+> Image taken from Canva
+
 ### Color terms
 
 - **Hue** - A hue is name of particular color, or it is also one of the 12 colors on the color wheel.
