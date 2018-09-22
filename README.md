@@ -2,6 +2,28 @@
 
 > A set of tools for working with colors
 
+## Table of contents
+
+- [Introduction]()
+
+- [Motivation]()
+
+- [Features]()
+
+- [Theory]()
+
+- [Install]()
+
+- [Usage]()
+
+- [Documentation]()
+
+- [Resources]()
+
+- [Contributing]()
+
+- [License]()
+
 ## Introduction
 
 `react-color-tools` provides a set of tools for working with colors. These tools can be used to manipulate a color for example controlling the intensity or purity of color, extracting color palettes directly from an image, creating a gradient or choosing from variety of shades and tints.
@@ -27,28 +49,6 @@
 ## Theory
 
 So before we dive into the installaton setup, usage and example, let's learn a little bit about color, different color terms and color harmonies for choosing a color scheme.
-
-## Table of contents
-
-- [Introduction]()
-
-- [Motivation]()
-
-- [Features]()
-
-- [Theory]()
-
-- [Install]()
-
-- [Usage]()
-
-- [Documentation]()
-
-- [Resources]()
-
-- [Contributing]()
-
-- [License]()
 
 ## TODO
 
