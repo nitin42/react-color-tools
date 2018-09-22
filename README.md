@@ -4,25 +4,23 @@
 
 ## Table of contents
 
-- [Introduction]()
+- [Introduction](#introduction)
 
-- [Motivation]()
+- [Motivation](#motivation)
 
-- [Features]()
+- [Features](#features)
 
-- [Theory]()
+- [Theory](#theory)
 
-- [Install]()
+- [Install](#install)
 
-- [Usage]()
+- [Usage](#usage)
 
-- [Documentation]()
+- [Documentation](#documentation)
 
-- [Resources]()
+- [Contributing](#contributing)
 
-- [Contributing]()
-
-- [License]()
+- [License](#license)
 
 ## Introduction
 
@@ -48,7 +46,11 @@
 
 ## Theory
 
-Let's learn a little bit about different color terms and color harmonies that you will be using while working with `react-color-tools`.
+A little bit about different color terms and color harmonies that you will be using while working with `react-color-tools`.
+
+<p align="center">
+  <img src="https://www.canva.com/learn/wp-content/uploads/2015/07/color-theory-1-tb-752x0.png" />
+</p>
 
 ### Color terms
 
