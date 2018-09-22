@@ -3,7 +3,7 @@
 > A set of tools for working with colors
 
 <p align="center">
-  <img src="./demo.gif" />
+  <img src="./media/demo.gif" />
 </p>
 
 ## Table of contents
@@ -80,4 +80,52 @@ A little bit about different color terms and color harmonies that you will be us
 
 - **Triadic** - This color scheme has three colors that are evenly spaced on the color wheel.
 
-- **Tetradic (or double complementary)** - Two pairs of colors which are opposite on the color wheel
+- **Tetradic** - Two pairs of colors which are opposite on the color wheel
+
+## Install
+
+```
+npm install react-color-tools
+```
+
+or if you use yarn,
+
+```
+yarn add react-color-tools
+```
+
+**This package also depends on React so make sure you've it installed.**
+
+## Usage
+
+```js
+import React from 'react'
+import { render } from 'react-dom'
+import { BasicColorPicker } from 'react-color-tools'
+
+class App extends React.Component {
+  state = {
+    color: 'hotpink'
+  }
+
+  render() {
+    const { color } = this.state
+
+    return (
+      <div>
+        <BasicColorPicker
+          color={color}
+          onChange={color => this.setState({ color })}
+        />
+        <h1 style={{ color }}>React Color Tools</h1>
+      </div>
+    )
+  }
+}
+```
+
+This will render -
+
+<p align="center">
+  <img src="./media/basic_picker.gif" />
+</p>

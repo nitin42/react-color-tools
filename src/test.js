@@ -4,6 +4,26 @@ import { css } from 'emotion'
 
 import { BasicPicker, GradientPicker } from './index'
 
+class WithoutTools extends React.Component {
+  state = {
+    color: 'hotpink'
+  }
+
+  render() {
+    const { color } = this.state
+
+    return (
+      <div style={{ marginTop: 20 }}>
+        <BasicPicker
+          color={color}
+          onChange={color => this.setState({ color })}
+        />
+        <h1 style={{ color }}>React Color Tools</h1>
+      </div>
+    )
+  }
+}
+
 class App extends React.Component {
   state = {
     color: 'hotpink',
@@ -11,34 +31,7 @@ class App extends React.Component {
   }
 
   render() {
-    return (
-      <div
-        className={css`
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          flex-direction: column;
-          margin-top: 30px;
-        `}
-      >
-        <GradientPicker
-          theme="light"
-          mode="linear"
-          direction="to top"
-          reverse
-          getGradient={gradient => this.setState({ gradient })}
-        />
-        <h1
-          className={css`
-            background-image: ${this.state.gradient};
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-          `}
-        >
-          React Color Tools
-        </h1>
-      </div>
-    )
+    return <WithoutTools />
   }
 }
 
