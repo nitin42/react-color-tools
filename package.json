@@ -51,7 +51,7 @@
     "start": "parcel ./public/index.html -p 4567",
     "formatall": "find src -name '*.js' | xargs prettier --write --no-semi --single-quote",
     "lint": "eslint ./src",
-    "validate": "yarn formatall && yarn lint && yarn test",
+    "validate": "yarn formatall && yarn lint",
     "reset": "rm -rf dist && rm -rf .cache"
   },
   "jest": {

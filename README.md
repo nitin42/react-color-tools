@@ -129,3 +129,39 @@ This will render -
 <p align="center">
   <img src="./media/basic_picker.gif" />
 </p>
+
+## Documentation
+
+[Check out the detailed documentation]()
+
+## Contributing
+
+If you like to contribute to this project, then follow the below instructions to setup the project locally on your machine.
+
+```
+git clone https://github.com/<your_username_here>/react-color-tools
+
+cd react-color-tools
+
+yarn
+```
+
+### Linting
+
+Run eslint using `yarn lint`
+
+### Building the source code
+
+Run `yarn build` to build the source code.
+
+### Formatting with Prettier
+
+Run `yarn formatall` to format the source code.
+
+### Reset the cache and dev builds
+
+Run `yarn reset` to reset the cache and delete the dev builds.
+
+## License
+
+MIT
