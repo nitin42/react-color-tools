@@ -8,7 +8,7 @@
 
 ## Motivation
 
-`react-color-tools` is inspired from [`react-color`](). I was using `react-color` for my projects and felt the need for more features like [image color extraction](), generating shades and tints, creating gradient and advance color tools controlling the intensity and value of the color.
+`react-color-tools` is inspired from [`react-color`](https://github.com/casesandberg/react-color). I was using `react-color` for my projects and felt the need for more features like [image color extraction](https://react-color-extractor.surge.sh), generating shades and tints, creating gradient and advance color tools controlling the intensity and value of the color.
 
 ## Features
 
@@ -26,7 +26,7 @@
 
 ## Theory
 
-So before we dive into the installaton setup, usage and example, let learn a little bit about color, different terms and color harmonies for choosing a color scheme
+So before we dive into the installaton setup, usage and example, let's learn a little bit about color, different color terms and color harmonies for choosing a color scheme.
 
 ## Table of contents
 
