@@ -48,14 +48,28 @@
 
 ## Theory
 
-So before we dive into the installaton setup, usage and example, let's learn a little bit about color, different color terms and color harmonies for choosing a color scheme.
+Before we dive into the installaton setup, usage and example, let's learn a little bit about color, different color terms and color harmonies for choosing a color scheme.
 
-## TODO
+### Color terms
 
-- Refactor color pickers
+- **`Hue`** -
 
-- Improve build setup
+- **`Shade`** -
 
-- Create documentation
+- **`Tint`** -
 
-- Create examples
+- **`Saturation`** -
+
+- **`Desaturation`** -
+
+### Color Harmony
+
+- **`Monochromatic`** -
+
+- **`Analogous`** -
+
+- **`Split Complementary`** -
+
+- **`Triadic`** -
+
+- **`Tetradic (or double complementary)`** -
