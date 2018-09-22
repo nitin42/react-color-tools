@@ -48,28 +48,28 @@
 
 ## Theory
 
-Before we dive into the installaton setup, usage and example, let's learn a little bit about color, different color terms and color harmonies for choosing a color scheme.
+Let's learn a little bit about different color terms and color harmonies that you will be using while working with `react-color-tools`.
 
 ### Color terms
 
-- **`Hue`** -
+- **Hue** - A hue is name of particular color, or it is also one of the 12 colors on the color wheel.
 
-- **`Shade`** -
+- **Shade** - A shade is a hue darkened with black.
 
-- **`Tint`** -
+- **Tint** - A tint is a hue lightened with gray.
 
-- **`Saturation`** -
+- **Saturation** - Describes the intensity or purity of color.
 
-- **`Desaturation`** -
+- **Desaturation** - Desaturation makes a color look more muted (hue approaches closer to gray).
 
 ### Color Harmony
 
-- **`Monochromatic`** -
+- **Monochromatic** - This color scheme contains tints, shades and tones of a color.
 
-- **`Analogous`** -
+- **Analogous** - This color scheme contains the hues that are located side by side on the color wheel.
 
-- **`Split Complementary`** -
+- **Split Complementary** - This scheme represent any color on the color wheel plus two colors that are it's complement.
 
-- **`Triadic`** -
+- **Triadic** - This color scheme has three colors that are evenly spaced on the color wheel.
 
-- **`Tetradic (or double complementary)`** -
+- **Tetradic (or double complementary)** - Two pairs of colors which are opposite on the color wheel
