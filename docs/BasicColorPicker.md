@@ -174,3 +174,10 @@ By default, the color format in the color picker is hex. To change the format, u
 <p align="center">
     <img src="../media/format.gif" />
 </p>
+## Generating different swatches
+
+You can generate a different set of swatches to choose from inside the color picker
+
+<p align="center">
+    <img src="../media/swatches.gif" />
+</p>
