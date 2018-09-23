@@ -136,6 +136,75 @@ When set to true, will add advance color manipulation tools to the color picker.
 
 When set to `false`, will remove the triangle from the top of color picker
 
+## Color onversion APIs
+
+By default, the color format is hex. To convert a color from one format to another, use the static class methods.
+
+For example - The default format for color when `onChange` is invoked is hex.
+
+```jsx
+state = { color: 'red' }
+
+<BasicColorPicker color={this.state.color} onChange={color => {
+  this.setState({ color });
+  console.log(color); // #F00
+}}/>
+```
+
+**`toRGB`**
+
+To convert a color to rgb format, use the static method `toRGB(color)`
+
+```
+BasicColorPicker.toRGB(color)
+```
+
+Example -
+
+```jsx
+class App extends React.Component {
+  state = {
+    color: 'hotpink'
+  }
+
+  render() {
+    const { color } = this.state
+
+    return (
+      <div>
+        <BasicColorPicker
+          color={color}
+          onChange={color =>
+            this.setState({ color: BasicColorPicker.toRGB(color) })
+          }
+        />
+        <h1 style={{ color }}>React Color Tools</h1>
+      </div>
+    )
+  }
+}
+```
+
+Similarly for other formats,
+
+**`toHSL`**
+
+```
+BasicColorPicker.toHSL(color)
+```
+
+**`toHSV`**
+
+```
+BasicColorPicker.toHSV(color)
+```
+
+**`toRGBPercent`**
+
+```
+BasicColorPicker.toRGBPercent(color)
+```
+
 ### Image color extraction
 
 You can also extract swatches from an image.
