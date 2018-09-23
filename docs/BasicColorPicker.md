@@ -68,7 +68,7 @@ This is invoked everytime when a color is updated in the color picker for exampl
 
 `swatches: Array<string>`
 
-Initialize your own swatches in the color picker by passing an array of colors in either hex format or name of the color.
+Initialize your own swatches in the color picker by passing an array of colors in either hex format or specifying the name of color.
 
 ```jsx
 <BasicColorPicker swatches={['red', 'mistyrose', 'hotpink']} />
