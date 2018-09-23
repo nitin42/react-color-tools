@@ -84,7 +84,7 @@ theme prop accepts two values - `light` and `dark`. Use this prop to set the the
 
 `maxColors: number`
 
-This prop accepts a number for amount of colors in palette from which swatches will be generated from an image
+This prop accepts a number for amount of colors in palette from which swatches will be generated from an image.
 
 `showTools: boolean`
 
@@ -119,6 +119,7 @@ When set to true, will add advance color manipulation tools to the color picker.
 <p align="center">
     <img src="../media/lighten.gif" />
 </p>
+
 `triangle: boolean`
 
 When set to `false`, will remove the triangle from the top of color picker
