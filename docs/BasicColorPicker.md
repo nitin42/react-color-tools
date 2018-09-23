@@ -46,7 +46,7 @@ class App extends React.Component {
 
 `color: string`
 
-color prop represents what color is currently active in the color picker. Use this prop to initialize the color picker with a particular color, or to keep it in sync with the state of a parent component.
+color prop represents what color is currently active in the color picker. Use this prop to initialize the color picker with a particular color, or to keep it in sync with the state of a parent component. The default value is `#088da5`
 
 ```jsx
 <BasicColorPicker color={this.state.color} />
@@ -80,7 +80,7 @@ Similar to `onChange` callback. The only difference is, this is invoked on hover
 
 `theme: string`
 
-theme prop accepts two values - `light` and `dark`. Use this prop to set the theme of the color picker
+theme prop accepts two values - `light` and `dark`. Use this prop to set the theme of the color picker. The default value is `light`
 
 **Light theme**
 
@@ -96,7 +96,7 @@ theme prop accepts two values - `light` and `dark`. Use this prop to set the the
 
 `maxColors: number`
 
-This prop accepts a number for amount of colors in palette from which swatches will be generated from an image.
+This prop accepts a number for amount of colors in palette from which swatches will be generated from an image. The default value is `64`
 
 `showTools: boolean`
 
