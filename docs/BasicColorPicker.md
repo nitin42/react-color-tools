@@ -119,3 +119,22 @@ When set to true, will add advance color manipulation tools to the color picker.
 <p align="center">
     <img src="../media/lighten.gif" />
 </p>
+`triangle: boolean`
+
+When set to `false`, will remove the triangle from the top of color picker
+
+### Image color extraction
+
+You can also extract swatches from an image.
+
+<p align="center">
+    <img src="../media/image.gif" />
+</p>
+
+### Generating shades and tints
+
+Generate shades and tints for a color
+
+<p align="center">
+    <img src="../media/tints.gif" />
+</p>
