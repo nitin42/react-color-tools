@@ -82,6 +82,18 @@ Similar to `onChange` callback. The only difference is, this is invoked on hover
 
 theme prop accepts two values - `light` and `dark`. Use this prop to set the theme of the color picker
 
+**Light theme**
+
+<p align="center">
+    <img src="../media/light.png"/>
+</p>
+
+**Dark theme**
+
+<p align="center">
+       <img src="../media/dark.png" />
+</p>
+
 `maxColors: number`
 
 This prop accepts a number for amount of colors in palette from which swatches will be generated from an image

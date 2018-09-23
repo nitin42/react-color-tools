@@ -13,15 +13,13 @@ class WithoutTools extends React.Component {
     const { color } = this.state
 
     return (
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <div>
         <BasicPicker
           color={color}
-          showTools
+          theme="dark"
           onChange={color => this.setState({ color })}
         />
-        <h1 style={{ color, marginTop: 310, marginLeft: 20, fontSize: 20 }}>
-          React Color Tools
-        </h1>
+        <h1>React Color Tools</h1>
       </div>
     )
   }
