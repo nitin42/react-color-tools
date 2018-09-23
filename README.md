@@ -132,7 +132,7 @@ This will render -
 
 ## Documentation
 
-[Check out the detailed documentation]()
+[Check out the detailed documentation](./docs)
 
 ## Contributing
 
