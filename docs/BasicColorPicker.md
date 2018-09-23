@@ -42,7 +42,7 @@ class App extends React.Component {
 }
 ```
 
-##Component API
+## Component API
 
 `color: string`
 
@@ -80,46 +80,42 @@ Similar to `onChange` callback. The only difference is, this is invoked on hover
 
 `theme: string`
 
-`theme` prop accepts two values - `light` and `dark`. Use this prop to set the theme of the color picker
+theme prop accepts two values - `light` and `dark`. Use this prop to set the theme of the color picker
 
 `maxColors: number`
 
-`maxColors` prop accepts a number for amount of colors in palette from which swatches will be generated from an image
+This prop accepts a number for amount of colors in palette from which swatches will be generated from an image
 
 `showTools: boolean`
 
-When set to true, will add advance color manipulation tools to the color picker. This includes -
+When set to true, will add advance color manipulation tools to the color picker. These tools include -
 
 - **Color spin** - spin (change) the color by a degree amount
 
-<p>
+<p align="center">
     <img src="../media/spin.gif" />
 </p>
 
 - **Color desaturation** - making the color more muted or closer to gray
 
-<p>
+<p align="center">
   <img src="../media/desaturation.gif" />
 </p>
 
 - **Color saturation** - changing the intensity or purity of color
 
-<p>
+<p align="center">
     <img src="../media/saturation.gif" />
 </p>
 
 - **Color darkening** - darken a color by an amount
 
-<p>
+<p align="center">
     <img src="../media/darken.gif" />
 </p>
 
 - **Color brighten** - brighten a color by an amount
 
-<p>
+<p align="center">
     <img src="../media/lighten.gif" />
-</p>
-
-<p>
-    
 </p>
