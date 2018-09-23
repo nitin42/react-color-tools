@@ -50,7 +50,7 @@ color prop represents what color is currently active in the color picker. Use th
 <BasicColorPicker color={this.state.color} />
 ```
 
-`onChange: (color) => {}`
+`onChange: (color: string): void => {}`
 
 This is invoked everytime when a color is updated in the color picker for example - clicking a swatch, extracting colors from image, generating swatches, shades or tints. Use this callback to update the state of parent component with the currently active color.
 
@@ -72,7 +72,7 @@ Initialize your own swatches in the color picker by passing an array of colors i
 <BasicColorPicker swatches={['red', 'mistyrose', 'hotpink']} />
 ```
 
-`onSwatchHover: (color) => {}`
+`onSwatchHover: (color: string): void => {}`
 
 Similar to `onChange` callback. The only difference is, this is invoked on hovering over a color in the color picker.
 
@@ -124,7 +124,7 @@ When set to true, will add advance color manipulation tools to the color picker.
     <img src="../media/darken.gif" />
 </p>
 
-- **Color brighten** - brighten a color by an amount
+- **Color brightening** - brighten a color by an amount
 
 <p align="center">
     <img src="../media/lighten.gif" />
@@ -241,7 +241,7 @@ By default, the color format in the color picker is hex. To change the format, u
     <img src="../media/format.gif" />
 </p>
 
-## Generating different swatches
+## Generate different swatches
 
 You can generate a different set of swatches to choose from inside the color picker
 
