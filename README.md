@@ -109,15 +109,13 @@ class App extends React.Component {
   }
 
   render() {
-    const { color } = this.state
-
     return (
       <div>
         <BasicColorPicker
-          color={color}
+          color={this.state.color}
           onChange={color => this.setState({ color })}
         />
-        <h1 style={{ color }}>React Color Tools</h1>
+        <h1 style={{ color: this.state.color }}>React Color Tools</h1>
       </div>
     )
   }
