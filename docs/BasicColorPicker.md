@@ -220,6 +220,7 @@ Generate shades and tints for a color
 <p align="center">
     <img src="../media/tints.gif" />
 </p>
+
 ## Copy a color from picker
 
 You can also directly copy the color in either format from the picker.
@@ -243,6 +244,7 @@ By default, the color format in the color picker is hex. To change the format, u
 <p align="center">
     <img src="../media/format.gif" />
 </p>
+
 ## Generating different swatches
 
 You can generate a different set of swatches to choose from inside the color picker
