@@ -136,7 +136,7 @@ When set to true, will add advance color manipulation tools to the color picker.
 
 When set to `false`, will remove the triangle from the top of color picker
 
-## Color onversion APIs
+## Color conversion APIs
 
 By default, the color format is hex. To convert a color from one format to another, use the static class methods.
 
