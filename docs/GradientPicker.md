@@ -4,9 +4,9 @@
     <img src="../media/demo.gif" />
 </p>
 
-**`<GradientPicker />`**
+## `<GradientPicker />`
 
-<GradientPicker> component can be used to create a gradient by mixing the two colors and changing their stop positions.
+`<GradientPicker>` component is used to create a gradient by mixing two colors and changing their stop positions.
 
 ### Color stops
 
