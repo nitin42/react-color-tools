@@ -151,3 +151,26 @@ Generate shades and tints for a color
 <p align="center">
     <img src="../media/tints.gif" />
 </p>
+## Copy a color from picker
+
+You can also directly copy the color in either format from the picker.
+
+<p align="center">
+    <img src="../media/clipboard.gif" />
+</p>
+
+## Display previous swatches
+
+You can also go back to the previous swatches after selecting the shades and tints of a color.
+
+<p align="center">
+    <img src="../media/reset.gif" />
+</p>
+
+## Change color format
+
+By default, the color format in the color picker is hex. To change the format, use the dropdown to select a color format option.
+
+<p align="center">
+    <img src="../media/format.gif" />
+</p>
