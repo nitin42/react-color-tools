@@ -115,6 +115,13 @@ export default class SchemePicker extends React.Component {
     }
   }
 
+  copyColor = () => {
+    const { color } = this.state
+
+    navigator.clipboard.writeText(color)
+    this.setState({ showMsg: true })
+  }
+
   render() {
     const { color, swatches, showMsg } = this.state
 
@@ -153,10 +160,7 @@ export default class SchemePicker extends React.Component {
               <BasicTools.Clipboard
                 id="scheme-picker-clipboard"
                 showMsg={showMsg}
-                copyColor={() => {
-                  navigator.clipboard.writeText(color)
-                  this.setState({ showMsg: true })
-                }}
+                copyColor={this.copyColor}
               />
             </div>
           </ColorProvider>

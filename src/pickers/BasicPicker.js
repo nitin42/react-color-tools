@@ -386,6 +386,15 @@ export default class BasicPicker extends React.PureComponent {
       showTints: false
     })
 
+  copyColor = () => {
+    const { color, currentFormat } = this.state
+
+    const activeColor = this.getColor(color)[currentFormat]
+
+    navigator.clipboard.writeText(activeColor)
+    this.setState({ showMsg: true })
+  }
+
   render() {
     const {
       image,
@@ -473,11 +482,7 @@ export default class BasicPicker extends React.PureComponent {
                 generateShades={this.generateShades}
               />
               <BasicTools.Clipboard
-                copyColor={() => {
-                  navigator.clipboard.writeText(color)
-                  // Show tooltip
-                  this.setState({ showMsg: true })
-                }}
+                copyColor={this.copyColor}
                 showMsg={this.state.showMsg}
               />
               <BasicTools.Reset resetColors={this.resetColors} />
