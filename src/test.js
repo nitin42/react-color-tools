@@ -2,14 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { css } from 'emotion'
 
-import { BasicPicker, GradientPicker } from './index'
+import { BasicPicker, GradientPicker, SchemePicker } from './index'
 
 class App extends React.Component {
-  state = { gradient: '' }
+  state = { gradient: '', color: 'hotpink' }
 
   render() {
-    const { gradient: grad } = this.state
-
     return (
       <div
         style={{
@@ -19,21 +17,12 @@ class App extends React.Component {
           alignItems: 'center'
         }}
       >
-        <GradientPicker
-          theme="light"
-          mode="linear"
-          direction="to bottom"
-          getGradient={gradient => this.setState({ gradient })}
+        <h1 style={{ color: this.state.color }}>React Color Tools</h1>
+        <SchemePicker
+          scheme="analogous"
+          color={this.state.color}
+          onChange={color => this.setState({ color })}
         />
-        <h1
-          style={{
-            'background-image': grad,
-            '-webkit-background-clip': 'text',
-            '-webkit-text-fill-color': 'transparent'
-          }}
-        >
-          React Gradient Picker
-        </h1>
       </div>
     )
   }

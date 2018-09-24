@@ -3,11 +3,11 @@ import { css } from 'emotion'
 import PropTypes from 'prop-types'
 
 // Main color picker container
-const Container = ({ children, width, background }) => (
+const Container = ({ children, width, background, height }) => (
   <div
     className={css`
       width: ${width};
-      height: 295px;
+      height: ${height || '295px'};
       background: ${background};
       box-shadow: rgba(0, 0, 0, 0.1) 0px 1px;
       border-radius: 6px;
