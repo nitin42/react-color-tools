@@ -6,7 +6,6 @@ import PropTypes from 'prop-types'
 import Container from '../components/Container'
 import ColorBlock from '../components/ColorBlock'
 import ColorInputField from '../components/ColorInputField'
-import ColorFormatPicker from '../components/ColorFormatPicker'
 import { BasicTools } from '../components/Tools'
 import { Palettes } from '../components/Palettes'
 
@@ -36,11 +35,16 @@ export default class SchemePicker extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.color !== prevProps.color) {
+    if (
+      this.props.color !== prevProps.color &&
+      this.props.color !== this.state.color
+    ) {
       const newColor = new TinyColor(this.props.color)
 
       if (newColor.isValid) {
-        this.setState({ color: newColor.toHexString() })
+        this.setState({ color: newColor.toHexString() }, () =>
+          this.generateSchemes(newColor)
+        )
       }
     }
   }
@@ -50,22 +54,19 @@ export default class SchemePicker extends React.Component {
     const newSchemes = new TinyColor(color)
       [this.props.scheme](30)
       .map(c => c.toHexString())
-      .reverse() // We render the colors from light to dark, so reverse the color schemes.
+      .reverse() // display the colors from light to dark, so reverse the color schemes.
 
     // All the color schemes should be unique
     const uniqueSchemes = new Set()
-
     newSchemes.forEach(scheme => uniqueSchemes.add(scheme))
-
     this.setState({ swatches: [...uniqueSchemes] })
   }
 
   // Click handler for a palette
-  updatePalette = color => {
-    // Preserve the old palettes while updating color state
-    // Only generate new palettes when the format changes or color input is updated
+  updateSwatch = color => {
     this.setState({ color })
 
+    // Invoke the prop callback
     this.props.onChange && this.props.onChange(color)
   }
 
@@ -76,7 +77,9 @@ export default class SchemePicker extends React.Component {
     if (newColor.isValid) {
       // Update the color input value
       // Also generate the new schemes based on the new color input
-      this.setState({ color: newColor.toHexString() })
+      this.setState({ color: newColor.toHexString() }, () =>
+        this.generateSchemes(color)
+      )
     }
   }
 
@@ -91,7 +94,7 @@ export default class SchemePicker extends React.Component {
             value={color}
             onChange={this.props.onChange || this.defaultOnChange}
           />
-          <Palettes schemes={swatches} updatePalette={this.updatePalette} />
+          <Palettes schemes={swatches} updatePalette={this.updateSwatch} />
           <div
             className={css`
               display: flex;
