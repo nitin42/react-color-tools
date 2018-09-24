@@ -20,9 +20,12 @@ import {
 const MAX_COLOR_SCHEMES = 30
 
 export default class SchemePicker extends React.Component {
+  clipboardIcon = null
+
   state = {
     color: new TinyColor(this.props.color).toHexString(),
-    swatches: []
+    swatches: [],
+    showMsg: false
   }
 
   static defaultProps = {
@@ -40,12 +43,18 @@ export default class SchemePicker extends React.Component {
       'monochromatic',
       'splitcomponent',
       'triad',
-      'tetrad'
+      'tetrad',
+      'analogous'
     ])
   }
 
   componentDidMount() {
     this.generateSchemes(this.props.color)
+
+    this.clipboardIcon = document.getElementById('scheme-picker-clipboard')
+
+    this.clipboardIcon.addEventListener('mouseleave', this.hideMsg)
+    this.clipboardIcon.addEventListener('blur', this.hideMsg)
   }
 
   componentDidUpdate(prevProps) {
@@ -63,6 +72,13 @@ export default class SchemePicker extends React.Component {
       }
     }
   }
+
+  componentWillUnmount() {
+    this.clipboardIcon.removeEventListener('mouseleave', this.hideMsg)
+    this.clipboardIcon.removeEventListener('blur', this.hideMsg)
+  }
+
+  hideMsg = () => this.setState({ showMsg: false })
 
   // Generate new color schemes based on the color input and current format state
   generateSchemes = (color, newState = this.state) => {
@@ -100,7 +116,7 @@ export default class SchemePicker extends React.Component {
   }
 
   render() {
-    const { color, swatches } = this.state
+    const { color, swatches, showMsg } = this.state
 
     const { theme } = this.props
 
@@ -116,7 +132,7 @@ export default class SchemePicker extends React.Component {
         width={SCHEME_CONTAINER_WIDTH}
         height={SCHEME_CONTAINER_HEIGHT}
       >
-        <ColorBlock color={color} />
+        <ColorBlock color={color} colorState={{}} />
         <div style={{ padding: 10 }}>
           <ColorInputField
             value={color}
@@ -134,7 +150,14 @@ export default class SchemePicker extends React.Component {
                 margin-top: 10px;
               `}
             >
-              <BasicTools.Clipboard />
+              <BasicTools.Clipboard
+                id="scheme-picker-clipboard"
+                showMsg={showMsg}
+                copyColor={() => {
+                  navigator.clipboard.writeText(color)
+                  this.setState({ showMsg: true })
+                }}
+              />
             </div>
           </ColorProvider>
         </div>
