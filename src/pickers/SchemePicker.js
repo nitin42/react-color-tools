@@ -7,19 +7,27 @@ import Container from '../components/Container'
 import ColorBlock from '../components/ColorBlock'
 import ColorInputField from '../components/ColorInputField'
 import { BasicTools } from '../components/Tools'
-import { Palettes } from '../components/Palettes'
+import { CompactSwatches } from '../components/CompactSwatches'
+
+import { Provider as ColorProvider } from '../utils/context'
+import {
+  DEFAULT_COLOR,
+  SCHEME_CONTAINER_HEIGHT,
+  SCHEME_CONTAINER_WIDTH,
+  DARK_COLOR,
+  LIGHT_COLOR
+} from '../utils/constants'
 
 export default class SchemePicker extends React.Component {
   state = {
-    // Input color
     color: new TinyColor(this.props.color).toHexString(),
-    // Swatches for the input color
     swatches: []
   }
 
   static defaultProps = {
-    color: '#F067B4',
+    color: DEFAULT_COLOR,
     theme: 'light',
+    // Default color scheme from which swatches are generated
     scheme: 'monochromatic'
   }
 
@@ -86,24 +94,41 @@ export default class SchemePicker extends React.Component {
   render() {
     const { color, swatches } = this.state
 
+    const { theme } = this.props
+
+    // Set the background color of color picker according to the current theme
+    const bg = theme === 'dark' ? DARK_COLOR : LIGHT_COLOR
+
+    // Set icon color according to the current theme
+    const iconColor = theme === 'dark' ? LIGHT_COLOR : DARK_COLOR
+
     return (
-      <Container width="200px" height="225px">
+      <Container
+        background={bg}
+        width={SCHEME_CONTAINER_WIDTH}
+        height={SCHEME_CONTAINER_HEIGHT}
+      >
         <ColorBlock color={color} />
         <div style={{ padding: 10 }}>
           <ColorInputField
             value={color}
             onChange={this.props.onChange || this.defaultOnChange}
           />
-          <Palettes schemes={swatches} updatePalette={this.updateSwatch} />
-          <div
-            className={css`
-              display: flex;
-              justify-content: center;
-              margin-top: 10px;
-            `}
-          >
-            <BasicTools.Clipboard />
-          </div>
+          <CompactSwatches
+            schemes={swatches}
+            updateSwatch={this.updateSwatch}
+          />
+          <ColorProvider value={iconColor}>
+            <div
+              className={css`
+                display: flex;
+                justify-content: center;
+                margin-top: 10px;
+              `}
+            >
+              <BasicTools.Clipboard />
+            </div>
+          </ColorProvider>
         </div>
       </Container>
     )
