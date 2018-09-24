@@ -1,3 +1,5 @@
+WORK IN PROGRESS
+
 # react-color-tools
 
 > A set of tools for working with colors
