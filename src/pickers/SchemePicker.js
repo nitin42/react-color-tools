@@ -12,10 +12,9 @@ import { CompactSwatches } from '../components/CompactSwatches'
 import { Provider as ColorProvider } from '../utils/context'
 import {
   SCHEME_CONTAINER_HEIGHT,
-  SCHEME_CONTAINER_WIDTH,
-  DARK_COLOR,
-  LIGHT_COLOR
+  SCHEME_CONTAINER_WIDTH
 } from '../utils/constants'
+import { getThemeVariants } from '../utils/theme'
 
 const MAX_COLOR_SCHEMES = 30
 
@@ -117,14 +116,7 @@ export default class SchemePicker extends React.Component {
 
   render() {
     const { color, swatches, showMsg } = this.state
-
-    const { theme } = this.props
-
-    // Set the background color of color picker according to the current theme
-    const bg = theme === 'dark' ? DARK_COLOR : LIGHT_COLOR
-
-    // Set icon color according to the current theme
-    const iconColor = theme === 'dark' ? LIGHT_COLOR : DARK_COLOR
+    const { bg, iconColor } = getThemeVariants(this.props.theme)
 
     return (
       <Container
@@ -132,7 +124,7 @@ export default class SchemePicker extends React.Component {
         width={SCHEME_CONTAINER_WIDTH}
         height={SCHEME_CONTAINER_HEIGHT}
       >
-        <ColorBlock color={color} colorState={{}} />
+        <ColorBlock color={color} />
         <div style={{ padding: 10 }}>
           <ColorInputField
             value={color}

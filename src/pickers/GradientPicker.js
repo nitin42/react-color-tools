@@ -11,14 +11,13 @@ import { BasicTools } from '../components/Tools'
 
 import { Provider as ColorProvider, Consumer } from '../utils/context'
 import {
-  DARK_COLOR,
-  LIGHT_COLOR,
   DEFAULT_COLOR_ONE,
   DEFAULT_COLOR_TWO,
   GRADIENT_CONTAINER_WIDTH,
   DEFAULT_COLOR_STOP
 } from '../utils/constants'
 import { randomColors } from '../utils/colors'
+import { getThemeVariants } from '../utils/theme'
 
 const StyledLabel = styled('label')`
   display: inline-block;
@@ -292,14 +291,7 @@ export default class GradientPicker extends React.Component {
       colorStopTwo,
       showMsg
     } = this.state
-
-    const { theme } = this.props
-
-    // Set the background color of color picker according to the current theme
-    const bg = theme === 'dark' ? DARK_COLOR : LIGHT_COLOR
-
-    // Set icon color according to the current theme
-    const iconColor = theme === 'dark' ? LIGHT_COLOR : DARK_COLOR
+    const { bg, iconColor } = getThemeVariants(this.props.theme)
 
     return (
       <Container background={bg} width={GRADIENT_CONTAINER_WIDTH}>

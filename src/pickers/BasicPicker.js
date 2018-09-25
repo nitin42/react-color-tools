@@ -19,11 +19,10 @@ import { Provider as ColorProvider } from '../utils/context'
 import {
   DEFAULT_SWATCHES,
   DEFAULT_COLOR,
-  DARK_COLOR,
-  LIGHT_COLOR,
   COLOR_CONTAINER_WIDTH,
   MAX_COLORS
 } from '../utils/constants'
+import { getThemeVariants } from '../utils/theme'
 
 // Copied from primer/primer-tooltips/build
 import '../styles/tooltip.css'
@@ -402,15 +401,9 @@ export default class BasicPicker extends React.PureComponent {
       saturate,
       formats
     } = this.state
-
     // Get the color string with a specified color format
     const color = this.getColor(this.state.color)[currentFormat]
-
-    // Set the background color of color picker according to the current theme
-    const bg = this.props.theme === 'dark' ? DARK_COLOR : LIGHT_COLOR
-
-    // Set icon color according to the current theme
-    const iconColor = this.props.theme === 'dark' ? LIGHT_COLOR : DARK_COLOR
+    const { bg, iconColor } = getThemeVariants(this.props.theme)
 
     return (
       <Container background={bg} width={COLOR_CONTAINER_WIDTH}>

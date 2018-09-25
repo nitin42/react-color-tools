@@ -34,13 +34,14 @@ const ColorBlock = ({ currentFormat, colorState, color }) => (
 )
 
 ColorBlock.defaultProps = {
-  currentFormat: 'HEX'
+  currentFormat: 'HEX',
+  colorState: {}
 }
 
 ColorBlock.propTypes = {
   color: PropTypes.string.isRequired,
   /* eslint-disable react/forbid-prop-types */
-  colorState: PropTypes.object.isRequired,
+  colorState: PropTypes.object,
   currentFormat: PropTypes.string
 }
 
