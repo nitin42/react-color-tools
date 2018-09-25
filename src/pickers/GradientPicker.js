@@ -14,6 +14,7 @@ import {
   DEFAULT_COLOR_ONE,
   DEFAULT_COLOR_TWO,
   GRADIENT_CONTAINER_WIDTH,
+  GRADIENT_CONTAINER_HEIGHT,
   DEFAULT_COLOR_STOP
 } from '../utils/constants'
 import { randomColors } from '../utils/colors'
@@ -301,7 +302,11 @@ export default class GradientPicker extends React.Component {
     const { bg, iconColor } = getThemeVariants(this.props.theme)
 
     return (
-      <Container background={bg} width={GRADIENT_CONTAINER_WIDTH}>
+      <Container
+        background={bg}
+        width={GRADIENT_CONTAINER_WIDTH}
+        height={GRADIENT_CONTAINER_HEIGHT}
+      >
         <ColorBlock gradient={grad.css()} />
         <ColorProvider value={iconColor}>
           <div style={{ padding: 10 }}>

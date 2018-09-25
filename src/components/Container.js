@@ -7,7 +7,7 @@ const Container = ({ children, width, background, height }) => (
   <div
     className={css`
       width: ${width};
-      height: ${height || '295px'};
+      height: ${height};
       background: ${background};
       box-shadow: rgba(0, 0, 0, 0.1) 0px 1px;
       border-radius: 6px;
@@ -20,6 +20,7 @@ const Container = ({ children, width, background, height }) => (
 
 Container.defaultProps = {
   width: '222px',
+  height: '295px',
   background: 'rgb(255, 255, 255)'
 }
 
@@ -29,6 +30,7 @@ Container.propTypes = {
     PropTypes.node
   ]).isRequired,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   background: PropTypes.string
 }
 

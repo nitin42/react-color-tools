@@ -14,8 +14,8 @@ const Swatch = ({ color, updateSwatch }) => (
 )
 
 Swatch.propTypes = {
-  color: PropTypes.string,
-  updateSwatch: PropTypes.func
+  color: PropTypes.string.isRequired,
+  updateSwatch: PropTypes.func.isRequired
 }
 
 export const CompactSwatches = ({ schemes, updateSwatch }) => (
@@ -37,6 +37,6 @@ export const CompactSwatches = ({ schemes, updateSwatch }) => (
 )
 
 CompactSwatches.propTypes = {
-  schemes: PropTypes.array,
-  updateSwatch: PropTypes.func
+  schemes: PropTypes.array.isRequired,
+  updateSwatch: PropTypes.func.isRequired
 }

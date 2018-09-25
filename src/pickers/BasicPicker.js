@@ -20,6 +20,7 @@ import {
   DEFAULT_SWATCHES,
   DEFAULT_COLOR,
   COLOR_CONTAINER_WIDTH,
+  COLOR_CONTAINER_HEIGHT,
   MAX_COLORS
 } from '../utils/constants'
 import { getThemeVariants } from '../utils/theme'
@@ -415,7 +416,11 @@ export default class BasicPicker extends React.PureComponent {
     const { bg, iconColor } = getThemeVariants(this.props.theme)
 
     return (
-      <Container background={bg} width={COLOR_CONTAINER_WIDTH}>
+      <Container
+        background={bg}
+        width={COLOR_CONTAINER_WIDTH}
+        height={COLOR_CONTAINER_HEIGHT}
+      >
         {/* eslint-disable operator-linebreak */}
         {/* eslint-disable indent */}
         {this.props.triangle &&
