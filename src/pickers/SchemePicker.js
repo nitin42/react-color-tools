@@ -2,6 +2,7 @@ import React from 'react'
 import { TinyColor } from '@ctrl/tinycolor'
 import { css } from 'emotion'
 import PropTypes from 'prop-types'
+import clipboard from 'clipboard-polyfill'
 
 import Container from '../components/Container'
 import ColorBlock from '../components/ColorBlock'
@@ -122,9 +123,7 @@ export default class SchemePicker extends React.Component {
   }
 
   copyColor = () => {
-    const { color } = this.state
-
-    navigator.clipboard.writeText(color)
+    clipboard.writeText(this.state.color)
     this.setState({ showMsg: true })
   }
 

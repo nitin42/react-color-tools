@@ -3,6 +3,7 @@ import gradient from 'tinygradient'
 import PropTypes from 'prop-types'
 import { TinyColor } from '@ctrl/tinycolor'
 import styled, { css } from 'react-emotion'
+import clipboard from 'clipboard-polyfill'
 
 import Container from '../components/Container'
 import ColorInputField from '../components/ColorInputField'
@@ -284,7 +285,7 @@ export default class GradientPicker extends React.Component {
   }
 
   copyColor = () => {
-    navigator.clipboard.writeText(this.state.gradient.css())
+    clipboard.writeText(this.state.gradient.css())
     this.setState({ showMsg: true })
   }
 

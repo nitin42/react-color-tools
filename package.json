@@ -9,6 +9,8 @@
   "license": "MIT",
   "dependencies": {
     "@ctrl/tinycolor": "^2.2.0",
+    "clipboard": "^2.0.1",
+    "clipboard-polyfill": "^2.5.4",
     "emotion": "^9.2.8",
     "prop-types": "^15.6.2",
     "randomcolor": "^0.5.3",

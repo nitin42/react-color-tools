@@ -5,6 +5,7 @@ import { TinyColor } from '@ctrl/tinycolor'
 import Values from 'values.js'
 import PropTypes from 'prop-types'
 import styled from 'react-emotion'
+import clipboard from 'clipboard-polyfill'
 
 import ColorInput from '../components/ColorInputField'
 import ColorBlock from '../components/ColorBlock'
@@ -388,10 +389,9 @@ export default class BasicPicker extends React.PureComponent {
 
   copyColor = () => {
     const { color, currentFormat } = this.state
-
     const activeColor = this.getColor(color)[currentFormat]
 
-    navigator.clipboard.writeText(activeColor)
+    clipboard.writeText(activeColor)
     this.setState({ showMsg: true })
   }
 

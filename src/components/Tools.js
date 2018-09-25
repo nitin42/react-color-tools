@@ -140,7 +140,7 @@ const PaletteGenerator = HOC(({ color, generateSwatches }) => (
     onClick={generateSwatches}
     onKeyDown={e => (e.keyCode === ENTER_KEY ? generateSwatches(e) : null)}
   >
-    <ToolsIcon id="image-icon" className="fas fa-palette" color={color} />
+    <ToolsIcon className="fas fa-palette" color={color} />
   </StyledSpan>
 ))
 
@@ -156,7 +156,7 @@ const ShadesGenerator = HOC(({ color, generateShades }) => (
     onClick={generateShades}
     onKeyDown={e => (e.keyCode === ENTER_KEY ? generateShades(e) : null)}
   >
-    <ToolsIcon id="image-icon" className="fas fa-adjust" color={color} />
+    <ToolsIcon className="fas fa-adjust" color={color} />
   </StyledSpan>
 ))
 
@@ -172,11 +172,7 @@ const Reset = HOC(({ color, resetColors }) => (
     onClick={resetColors}
     onKeyDown={e => (e.keyCode === ENTER_KEY ? resetColors(e) : null)}
   >
-    <ToolsIcon
-      id="image-icon"
-      className="fas fa-arrow-alt-circle-left"
-      color={color}
-    />
+    <ToolsIcon className="fas fa-arrow-alt-circle-left" color={color} />
   </StyledSpan>
 ))
 
@@ -192,7 +188,7 @@ const TintsGenerator = HOC(({ color, generateTints }) => (
     onClick={generateTints}
     onKeyDown={e => (e.keyCode === ENTER_KEY ? generateTints(e) : null)}
   >
-    <ToolsIcon id="image-icon" className="fas fa-tint" color={color} />
+    <ToolsIcon className="fas fa-tint" color={color} />
   </StyledSpan>
 ))
 
@@ -210,13 +206,15 @@ const Clipboard = HOC(({ color, copyColor, showMsg, id = 'clipboard' }) => (
     className={showMsg ? TOOLTIP_CLASSNAME : 'no-tooltip'}
     aria-label="Copied"
   >
-    <ToolsIcon id="image-icon" className="fas fa-copy" color={color} />
+    <ToolsIcon className="fas fa-copy" color={color} />
   </StyledSpan>
 ))
 
 Clipboard.propTypes = {
   color: PropTypes.string,
-  copyColor: PropTypes.func
+  copyColor: PropTypes.func,
+  showMsg: PropTypes.bool,
+  id: PropTypes.string
 }
 
 const GradientGenerator = HOC(({ color, generateGradient }) => (
