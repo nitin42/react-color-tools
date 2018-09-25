@@ -24,6 +24,7 @@ class App extends React.Component {
           color={this.state.color}
           onChange={color => this.setState({ color })}
         />
+        <GradientPicker />
       </div>
     )
   }

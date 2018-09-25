@@ -282,6 +282,13 @@ export default class GradientPicker extends React.Component {
     )
   }
 
+  copyColor = () => {
+    const { gradient } = this.state
+
+    navigator.clipboard.writeText(gradient.css())
+    this.setState({ showMsg: true })
+  }
+
   render() {
     const {
       gradient: grad,
@@ -320,10 +327,7 @@ export default class GradientPicker extends React.Component {
               <BasicTools.Clipboard
                 id="gradient-clipboard"
                 showMsg={showMsg}
-                copyColor={() => {
-                  navigator.clipboard.writeText(grad.css())
-                  this.setState({ showMsg: true })
-                }}
+                copyColor={this.copyColor}
               />
               <div style={{ marginLeft: 10 }}>
                 <BasicTools.GradientGenerator
