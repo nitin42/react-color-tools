@@ -18,7 +18,7 @@ import {
   DEFAULT_COLOR_STOP
 } from '../utils/constants'
 import { randomColors } from '../utils/colors'
-import { getThemeVariants } from '../utils/theme'
+import getThemeVariants from '../utils/theme'
 
 const StyledLabel = styled('label')`
   display: inline-block;
@@ -284,9 +284,7 @@ export default class GradientPicker extends React.Component {
   }
 
   copyColor = () => {
-    const { gradient } = this.state
-
-    navigator.clipboard.writeText(gradient.css())
+    navigator.clipboard.writeText(this.state.gradient.css())
     this.setState({ showMsg: true })
   }
 

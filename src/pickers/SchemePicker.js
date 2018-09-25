@@ -7,14 +7,14 @@ import Container from '../components/Container'
 import ColorBlock from '../components/ColorBlock'
 import ColorInputField from '../components/ColorInputField'
 import { BasicTools } from '../components/Tools'
-import { CompactSwatches } from '../components/CompactSwatches'
+import CompactSwatches from '../components/CompactSwatches'
 
 import { Provider as ColorProvider } from '../utils/context'
 import {
   SCHEME_CONTAINER_HEIGHT,
   SCHEME_CONTAINER_WIDTH
 } from '../utils/constants'
-import { getThemeVariants } from '../utils/theme'
+import getThemeVariants from '../utils/theme'
 
 const MAX_COLOR_SCHEMES = 30
 
@@ -36,6 +36,7 @@ export default class SchemePicker extends React.Component {
 
   static propTypes = {
     color: PropTypes.string,
+    /* eslint-disable react/require-default-props */
     onChange: PropTypes.func,
     theme: PropTypes.oneOf(['light', 'dark']),
     scheme: PropTypes.oneOf([
@@ -58,8 +59,10 @@ export default class SchemePicker extends React.Component {
 
   componentDidUpdate(prevProps) {
     // Only invoked when the color input is updated
+    /* eslint-disable operator-linebreak */
     if (
       this.props.color !== prevProps.color &&
+      /* eslint-disable max-len */
       this.props.color !== this.state.color // This ensures that when we click on a swatch, it will not generate the swatches for the currently selected swatch.
     ) {
       const newColor = new TinyColor(this.props.color)
@@ -80,9 +83,13 @@ export default class SchemePicker extends React.Component {
   hideMsg = () => this.setState({ showMsg: false })
 
   // Generate new color schemes based on the color input and current format state
-  generateSchemes = (color, newState = this.state) => {
+  generateSchemes = color => {
     const newSchemes = new TinyColor(color)
-      [this.props.scheme](MAX_COLOR_SCHEMES) // the max color scheme amount will be adjusted by TinyColor for different color schemes
+      [
+        /* eslint-disable no-unexpected-multiline */
+        this.props.scheme
+      ](MAX_COLOR_SCHEMES) // the max color scheme amount will be adjusted by TinyColor for different color schemes
+      /* eslint-disable max-len */
       .map(c => c.toHexString()) // Get the hex string of each color
       .reverse() // We have to display the colors from light to dark, so reverse the color schemes.
 

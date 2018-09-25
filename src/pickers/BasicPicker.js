@@ -23,7 +23,7 @@ import {
   COLOR_CONTAINER_HEIGHT,
   MAX_COLORS
 } from '../utils/constants'
-import { getThemeVariants } from '../utils/theme'
+import getThemeVariants from '../utils/theme'
 
 // Copied from primer/primer-tooltips/build
 import '../styles/tooltip.css'
