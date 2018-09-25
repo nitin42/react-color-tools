@@ -42,7 +42,7 @@ export default class SchemePicker extends React.Component {
     theme: PropTypes.oneOf(['light', 'dark']),
     scheme: PropTypes.oneOf([
       'monochromatic',
-      'splitcomponent',
+      'splitcomplement',
       'triad',
       'tetrad',
       'analogous'
