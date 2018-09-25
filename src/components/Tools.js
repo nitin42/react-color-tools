@@ -5,6 +5,9 @@ import styled from 'react-emotion'
 import Slider from './Slider'
 import { Consumer } from '../utils/context'
 
+// Copied from primer/primer-tooltips/build
+import '../styles/tooltip.css'
+
 const StyledIcon = styled('i')`
   display: inline-block;
   width: 20px;

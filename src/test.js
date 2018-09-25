@@ -19,13 +19,12 @@ class App extends React.Component {
       >
         <h1 style={{ color: this.state.color }}>React Color Tools</h1>
         <SchemePicker
-          theme="dark"
+          theme="light"
           scheme="analogous"
           color={this.state.color}
           onChange={color => this.setState({ color })}
         />
         <GradientPicker />
-        <BasicPicker />
       </div>
     )
   }

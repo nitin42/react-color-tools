@@ -26,9 +26,6 @@ import {
 } from '../utils/constants'
 import getThemeVariants from '../utils/theme'
 
-// Copied from primer/primer-tooltips/build
-import '../styles/tooltip.css'
-
 const StyledList = styled('ul')`
   display: grid;
   justify-content: center;
