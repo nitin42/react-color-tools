@@ -1,0 +1,7 @@
+public
+node_modules
+docs
+dist
+.cache
+media
+examples
