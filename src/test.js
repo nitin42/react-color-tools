@@ -66,7 +66,7 @@ class TestSchemePicker extends React.Component {
       >
         <h1 style={{ color: this.state.color }}>React Color Tools</h1>
         <SchemePicker
-          theme="dark"
+          theme="light"
           scheme="analogous"
           color={this.state.color}
           onChange={color => this.setState({ color })}
@@ -76,4 +76,4 @@ class TestSchemePicker extends React.Component {
   }
 }
 
-ReactDOM.render(<TestGradientPicker />, document.getElementById('root'))
+ReactDOM.render(<TestSchemePicker />, document.getElementById('root'))

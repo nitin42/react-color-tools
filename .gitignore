@@ -2,4 +2,6 @@
 dist
 node_modules
 public
-src/test.js
+examples
+media
+./src/test.js
