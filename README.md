@@ -2,7 +2,7 @@ WORK IN PROGRESS
 
 # react-color-tools
 
-> A set of tools for working with colors
+> A set of tools as React components for working with colors
 
 <p align="center">
   <img src="./media/demo.gif" />
@@ -30,11 +30,11 @@ WORK IN PROGRESS
 
 ## Introduction
 
-`react-color-tools` provides a set of tools for working with colors. These tools can be used to manipulate a color for example controlling the intensity or purity of color, extracting color palettes directly from an image, creating a gradient or choosing from variety of shades and tints.
+`react-color-tools` provides a set of tools as React components for working with colors. These tools can be used to manipulate a color for example controlling the intensity or purity of color, extracting swatches directly from an image, creating a gradient, choosing from variety of shades and tints or choosing a color scheme.
 
 ## Motivation
 
-`react-color-tools` is inspired from [`react-color`](https://github.com/casesandberg/react-color). I was using `react-color` for my projects and felt the need for more features like [image color extraction](https://react-color-extractor.surge.sh), generating shades and tints, creating gradients, and advance color tools for controlling the intensity and value of the color. So I decided to build `react-color-tools` with such features while keeping the API surface minimal.
+`react-color-tools` is inspired from [`react-color`](https://github.com/casesandberg/react-color). I was using `react-color` for my projects and felt the need for more features like [image color extraction](https://react-color-extractor.surge.sh), generating shades and tints, creating gradients, and advance color tools for controlling the intensity and value of the color. So I decided to build `react-color-tools` with these features while keeping the API surface minimal and easy to use.
 
 ## Features
 
@@ -48,7 +48,7 @@ WORK IN PROGRESS
 
 - API for color conversions
 
-- Color harmonies
+- Color scheme picker
 
 ## Theory
 
