@@ -26,6 +26,8 @@ input value for color two. Accepts values similar to `colorOne`.
 
 This is invoked on updating color input field and color stop positions. The callback function receives the css gradient string as its value and can be used to keep the state of parent component in sync.
 
+### Usage
+
 ```jsx
 import React from 'react'
 import { GradientPicker } from 'gradientPicker'
