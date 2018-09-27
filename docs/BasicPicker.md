@@ -4,7 +4,7 @@
     <img src="../media/basic_picker.gif" />
 </p>
 
-## `<BasicColorPicker />`
+## `<BasicPicker />`
 
 Basic color picker includes tools such as -
 
@@ -19,7 +19,7 @@ Basic color picker includes tools such as -
 
 ```jsx
 import React from 'react'
-import { BasicColorPicker } from 'react-color-tools'
+import { BasicPicker } from 'react-color-tools'
 
 class App extends React.Component {
   state = {
@@ -29,7 +29,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <BasicColorPicker
+        <BasicPicker
           color={this.state.color}
           onChange={color => this.setState({ color })}
         />
@@ -47,7 +47,7 @@ class App extends React.Component {
 color prop represents what color is currently active in the color picker. Use this prop to initialize the color picker with a particular color, or to keep it in sync with the state of a parent component. The default value is `#088da5`
 
 ```jsx
-<BasicColorPicker color={this.state.color} />
+<BasicPicker color={this.state.color} />
 ```
 
 `onChange: (color: string): void => {}`
@@ -56,7 +56,7 @@ This is invoked everytime when a color is updated in the color picker for exampl
 
 ```jsx
 <div>
-  <BasicColorPicker
+  <BasicPicker
     color={this.state.color}
     onChange={color => this.setState({ color })}
   />
@@ -69,7 +69,7 @@ This is invoked everytime when a color is updated in the color picker for exampl
 Initialize your own swatches in the color picker by passing an array of colors in either hex format or specifying the name of color.
 
 ```jsx
-<BasicColorPicker swatches={['red', 'mistyrose', 'hotpink']} />
+<BasicPicker swatches={['red', 'mistyrose', 'hotpink']} />
 ```
 
 `onSwatchHover: (color: string): void => {}`
@@ -143,7 +143,7 @@ For example - The default format for color when `onChange` is invoked is hex.
 ```jsx
 state = { color: 'red' }
 
-<BasicColorPicker color={this.state.color} onChange={color => {
+<BasicPicker color={this.state.color} onChange={color => {
   this.setState({ color });
   console.log(color); // #F00
 }}/>
@@ -154,7 +154,7 @@ state = { color: 'red' }
 To convert a color to rgb format, use the static method `toRGB(color)`
 
 ```
-BasicColorPicker.toRGB(color)
+BasicPicker.toRGB(color)
 ```
 
 Example -
@@ -168,11 +168,9 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <BasicColorPicker
+        <BasicPicker
           color={this.state.color}
-          onChange={color =>
-            this.setState({ color: BasicColorPicker.toRGB(color) })
-          }
+          onChange={color => this.setState({ color: BasicPicker.toRGB(color) })}
         />
         <h1 style={{ color: this.state.color }}>React Color Tools</h1>
       </div>
@@ -186,19 +184,19 @@ Similarly for other formats,
 **`toHSL`**
 
 ```
-BasicColorPicker.toHSL(color)
+BasicPicker.toHSL(color)
 ```
 
 **`toHSV`**
 
 ```
-BasicColorPicker.toHSV(color)
+BasicPicker.toHSV(color)
 ```
 
 **`toRGBPercent`**
 
 ```
-BasicColorPicker.toRGBPercent(color)
+BasicPicker.toRGBPercent(color)
 ```
 
 ### Image color extraction

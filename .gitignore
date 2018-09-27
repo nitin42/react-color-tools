@@ -2,6 +2,4 @@
 dist
 node_modules
 public
-examples
-media
 ./src/test.js

@@ -1,5 +1,3 @@
-WORK IN PROGRESS
-
 # react-color-tools
 
 > A set of tools as React components for working with colors
@@ -30,7 +28,7 @@ WORK IN PROGRESS
 
 ## Introduction
 
-`react-color-tools` provides a set of tools as React components for working with colors. These tools can be used to manipulate a color for example controlling the intensity or purity of color, extracting swatches directly from an image, creating a gradient, choosing from variety of shades and tints or choosing a color scheme.
+`react-color-tools` provides a set of tools as React components for working with colors. These tools can be used to manipulate a color for example controlling the intensity or purity of color, extracting swatches from an image, creating a gradienty defining color stop positions, choosing from variety of shades and tints or choosing a color scheme.
 
 ## Motivation
 
@@ -38,7 +36,7 @@ WORK IN PROGRESS
 
 ## Features
 
-- Image color extraction :
+- Image color extraction
 
 - Generate shades and tints
 
@@ -72,7 +70,7 @@ A little bit about different color terms and color harmonies that you will be us
 
 - **Desaturation** - Desaturation makes a color look more muted (hue approaches closer to gray).
 
-### Color Harmony
+### Color schemes
 
 - **Monochromatic** - This color scheme contains tints, shades and tones of a color.
 
@@ -103,7 +101,7 @@ yarn add react-color-tools
 ```js
 import React from 'react'
 import { render } from 'react-dom'
-import { BasicColorPicker } from 'react-color-tools'
+import { BasicPicker } from 'react-color-tools'
 
 class App extends React.Component {
   state = {
@@ -113,7 +111,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <BasicColorPicker
+        <BasicPicker
           color={this.state.color}
           onChange={color => this.setState({ color })}
         />
@@ -136,7 +134,7 @@ This will render -
 
 ## Contributing
 
-If you like to contribute to this project, then follow the below instructions to setup the project locally on your machine.
+If you'd like to contribute to this project, then follow the below instructions to setup the project locally on your machine.
 
 ```
 git clone https://github.com/<your_username_here>/react-color-tools

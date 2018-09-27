@@ -2,10 +2,28 @@
 
 This is the documentation for `react-color-tools`
 
-`react-color-tools` provides three pickers -
+## Table of contents
 
-- **Basic color picker** for color manipulation
-
-* **Gradient picker** for creating a gradient
-
-- **Color harmony picker** for selecting a color scheme
+- [Introduction](./README.md#introduction)
+- [Features](./README.md#features)
+- [Usage](./README.md#usage)
+- [Basic color picker](./BasicPicker.md)
+  - [Component API]()
+  - [Usage]()
+  - [Image color extraction]()
+  - [Generating shades and tints]()
+  - [Copying color from picker]()
+  - [Displaying previous swatches]()
+  - [Generating different swatches]()
+- [Gradient picker]()
+  - [Component API]()
+  - [Usage]()
+  - [Gradient picker tools]()
+- [Color scheme picker]()
+  - [Component API]()
+  - [Usage]()
+  - [Color schemes and color theory]()
+- [Color conversion APIs]()
+- [Examples]()
+- [Contributing]()
+- [License]()
