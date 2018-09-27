@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'react-emotion'
 
+import '@fortawesome/fontawesome-free/css/all.min.css'
+
 import Slider from './Slider'
 import { Consumer } from '../utils/context'
 

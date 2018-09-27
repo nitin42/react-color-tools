@@ -2,11 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { css } from 'emotion'
 
-import {
-  BasicPicker,
-  GradientPicker,
-  SchemePicker
-} from '../build/react-color-tools.es'
+import { BasicPicker, GradientPicker, SchemePicker } from './index'
 
 class TestBasicPicker extends React.Component {
   state = {

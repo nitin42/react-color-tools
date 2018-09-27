@@ -2,4 +2,5 @@
 dist
 node_modules
 public
+build
 ./src/test.js
