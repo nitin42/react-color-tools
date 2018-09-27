@@ -96,9 +96,10 @@ export default class SchemePicker extends React.Component {
 
     // All the color schemes should be unique
     const uniqueSchemes = new Set()
-
     newSchemes.forEach(scheme => uniqueSchemes.add(scheme))
-    this.setState({ swatches: [...uniqueSchemes] })
+
+    const swatches = Array.from(uniqueSchemes)
+    this.setState({ swatches })
   }
 
   // Click handler for a palette

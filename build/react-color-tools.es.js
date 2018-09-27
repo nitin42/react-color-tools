@@ -218,12 +218,6 @@ ColorInputField.defaultProps = {
   placeholder: ''
 }
 
-ColorInputField.propTypes = {
-  value: PropTypes.string,
-  onChange: PropTypes.func,
-  placeholder: PropTypes.string
-}
-
 // Copied from react-color/helpers/colors
 
 function toState(data, oldHue) {
@@ -336,13 +330,6 @@ ColorBlock.defaultProps = {
   colorState: {}
 }
 
-ColorBlock.propTypes = {
-  color: PropTypes.string.isRequired,
-  /* eslint-disable react/forbid-prop-types */
-  colorState: PropTypes.object,
-  currentFormat: PropTypes.string
-}
-
 var _templateObject$2 = taggedTemplateLiteralLoose(
   [
     '\n      width: ',
@@ -379,16 +366,6 @@ Container.defaultProps = {
   background: 'rgb(255, 255, 255)'
 }
 
-Container.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]).isRequired,
-  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  background: PropTypes.string
-}
-
 var Image = function Image(_ref) {
   var src = _ref.src,
     rest = objectWithoutProperties(_ref, ['src'])
@@ -396,10 +373,6 @@ var Image = function Image(_ref) {
     'img',
     _extends({ src: src, alt: '', style: { width: '228px' } }, rest)
   )
-}
-
-Image.propTypes = {
-  src: PropTypes.string.isRequired
 }
 
 var _templateObject$3 = taggedTemplateLiteralLoose(
@@ -436,13 +409,6 @@ Swatch.defaultProps = {
   updateSwatch: function updateSwatch() {},
   onSwatchHover: function onSwatchHover() {},
   updateSwatchOnKeyDown: function updateSwatchOnKeyDown() {}
-}
-
-Swatch.propTypes = {
-  color: PropTypes.string.isRequired,
-  updateSwatch: PropTypes.func,
-  onSwatchHover: PropTypes.func,
-  updateSwatchOnKeyDown: PropTypes.func
 }
 
 var _templateObject$4 = taggedTemplateLiteralLoose(
@@ -491,12 +457,6 @@ Swatches.defaultProps = {
   onSwatchHover: function onSwatchHover() {}
 }
 
-Swatches.propTypes = {
-  swatches: PropTypes.arrayOf(PropTypes.string).isRequired,
-  updateSwatch: PropTypes.func,
-  onSwatchHover: PropTypes.func
-}
-
 var _templateObject$5 = taggedTemplateLiteralLoose(
   [
     '\n      width: 0px;\n      height: 0px;\n      border-style: solid;\n      border-width: 0 10px 10px 10px;\n      border-color: transparent transparent ',
@@ -513,10 +473,6 @@ var Triangle = function Triangle(_ref) {
   return React.createElement('div', {
     className: css(_templateObject$5, color)
   })
-}
-
-Triangle.propTypes = {
-  color: PropTypes.string.isRequired
 }
 
 var _templateObject$6 = taggedTemplateLiteralLoose(
@@ -562,11 +518,6 @@ var ColorFormatPicker = function ColorFormatPicker(_ref) {
   )
 }
 
-ColorFormatPicker.propTypes = {
-  formats: PropTypes.arrayOf(PropTypes.string).isRequired,
-  changeFormat: PropTypes.func.isRequired
-}
-
 var _templateObject$7 = taggedTemplateLiteralLoose(
   [
     '\n      -webkit-appearance: none;\n      width: 140px;\n      height: 2px;\n      border-radius: 5px;\n      background: #dcdcdc;\n      outline: none;\n      opacity: 0.7;\n      -webkit-transition: 0.2s;\n      transition: opacity 0.2s;\n\n      ::-webkit-slider-thumb {\n        -webkit-appearance: none;\n        appearance: none;\n        width: 15px;\n        height: 15px;\n        border-radius: 50%;\n        cursor: pointer;\n        background: ',
@@ -610,14 +561,6 @@ var Slider = function Slider(_ref) {
 Slider.defaultProps = {
   value: 0,
   onChange: function onChange() {}
-}
-
-Slider.propTypes = {
-  min: PropTypes.string.isRequired,
-  max: PropTypes.string.isRequired,
-  value: PropTypes.number,
-  onChange: PropTypes.func,
-  color: PropTypes.string.isRequired
 }
 
 var _createContext = createContext(),
@@ -1640,17 +1583,6 @@ BasicPicker.defaultProps = {
   // Color tools are disabled by default
   showTools: false
 }
-BasicPicker.propTypes = {
-  color: PropTypes.string,
-  /* eslint-disable react/require-default-props */
-  onChange: PropTypes.func,
-  onSwatchHover: PropTypes.func,
-  swatches: PropTypes.arrayOf(PropTypes.string),
-  maxColors: PropTypes.number,
-  triangle: PropTypes.bool,
-  theme: PropTypes.oneOf(['light', 'dark']),
-  showTools: PropTypes.bool
-}
 
 var _templateObject$a = taggedTemplateLiteralLoose(
     [
@@ -1707,10 +1639,6 @@ var ColorBlock$1 = function ColorBlock(_ref) {
   })
 }
 
-ColorBlock$1.propTypes = {
-  gradient: PropTypes.string.isRequired
-}
-
 var ColorStop = function ColorStop(_ref2) {
   var inputColor = _ref2.color,
     onChangeColor = _ref2.onChangeColor,
@@ -1744,13 +1672,6 @@ var ColorStop = function ColorStop(_ref2) {
       )
     )
   })
-}
-
-ColorStop.propTypes = {
-  color: PropTypes.string.isRequired,
-  onChangeColor: PropTypes.func.isRequired,
-  value: PropTypes.number.isRequired,
-  onChangeStop: PropTypes.func.isRequired
 }
 
 var GradientPicker = (function(_React$Component) {
@@ -2038,16 +1959,6 @@ GradientPicker.defaultProps = {
   mode: 'linear',
   direction: 'to top'
 }
-GradientPicker.propTypes = {
-  colorOne: PropTypes.string,
-  colorTwo: PropTypes.string,
-  getGradient: PropTypes.func,
-  theme: PropTypes.oneOf(['light', 'dark']),
-  /* eslint-disable react/require-default-props */
-  mode: PropTypes.oneOf(['linear', 'radial']),
-  direction: PropTypes.string,
-  reverse: PropTypes.bool
-}
 
 var _templateObject$b = taggedTemplateLiteralLoose(
     [
@@ -2081,11 +1992,6 @@ var Swatch$1 = function Swatch(_ref) {
   })
 }
 
-Swatch$1.propTypes = {
-  color: PropTypes.string.isRequired,
-  updateSwatch: PropTypes.func.isRequired
-}
-
 var CompactSwatches = function CompactSwatches(_ref2) {
   var schemes = _ref2.schemes,
     updateSwatch = _ref2.updateSwatch
@@ -2102,11 +2008,6 @@ var CompactSwatches = function CompactSwatches(_ref2) {
       })
     })
   )
-}
-
-CompactSwatches.propTypes = {
-  schemes: PropTypes.arrayOf(PropTypes.string).isRequired,
-  updateSwatch: PropTypes.func.isRequired
 }
 
 var _templateObject$c = taggedTemplateLiteralLoose(
@@ -2165,11 +2066,12 @@ var SchemePicker = (function(_React$Component) {
 
         // All the color schemes should be unique
         var uniqueSchemes = new Set()
-
         newSchemes.forEach(function(scheme) {
           return uniqueSchemes.add(scheme)
         })
-        _this.setState({ swatches: [].concat(uniqueSchemes) })
+
+        var swatches = Array.from(uniqueSchemes)
+        _this.setState({ swatches: swatches })
       }),
       (_this.updateSwatch = function(color) {
         _this.setState({ color: color })
@@ -2295,19 +2197,6 @@ SchemePicker.defaultProps = {
   theme: 'light',
   // Default color scheme from which swatches are generated
   scheme: 'monochromatic'
-}
-SchemePicker.propTypes = {
-  color: PropTypes.string,
-  /* eslint-disable react/require-default-props */
-  onChange: PropTypes.func,
-  theme: PropTypes.oneOf(['light', 'dark']),
-  scheme: PropTypes.oneOf([
-    'monochromatic',
-    'splitcomplement',
-    'triad',
-    'tetrad',
-    'analogous'
-  ])
 }
 
 export { BasicPicker, GradientPicker, SchemePicker, utils }

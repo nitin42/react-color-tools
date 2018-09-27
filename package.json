@@ -24,6 +24,7 @@
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.18",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "eslint": "^4.19.1",
@@ -59,7 +60,7 @@
     "start": "parcel ./public/index.html -p 4567",
     "formatall": "find src -name '*.js' | xargs prettier --write --no-semi --single-quote",
     "lint": "eslint ./src",
-    "build": "rollup -c",
+    "build": "NODE_ENV=production rollup -c",
     "validate": "yarn formatall && yarn lint",
     "reset": "rm -rf dist && rm -rf .cache"
   },
