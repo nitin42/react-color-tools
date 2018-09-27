@@ -45,15 +45,6 @@ const ToolsContainer = styled('div')`
 `
 
 export default class BasicPicker extends React.PureComponent {
-  // Color conversion helpers
-  static toRGB = color => new TinyColor(color).toRgbString()
-
-  static toHSL = color => new TinyColor(color).toHslString()
-
-  static toHSV = color => new TinyColor(color).toHsvString()
-
-  static toRGBPercent = color => new TinyColor(color).toPercentageRgbString()
-
   // Image upload icon
   imageIcon = null
 

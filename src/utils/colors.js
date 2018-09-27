@@ -52,3 +52,11 @@ export const randomColors = () => {
 
   return newColors
 }
+
+// Color conversion helpers
+export const utils = {
+  toRGB: color => new TinyColor(color).toRgbString(),
+  toHSL: color => new TinyColor(color).toHslString(),
+  toHSV: color => new TinyColor(color).toHsvString(),
+  toRGBPercent: color => new TinyColor(color).toPercentageRgbString()
+}
