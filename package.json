@@ -21,24 +21,29 @@
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-eslint": "^9.0.0",
+    "babel-jest": "^23.6.0",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.18",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
+    "enzyme": "^3.6.0",
+    "enzyme-adapter-react-16": "^1.5.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.0",
     "husky": "^1.0.0-rc.13",
+    "jest": "^23.6.0",
     "lint-staged": "^7.2.2",
     "node-sass": "^4.9.3",
     "parcel-bundler": "^1.9.7",
     "prettier": "^1.14.2",
     "react": "^16.5.2",
     "react-dom": "^16.4.2",
+    "react-test-renderer": "^16.5.2",
     "rollup": "^0.65.0",
     "rollup-plugin-babel": "^3.0.7",
     "rollup-plugin-filesize": "^4.0.1",
@@ -67,6 +72,16 @@
     "lint": "eslint ./src",
     "build": "NODE_ENV=production rollup -c",
     "validate": "npm run formatall && npm run lint",
-    "reset": "rm -rf dist && rm -rf .cache"
+    "reset": "rm -rf dist && rm -rf .cache",
+    "test:watch": "NODE_ENV=test ./node_modules/.bin/jest --watch"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "./test.js"
+    ],
+    "moduleNameMapper": {
+      "\\.(css|less)$": "<rootDir>/tests/styleMock.js"
+    },
+    "setupTestFrameworkScriptFile": "<rootDir>/test-setup.js"
   }
 }

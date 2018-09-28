@@ -154,13 +154,17 @@ export default class GradientPicker extends React.Component {
 
     this.clipboardIcon = document.getElementById('gradient-clipboard')
 
-    this.clipboardIcon.addEventListener('mouseleave', this.hideMsg)
-    this.clipboardIcon.addEventListener('blur', this.hideMsg)
+    this.clipboardIcon &&
+      this.clipboardIcon.addEventListener('mouseleave', this.hideMsg)
+    this.clipboardIcon &&
+      this.clipboardIcon.addEventListener('blur', this.hideMsg)
   }
 
   componentWillUnmount() {
-    this.clipboardIcon.removeEventListener('mouseleave', this.hideMsg)
-    this.clipboardIcon.removeEventListener('blur', this.hideMsg)
+    this.clipboardIcon &&
+      this.clipboardIcon.removeEventListener('mouseleave', this.hideMsg)
+    this.clipboardIcon &&
+      this.clipboardIcon.removeEventListener('blur', this.hideMsg)
   }
 
   hideMsg = () => this.setState({ showMsg: false })
@@ -213,7 +217,7 @@ export default class GradientPicker extends React.Component {
   updateColorStop = (e, color) => {
     const value = parseInt(e.target.value)
     // color stop position value should be between 0 and 1
-    const pos = this.state[color] / 10
+    const pos = value / 10
 
     // Create the gradient depending on the color stop value and color state
     if (color === 'colorStopOne') {

@@ -54,8 +54,10 @@ export default class SchemePicker extends React.Component {
 
     this.clipboardIcon = document.getElementById('scheme-picker-clipboard')
 
-    this.clipboardIcon.addEventListener('mouseleave', this.hideMsg)
-    this.clipboardIcon.addEventListener('blur', this.hideMsg)
+    this.clipboardIcon &&
+      this.clipboardIcon.addEventListener('mouseleave', this.hideMsg)
+    this.clipboardIcon &&
+      this.clipboardIcon.addEventListener('blur', this.hideMsg)
   }
 
   componentDidUpdate(prevProps) {
@@ -77,8 +79,10 @@ export default class SchemePicker extends React.Component {
   }
 
   componentWillUnmount() {
-    this.clipboardIcon.removeEventListener('mouseleave', this.hideMsg)
-    this.clipboardIcon.removeEventListener('blur', this.hideMsg)
+    this.clipboardIcon &&
+      this.clipboardIcon.removeEventListener('mouseleave', this.hideMsg)
+    this.clipboardIcon &&
+      this.clipboardIcon.removeEventListener('blur', this.hideMsg)
   }
 
   hideMsg = () => this.setState({ showMsg: false })

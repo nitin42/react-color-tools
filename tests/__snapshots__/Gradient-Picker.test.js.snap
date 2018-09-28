@@ -1,0 +1,289 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test GradientPicker API should render the gradient picker 1`] = `
+<div
+  className="css-dkpzwh"
+>
+  <div
+    className="css-3ef40x"
+    style={
+      Object {
+        "backgroundImage": "linear-gradient(to right, rgb(129, 255, 239) 0%, rgb(240, 103, 180) 100%)",
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "padding": 10,
+      }
+    }
+  >
+    <div>
+      <input
+        className="css-sskoaq"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        placeholder=""
+        spellCheck="false"
+        value="#81FFEF"
+      />
+      <span>
+        <label
+          className="label css-nj1yzf"
+          color="#1f1f1f"
+        >
+          Stops
+        </label>
+        <input
+          className="css-1705gpz"
+          max="10"
+          min="0"
+          onChange={[Function]}
+          step="0.01"
+          style={
+            Object {
+              "marginBottom": 10,
+              "marginTop": 10,
+            }
+          }
+          type="range"
+          value={0}
+        />
+      </span>
+    </div>
+    <div>
+      <input
+        className="css-sskoaq"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        placeholder=""
+        spellCheck="false"
+        value="#F067B4"
+      />
+      <span>
+        <label
+          className="label css-nj1yzf"
+          color="#1f1f1f"
+        >
+          Stops
+        </label>
+        <input
+          className="css-1705gpz"
+          max="10"
+          min="0"
+          onChange={[Function]}
+          step="0.01"
+          style={
+            Object {
+              "marginBottom": 10,
+              "marginTop": 10,
+            }
+          }
+          type="range"
+          value={0}
+        />
+      </span>
+    </div>
+    <div
+      className="css-upj78"
+    >
+      <span
+        aria-label="Copied"
+        className="no-tooltip css-1v5ga19"
+        id="gradient-clipboard"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        tabIndex={0}
+      >
+        <svg
+          className="css-1h5x3dy"
+          height={18}
+          viewBox="0 0 20 20"
+          width={19}
+        >
+          <title />
+          <path
+            d="M15.6 2l-1.2 3h-8.8l-1.2-3c-0.771 0-1.4 0.629-1.4 1.4v15.2c0 0.77 0.629 1.4 1.399 1.4h11.2c0.77 0 1.4-0.631 1.4-1.4v-15.2c0.001-0.771-0.63-1.4-1.399-1.4zM13.6 4l0.9-2h-2.181l-0.719-2h-3.2l-0.72 2h-2.18l0.899 2h7.201z"
+            fill="#1f1f1f"
+          />
+        </svg>
+      </span>
+      <div
+        style={
+          Object {
+            "marginLeft": 10,
+          }
+        }
+      >
+        <span
+          className="css-1v5ga19"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          tabIndex={0}
+          title="Gradient generator"
+        >
+          <svg
+            className="css-1h5x3dy"
+            height={20}
+            viewBox="0 0 32 32"
+            width={17.5}
+          >
+            <title />
+            <path
+              d="M32 12h-12l4.485-4.485c-2.267-2.266-5.28-3.515-8.485-3.515s-6.219 1.248-8.485 3.515c-2.266 2.267-3.515 5.28-3.515 8.485s1.248 6.219 3.515 8.485c2.267 2.266 5.28 3.515 8.485 3.515s6.219-1.248 8.485-3.515c0.189-0.189 0.371-0.384 0.546-0.583l3.010 2.634c-2.933 3.349-7.239 5.464-12.041 5.464-8.837 0-16-7.163-16-16s7.163-16 16-16c4.418 0 8.418 1.791 11.313 4.687l4.687-4.687v12z"
+              fill="#1f1f1f"
+            />
+          </svg>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Test GradientPicker API should render the gradient picker with dark theme 1`] = `
+<div
+  className="css-1v1bp1x"
+>
+  <div
+    className="css-3ef40x"
+    style={
+      Object {
+        "backgroundImage": "linear-gradient(to right, rgb(129, 255, 239) 0%, rgb(240, 103, 180) 100%)",
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "padding": 10,
+      }
+    }
+  >
+    <div>
+      <input
+        className="css-sskoaq"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        placeholder=""
+        spellCheck="false"
+        value="#81FFEF"
+      />
+      <span>
+        <label
+          className="label css-njkhub"
+          color="rgb(255, 255, 255)"
+        >
+          Stops
+        </label>
+        <input
+          className="css-1lpha99"
+          max="10"
+          min="0"
+          onChange={[Function]}
+          step="0.01"
+          style={
+            Object {
+              "marginBottom": 10,
+              "marginTop": 10,
+            }
+          }
+          type="range"
+          value={0}
+        />
+      </span>
+    </div>
+    <div>
+      <input
+        className="css-sskoaq"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        placeholder=""
+        spellCheck="false"
+        value="#F067B4"
+      />
+      <span>
+        <label
+          className="label css-njkhub"
+          color="rgb(255, 255, 255)"
+        >
+          Stops
+        </label>
+        <input
+          className="css-1lpha99"
+          max="10"
+          min="0"
+          onChange={[Function]}
+          step="0.01"
+          style={
+            Object {
+              "marginBottom": 10,
+              "marginTop": 10,
+            }
+          }
+          type="range"
+          value={0}
+        />
+      </span>
+    </div>
+    <div
+      className="css-upj78"
+    >
+      <span
+        aria-label="Copied"
+        className="no-tooltip css-1v5ga19"
+        id="gradient-clipboard"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        tabIndex={0}
+      >
+        <svg
+          className="css-1h5x3dy"
+          height={18}
+          viewBox="0 0 20 20"
+          width={19}
+        >
+          <title />
+          <path
+            d="M15.6 2l-1.2 3h-8.8l-1.2-3c-0.771 0-1.4 0.629-1.4 1.4v15.2c0 0.77 0.629 1.4 1.399 1.4h11.2c0.77 0 1.4-0.631 1.4-1.4v-15.2c0.001-0.771-0.63-1.4-1.399-1.4zM13.6 4l0.9-2h-2.181l-0.719-2h-3.2l-0.72 2h-2.18l0.899 2h7.201z"
+            fill="rgb(255, 255, 255)"
+          />
+        </svg>
+      </span>
+      <div
+        style={
+          Object {
+            "marginLeft": 10,
+          }
+        }
+      >
+        <span
+          className="css-1v5ga19"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          tabIndex={0}
+          title="Gradient generator"
+        >
+          <svg
+            className="css-1h5x3dy"
+            height={20}
+            viewBox="0 0 32 32"
+            width={17.5}
+          >
+            <title />
+            <path
+              d="M32 12h-12l4.485-4.485c-2.267-2.266-5.28-3.515-8.485-3.515s-6.219 1.248-8.485 3.515c-2.266 2.267-3.515 5.28-3.515 8.485s1.248 6.219 3.515 8.485c2.267 2.266 5.28 3.515 8.485 3.515s6.219-1.248 8.485-3.515c0.189-0.189 0.371-0.384 0.546-0.583l3.010 2.634c-2.933 3.349-7.239 5.464-12.041 5.464-8.837 0-16-7.163-16-16s7.163-16 16-16c4.418 0 8.418 1.791 11.313 4.687l4.687-4.687v12z"
+              fill="rgb(255, 255, 255)"
+            />
+          </svg>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;
