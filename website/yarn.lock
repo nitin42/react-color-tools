@@ -77,10 +77,6 @@
   version "0.8.2"
   resolved "https://registry.npmjs.org/@emotion/utils/-/utils-0.8.2.tgz#576ff7fb1230185b619a75d258cbc98f0867a8dc"
 
-"@fortawesome/fontawesome-free@^5.3.1":
-  version "5.3.1"
-  resolved "https://registry.npmjs.org/@fortawesome/fontawesome-free/-/fontawesome-free-5.3.1.tgz#5466b8f31c1f493a96754c1426c25796d0633dd9"
-
 "@jimp/bmp@^0.5.3":
   version "0.5.3"
   resolved "https://registry.npmjs.org/@jimp/bmp/-/bmp-0.5.3.tgz#7f1a854dc47666072bbea285d61ff38941c2e38a"
@@ -6075,12 +6071,11 @@ react-color-extractor@^1.1.2:
   dependencies:
     node-vibrant "^3.0.0"
 
-react-color-tools@1.0.0-beta.2:
-  version "1.0.0-beta.2"
-  resolved "https://registry.npmjs.org/react-color-tools/-/react-color-tools-1.0.0-beta.2.tgz#1b14b622cdf855956f45d6f54030e6085ce8d527"
+react-color-tools@1.0.0-beta.3:
+  version "1.0.0-beta.3"
+  resolved "https://registry.npmjs.org/react-color-tools/-/react-color-tools-1.0.0-beta.3.tgz#22d67c27073c0cd2d6a6423f7158272e5d2abb38"
   dependencies:
     "@ctrl/tinycolor" "^2.2.0"
-    "@fortawesome/fontawesome-free" "^5.3.1"
     clipboard-polyfill "^2.5.4"
     emotion "^9.2.8"
     prop-types "^15.6.2"

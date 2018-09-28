@@ -19,9 +19,10 @@ export const createStyledSVG = ({
   viewBox,
   color,
   title,
-  d
+  d,
+  ...rest
 }) => (
-  <StyledSVG width={width} height={height} viewBox={viewBox}>
+  <StyledSVG width={width} height={height} viewBox={viewBox} {...rest}>
     <title>{title}</title>
     <path fill={color} d={d} />
   </StyledSVG>

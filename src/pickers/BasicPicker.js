@@ -293,9 +293,11 @@ export default class BasicPicker extends React.PureComponent {
       i += 1
     }
 
+    const swatches = Array.from(newColors)
+
     // Hide shades and tints when new swatches are added
     this.setState({
-      swatches: [...newColors],
+      swatches: [...swatches],
       showShades: false,
       showTints: false,
       tints: [],
