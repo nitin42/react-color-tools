@@ -62,10 +62,11 @@
   },
   "scripts": {
     "start": "parcel ./public/index.html -p 4567",
+    "build:watch": "rollup -c -w",
     "formatall": "find src -name '*.js' | xargs prettier --write --no-semi --single-quote",
     "lint": "eslint ./src",
     "build": "NODE_ENV=production rollup -c",
-    "validate": "yarn formatall && yarn lint",
+    "validate": "npm run formatall && npm run lint",
     "reset": "rm -rf dist && rm -rf .cache"
   },
   "jest": {
