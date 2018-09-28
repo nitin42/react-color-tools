@@ -7,7 +7,7 @@ const Container = ({ children, width, background, height }) => (
   <div
     className={css`
       width: ${width};
-      height: ${height};
+      height: auto;
       background: ${background};
       box-shadow: rgba(0, 0, 0, 0.1) 0px 1px;
       border-radius: 6px;

@@ -40,8 +40,7 @@ const createConfig = ({ output, min = false, env } = {}) => ({
   ),
   external: makeExternalPredicate([
     ...Object.keys(pkg.dependencies || {}),
-    ...Object.keys(pkg.peerDependencies || {}),
-    'react'
+    ...Object.keys(pkg.peerDependencies || {})
   ]),
   plugins: [
     postcss(),

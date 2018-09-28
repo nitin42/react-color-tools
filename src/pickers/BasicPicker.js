@@ -404,11 +404,7 @@ export default class BasicPicker extends React.PureComponent {
     const { bg, iconColor } = getThemeVariants(this.props.theme)
 
     return (
-      <Container
-        background={bg}
-        width={COLOR_CONTAINER_WIDTH}
-        height={COLOR_CONTAINER_HEIGHT}
-      >
+      <Container background={bg} width={COLOR_CONTAINER_WIDTH}>
         {/* eslint-disable operator-linebreak */}
         {/* eslint-disable indent */}
         {this.props.triangle &&

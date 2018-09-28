@@ -2,10 +2,22 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'react-emotion'
 
-import '@fortawesome/fontawesome-free/css/all.min.css'
-
 import Slider from './Slider'
 import { Consumer } from '../utils/context'
+import {
+  SaturatorIcon,
+  DesaturatorIcon,
+  ColorSpinIcon,
+  ColorDarkenerIcon,
+  ColorBrightenerIcon,
+  ImagePickerIcon,
+  SwatchesGeneratorIcon,
+  ShadesGeneratorIcon,
+  ResetIcon,
+  TintsGeneratorIcon,
+  ClipboardIcon,
+  GenerateGradientIcon
+} from '../icons'
 
 // Copied from primer/primer-tooltips/build
 import '../styles/tooltip.css'
@@ -49,7 +61,7 @@ const HOC = Comp => props => (
 
 const ColorSaturator = HOC(({ color, value, onChange }) => (
   <StyledSpan title="color saturator">
-    <StyledIcon className="fas fa-star-half-alt" color={color} />
+    <SaturatorIcon width={20} height={20} color={color} />
     <Slider
       min="10"
       max="100"
@@ -63,7 +75,7 @@ const ColorSaturator = HOC(({ color, value, onChange }) => (
 
 const ColorDesaturator = HOC(({ color, value, onChange }) => (
   <StyledSpan title="color desaturator">
-    <StyledIcon className="fas fa-fill" color={color} />
+    <DesaturatorIcon width={20} height={20} color={color} />
     <Slider
       min="10"
       max="100"
@@ -77,7 +89,7 @@ const ColorDesaturator = HOC(({ color, value, onChange }) => (
 
 const ColorBrightener = HOC(({ color, value, onChange }) => (
   <StyledSpan title="color brightener">
-    <StyledIcon className="fas fa-sun" color={color} />
+    <ColorBrightenerIcon width={20} height={20} color={color} />
     <Slider
       min="10"
       max="100"
@@ -91,7 +103,7 @@ const ColorBrightener = HOC(({ color, value, onChange }) => (
 
 const ColorDarkener = HOC(({ color, value, onChange }) => (
   <StyledSpan title="color darkener">
-    <StyledIcon className="fas fa-moon" color={color} />
+    <ColorDarkenerIcon width={16} height={16} color={color} />
     <Slider
       min="10"
       max="100"
@@ -105,7 +117,7 @@ const ColorDarkener = HOC(({ color, value, onChange }) => (
 
 const ColorSpinner = HOC(({ color, onChange, value }) => (
   <StyledSpan title="color spin">
-    <StyledIcon className="fas fa-sync-alt" color={color} />
+    <ColorSpinIcon width={18} height={18} color={color} />
     <Slider
       min="-360"
       max="360"
@@ -129,7 +141,7 @@ const ImagePicker = HOC(({ color, uploadImage }) => (
       accept="image/*"
       onChange={uploadImage}
     />
-    <ToolsIcon id="image-icon" className="fas fa-image" color={color} />
+    <ImagePickerIcon id="image-icon" height={20} width={20} color={color} />
   </StyledSpan>
 ))
 
@@ -145,7 +157,7 @@ const PaletteGenerator = HOC(({ color, generateSwatches }) => (
     onClick={generateSwatches}
     onKeyDown={e => (e.keyCode === ENTER_KEY ? generateSwatches(e) : null)}
   >
-    <ToolsIcon className="fas fa-palette" color={color} />
+    <SwatchesGeneratorIcon width={21} height={21} color={color} />
   </StyledSpan>
 ))
 
@@ -161,7 +173,7 @@ const ShadesGenerator = HOC(({ color, generateShades }) => (
     onClick={generateShades}
     onKeyDown={e => (e.keyCode === ENTER_KEY ? generateShades(e) : null)}
   >
-    <ToolsIcon className="fas fa-adjust" color={color} />
+    <ShadesGeneratorIcon height={20} width={20} color={color} />
   </StyledSpan>
 ))
 
@@ -177,7 +189,7 @@ const Reset = HOC(({ color, resetColors }) => (
     onClick={resetColors}
     onKeyDown={e => (e.keyCode === ENTER_KEY ? resetColors(e) : null)}
   >
-    <ToolsIcon className="fas fa-arrow-alt-circle-left" color={color} />
+    <ResetIcon height={18} width={18} color={color} />
   </StyledSpan>
 ))
 
@@ -193,7 +205,7 @@ const TintsGenerator = HOC(({ color, generateTints }) => (
     onClick={generateTints}
     onKeyDown={e => (e.keyCode === ENTER_KEY ? generateTints(e) : null)}
   >
-    <ToolsIcon className="fas fa-tint" color={color} />
+    <TintsGeneratorIcon height={21} width={21} color={color} />
   </StyledSpan>
 ))
 
@@ -211,7 +223,7 @@ const Clipboard = HOC(({ color, copyColor, showMsg, id = 'clipboard' }) => (
     className={showMsg ? TOOLTIP_CLASSNAME : 'no-tooltip'}
     aria-label="Copied"
   >
-    <ToolsIcon className="fas fa-copy" color={color} />
+    <ClipboardIcon height={19} width={19} color={color} />
   </StyledSpan>
 ))
 
@@ -229,7 +241,7 @@ const GradientGenerator = HOC(({ color, generateGradient }) => (
     title="Gradient generator"
     onKeyDown={e => (e.keyCode === ENTER_KEY ? generateGradient(e) : null)}
   >
-    <ToolsIcon className="fas fa-redo-alt" color={color} />
+    <GenerateGradientIcon height={20} width={17.5} color={color} />
   </StyledSpan>
 ))
 
