@@ -33,8 +33,7 @@ const createConfig = ({ output, min = false, env } = {}) => ({
         tinygradient: 'gradient',
         'values.js': 'Values',
         emotion: 'emotion',
-        'react-emotion': 'styled',
-        '@fortawesome/fontawesome-free': '@fortawesome/fontawesome-free'
+        'react-emotion': 'styled'
       }
     })
   ),

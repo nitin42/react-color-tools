@@ -17,27 +17,13 @@ import {
   TintsGeneratorIcon,
   ClipboardIcon,
   GenerateGradientIcon
-} from '../icons'
+} from '../icons/index.js'
 
 // Copied from primer/primer-tooltips/build
 import '../styles/tooltip.css'
 
-const StyledIcon = styled('i')`
-  display: inline-block;
-  width: 20px;
-  position: relative;
-  top: 5px;
-  left: -5px;
-  color: ${props => props.color};
-`
-
 const StyledSpan = styled('span')`
   outline: none;
-`
-
-const ToolsIcon = styled('i')`
-  cursor: pointer;
-  color: ${props => props.color};
 `
 
 const StyledLabel = styled('label')`

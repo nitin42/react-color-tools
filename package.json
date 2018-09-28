@@ -9,7 +9,6 @@
   "license": "MIT",
   "dependencies": {
     "@ctrl/tinycolor": "^2.2.0",
-    "@fortawesome/fontawesome-free": "^5.3.1",
     "clipboard-polyfill": "^2.5.4",
     "emotion": "^9.2.8",
     "prop-types": "^15.6.2",
@@ -38,7 +37,7 @@
     "node-sass": "^4.9.3",
     "parcel-bundler": "^1.9.7",
     "prettier": "^1.14.2",
-    "react": "^16.4.2",
+    "react": "^16.5.2",
     "react-dom": "^16.4.2",
     "rollup": "^0.65.0",
     "rollup-plugin-babel": "^3.0.7",
