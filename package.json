@@ -1,7 +1,7 @@
 {
   "name": "react-color-tools",
   "version": "1.0.0-beta.3",
-  "description": "A collection of tools for manipulating colors",
+  "description": "A set of tools as React components for working with colors",
   "main": "build/react-color-tools.js",
   "module": "build/react-color-tools.es.js",
   "unpkg": "build/react-color-tools.min.js",
@@ -68,8 +68,5 @@
     "build": "NODE_ENV=production rollup -c",
     "validate": "npm run formatall && npm run lint",
     "reset": "rm -rf dist && rm -rf .cache"
-  },
-  "jest": {
-    "testEnvironment": "node"
   }
 }

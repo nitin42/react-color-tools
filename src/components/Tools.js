@@ -175,7 +175,7 @@ const Reset = HOC(({ color, resetColors }) => (
     onClick={resetColors}
     onKeyDown={e => (e.keyCode === ENTER_KEY ? resetColors(e) : null)}
   >
-    <ResetIcon height={18} width={18} color={color} />
+    <ResetIcon height={18} width={17.5} color={color} />
   </StyledSpan>
 ))
 
@@ -209,7 +209,7 @@ const Clipboard = HOC(({ color, copyColor, showMsg, id = 'clipboard' }) => (
     className={showMsg ? TOOLTIP_CLASSNAME : 'no-tooltip'}
     aria-label="Copied"
   >
-    <ClipboardIcon height={19} width={19} color={color} />
+    <ClipboardIcon height={18} width={19} color={color} />
   </StyledSpan>
 ))
 
