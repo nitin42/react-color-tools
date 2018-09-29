@@ -71,7 +71,7 @@ describe('Test BasicPicker API', () => {
     expect(tree).toMatchSnapshot()
   })
 
-  it('should render the gradient picker with dark theme', () => {
+  it('should render the basic picker with dark theme', () => {
     const tree = renderer.create(<BasicPicker theme="dark" />).toJSON()
     expect(tree).toMatchSnapshot()
   })
@@ -137,6 +137,7 @@ describe('Test BasicPicker API', () => {
     expect(Wrapper.state('swatches')).toEqual(DEFAULT_SWATCHES)
     Wrapper.find('SwatchesGenerator').simulate('click')
 
+    // Swatches are generated randomly, so we cannot assume it to be equal to a constant value
     expect(Wrapper.state('swatches')).not.toEqual(DEFAULT_SWATCHES)
   })
 
@@ -184,7 +185,7 @@ describe('Test BasicPicker API', () => {
     expect(Wrapper.state('color')).toEqual('#b4ff69')
   })
 
-  it('should apply spin operation to a color', () => {
+  it('should apply saturation operation to a color', () => {
     const Wrapper = mount(<App showTools={true} />)
 
     expect(Wrapper.state('color')).toEqual('hotpink')
@@ -196,7 +197,7 @@ describe('Test BasicPicker API', () => {
     expect(Wrapper.state('color')).toEqual('#ff69b4')
   })
 
-  it('should apply spin operation to a color', () => {
+  it('should apply desaturation operation to a color', () => {
     const Wrapper = mount(<App showTools={true} />)
 
     expect(Wrapper.state('color')).toEqual('hotpink')
@@ -208,7 +209,7 @@ describe('Test BasicPicker API', () => {
     expect(Wrapper.state('color')).toEqual('#c3a5b4')
   })
 
-  it('should apply spin operation to a color', () => {
+  it('should apply dark operation to a color', () => {
     const Wrapper = mount(<App showTools={true} />)
 
     expect(Wrapper.state('color')).toEqual('hotpink')
@@ -220,7 +221,7 @@ describe('Test BasicPicker API', () => {
     expect(Wrapper.state('color')).toEqual('#9c004e')
   })
 
-  it('should apply spin operation to a color', () => {
+  it('should apply bright operation to a color', () => {
     const Wrapper = mount(<App showTools={true} />)
 
     expect(Wrapper.state('color')).toEqual('hotpink')
