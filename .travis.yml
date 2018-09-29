@@ -7,3 +7,5 @@ script:
   - yarn lint
   - yarn test
   - yarn build
+cache: yarn
+
