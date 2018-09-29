@@ -20,6 +20,8 @@
 
 - [Usage](#usage)
 
+- [Examples](#examples)
+
 - [Documentation](#documentation)
 
 - [Contributing](#contributing)
@@ -127,6 +129,22 @@ This will render -
 <p align="center">
   <img src="./media/basic_picker.gif" />
 </p>
+
+## Examples
+
+#### Basic Picker
+
+[![Edit jj7jpl5xvv](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/jj7jpl5xvv)
+
+#### Gradient Picker
+
+[![Edit wqln38j8wk](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/wqln38j8wk)
+
+#### Scheme Picker
+
+[![Edit 935ppx461o](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/935ppx461o)
+
+or checkout [`examples`](./examples) folder
 
 ## Documentation
 
