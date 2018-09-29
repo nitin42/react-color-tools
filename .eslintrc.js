@@ -22,7 +22,9 @@ module.exports = {
     'react/no-did-update-set-state': 0,
     radix: 0,
     'no-nested-ternary': 0,
-    'operator-linebreak': 0
+    'operator-linebreak': 0,
+    'no-unexpected-multiline': 0,
+    'function-paren-newline': 0
   },
   parser: 'babel-eslint'
 }
