@@ -150,15 +150,19 @@ Run eslint using `yarn lint`
 
 ### Building the source code
 
-Run `yarn build` to build the source code.
+Run `yarn build` to build the source code. To use the watch mode, run the cmd `yarn build:watch`
 
 ### Formatting with Prettier
 
 Run `yarn formatall` to format the source code.
 
-### Reset the cache and dev builds
+### Storybook
 
-Run `yarn reset` to reset the cache and delete the dev builds.
+Run `yarn storybook` to start the storybook development environment.
+
+### Test
+
+Run `yarn test` to test the pickers.
 
 ## License
 
