@@ -1,5 +1,7 @@
 # react-color-tools
 
+[![Build Status](https://travis-ci.org/nitin42/react-color-tools.svg?branch=master)](https://travis-ci.org/nitin42/react-color-tools)
+
 > A set of tools as React components for working with colors
 
 <p align="center">
