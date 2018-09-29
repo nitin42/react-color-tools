@@ -39,7 +39,6 @@
     "jest": "^23.6.0",
     "lint-staged": "^7.2.2",
     "node-sass": "^4.9.3",
-    "parcel-bundler": "^1.9.7",
     "prettier": "^1.14.2",
     "react": "^16.5.2",
     "react-dom": "^16.4.2",
@@ -69,14 +68,13 @@
     ]
   },
   "scripts": {
-    "start": "parcel ./public/index.html -p 4567",
     "build:watch": "rollup -c -w",
     "formatall": "find src -name '*.js' | xargs prettier --write --no-semi --single-quote",
     "lint": "eslint ./src",
     "build": "NODE_ENV=production rollup -c",
-    "validate": "npm run formatall && npm run lint",
-    "reset": "rm -rf dist && rm -rf .cache",
+    "validate": "yarn formatall && yarn lint && yarn test",
     "test:watch": "NODE_ENV=test ./node_modules/.bin/jest --watch",
+    "test": "./node_modules/.bin/jest",
     "storybook": "NODE_ENV=test start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
