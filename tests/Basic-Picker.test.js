@@ -96,8 +96,6 @@ describe('Test BasicPicker API', () => {
   it('should update the color state when a swatch is clicked', () => {
     const Wrapper = mount(<App />)
 
-    expect(Wrapper.state('color')).toEqual('hotpink')
-
     Wrapper.find('Swatch').forEach((node, i) => {
       if (i === 3) {
         node.simulate('click')
@@ -109,7 +107,6 @@ describe('Test BasicPicker API', () => {
 
   it('should update the color state on hovering over a swatch', () => {
     const Wrapper = mount(<App />)
-    expect(Wrapper.state('color')).toEqual('hotpink')
 
     Wrapper.find('Swatch').forEach((node, i) => {
       if (i === 8) {
@@ -122,7 +119,6 @@ describe('Test BasicPicker API', () => {
 
   it('should update the color when color input changes', () => {
     const Wrapper = mount(<App />)
-    expect(Wrapper.state('color')).toEqual('hotpink')
 
     Wrapper.find('ColorInputField').simulate('change', {
       target: { value: 'mistyrose' }
@@ -134,7 +130,6 @@ describe('Test BasicPicker API', () => {
   it('should update the swatches when new swatches are generated', () => {
     const Wrapper = mount(<BasicPicker />)
 
-    expect(Wrapper.state('swatches')).toEqual(DEFAULT_SWATCHES)
     Wrapper.find('SwatchesGenerator').simulate('click')
 
     // Swatches are generated randomly, so we cannot assume it to be equal to a constant value
@@ -144,8 +139,6 @@ describe('Test BasicPicker API', () => {
   it('should generate tints of a color', () => {
     const Wrapper = mount(<BasicPicker color="hotpink" />)
 
-    expect(Wrapper.state('tints')).toEqual([])
-
     Wrapper.find('TintsGenerator').simulate('click')
 
     expect(Wrapper.state('tints')).toEqual(PINK_TINTS)
@@ -153,8 +146,6 @@ describe('Test BasicPicker API', () => {
 
   it('should generate shades of a color', () => {
     const Wrapper = mount(<BasicPicker color="hotpink" />)
-
-    expect(Wrapper.state('shades')).toEqual([])
 
     Wrapper.find('ShadesGenerator').simulate('click')
 
@@ -176,8 +167,6 @@ describe('Test BasicPicker API', () => {
   it('should apply spin operation to a color', () => {
     const Wrapper = mount(<App showTools={true} />)
 
-    expect(Wrapper.state('color')).toEqual('hotpink')
-
     Wrapper.find('ColorSpinner')
       .find('Slider')
       .simulate('change', { target: { value: '120' } })
@@ -187,8 +176,6 @@ describe('Test BasicPicker API', () => {
 
   it('should apply saturation operation to a color', () => {
     const Wrapper = mount(<App showTools={true} />)
-
-    expect(Wrapper.state('color')).toEqual('hotpink')
 
     Wrapper.find('ColorSaturator')
       .find('Slider')
@@ -200,8 +187,6 @@ describe('Test BasicPicker API', () => {
   it('should apply desaturation operation to a color', () => {
     const Wrapper = mount(<App showTools={true} />)
 
-    expect(Wrapper.state('color')).toEqual('hotpink')
-
     Wrapper.find('ColorDesaturator')
       .find('Slider')
       .simulate('change', { target: { value: '80' } })
@@ -212,8 +197,6 @@ describe('Test BasicPicker API', () => {
   it('should apply dark operation to a color', () => {
     const Wrapper = mount(<App showTools={true} />)
 
-    expect(Wrapper.state('color')).toEqual('hotpink')
-
     Wrapper.find('ColorDarkener')
       .find('Slider')
       .simulate('change', { target: { value: '40' } })
@@ -223,8 +206,6 @@ describe('Test BasicPicker API', () => {
 
   it('should apply bright operation to a color', () => {
     const Wrapper = mount(<App showTools={true} />)
-
-    expect(Wrapper.state('color')).toEqual('hotpink')
 
     Wrapper.find('ColorBrightener')
       .find('Slider')

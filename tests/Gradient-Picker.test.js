@@ -60,10 +60,6 @@ describe('Test GradientPicker API', () => {
   it('should create new gradient based when color input changes', () => {
     const Wrapper = mount(<App />)
 
-    expect(Wrapper.state('gradient')).toEqual(
-      'linear-gradient(to right, rgb(129, 255, 239) 0%, rgb(240, 103, 180) 100%)'
-    )
-
     Wrapper.find('ColorInputField').forEach((node, i) => {
       if (i === 1) {
         // Color input one
