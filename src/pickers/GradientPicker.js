@@ -132,10 +132,10 @@ export default class GradientPicker extends React.Component {
     // (setting stop values, or updating the color input field)
     /* eslint-disable no-unused-vars */
     getGradient: grad => {},
-    theme: 'light',
+    theme: 'light'
     // These defaults are built-in in tinygradient module
-    mode: 'linear',
-    direction: 'to top'
+    // mode: 'linear',
+    // direction: 'to bottom'
   }
 
   static propTypes = {
