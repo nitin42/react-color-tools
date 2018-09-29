@@ -4,5 +4,5 @@ node_js:
 notifications:
   email: false
 script:
-  - yarn test
-  - yarn lint
+  - npm run test
+  - npm run lint
