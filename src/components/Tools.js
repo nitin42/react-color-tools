@@ -17,7 +17,7 @@ import {
   TintsGeneratorIcon,
   ClipboardIcon,
   GenerateGradientIcon
-} from '../icons/index.js'
+} from '../icons/index'
 
 // Copied from primer/primer-tooltips/build
 import '../styles/tooltip.css'

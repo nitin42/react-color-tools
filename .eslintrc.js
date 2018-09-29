@@ -21,7 +21,8 @@ module.exports = {
     'jsx-a11y/label-has-for': 0,
     'react/no-did-update-set-state': 0,
     radix: 0,
-    'no-nested-ternary': 0
+    'no-nested-ternary': 0,
+    'operator-linebreak': 0
   },
   parser: 'babel-eslint'
 }

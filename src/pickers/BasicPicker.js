@@ -21,7 +21,6 @@ import {
   DEFAULT_SWATCHES,
   DEFAULT_COLOR,
   COLOR_CONTAINER_WIDTH,
-  COLOR_CONTAINER_HEIGHT,
   MAX_COLORS
 } from '../utils/constants'
 import getThemeVariants from '../utils/theme'
