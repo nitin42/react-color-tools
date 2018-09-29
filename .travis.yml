@@ -1,8 +1,9 @@
 language: node_js
 node_js:
-  - "6"
+  - "8"
 notifications:
   email: false
 script:
-  - npm run test
-  - npm run lint
+  - yarn lint
+  - yarn test
+  - yarn build
