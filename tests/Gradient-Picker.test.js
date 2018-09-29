@@ -11,7 +11,7 @@ class App extends React.Component {
     const { gradient: grad } = this.state
 
     return (
-      <div>
+      <React.Fragment>
         <GradientPicker
           mode={this.props.mode}
           direction={this.props.direction}
@@ -26,7 +26,7 @@ class App extends React.Component {
         >
           React Gradient Picker
         </h1>
-      </div>
+      </React.Fragment>
     )
   }
 }
@@ -42,11 +42,11 @@ describe('Test GradientPicker API', () => {
     expect(tree).toMatchSnapshot()
   })
 
-  it('should update the state of parent component', () => {
+  it('should update the state of parent component when onChange is invoked on first render', () => {
     const Wrapper = mount(<App />)
 
     expect(Wrapper.state('gradient')).toEqual(
-      'linear-gradient(to top, rgb(129, 255, 239) 0%, rgb(240, 103, 180) 100%)'
+      'linear-gradient(to right, rgb(129, 255, 239) 0%, rgb(240, 103, 180) 100%)'
     )
   })
 
@@ -61,19 +61,21 @@ describe('Test GradientPicker API', () => {
     const Wrapper = mount(<App />)
 
     expect(Wrapper.state('gradient')).toEqual(
-      'linear-gradient(to top, rgb(129, 255, 239) 0%, rgb(240, 103, 180) 100%)'
+      'linear-gradient(to right, rgb(129, 255, 239) 0%, rgb(240, 103, 180) 100%)'
     )
 
     Wrapper.find('ColorInputField').forEach((node, i) => {
       if (i === 1) {
+        // Color input one
         node.simulate('change', { target: { value: 'red' } })
       } else {
+        // Color input two
         node.simulate('change', { target: { value: 'orange' } })
       }
     })
 
     expect(Wrapper.state('gradient')).toEqual(
-      'linear-gradient(to top, rgb(255, 165, 0) 0%, rgb(255, 0, 0) 100%)'
+      'linear-gradient(to right, rgb(255, 165, 0) 0%, rgb(255, 0, 0) 100%)'
     )
   })
 
@@ -82,14 +84,16 @@ describe('Test GradientPicker API', () => {
 
     Wrapper.find('Slider').forEach((node, i) => {
       if (i === 1) {
+        // Color stop one
         node.simulate('change', { target: { value: '8' } })
       } else {
+        // Color stop two
         node.simulate('change', { target: { value: '4' } })
       }
     })
 
     expect(Wrapper.state('gradient')).toEqual(
-      'linear-gradient(to top, rgb(129, 255, 239) 0%, rgb(129, 255, 239) 20%, rgb(240, 103, 180) 80%, rgb(240, 103, 180) 100%)'
+      'linear-gradient(to right, rgb(129, 255, 239) 0%, rgb(129, 255, 239) 20%, rgb(240, 103, 180) 80%, rgb(240, 103, 180) 100%)'
     )
   })
 })

@@ -9,14 +9,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          flexDirection: 'column',
-          alignItems: 'center'
-        }}
-      >
+      <React.Fragment>
         <h1 style={{ color: this.state.color }}>React Color Tools</h1>
         <SchemePicker
           theme={this.props.theme}
@@ -24,7 +17,7 @@ class App extends React.Component {
           color={this.state.color}
           onChange={color => this.setState({ color })}
         />
-      </div>
+      </React.Fragment>
     )
   }
 }
@@ -42,8 +35,6 @@ describe('Test SchemePicker API', () => {
 
   it('should update the state of parent component when a swatch is clicked', () => {
     const Wrapper = mount(<App />)
-    const instance = Wrapper.instance()
-
     expect(Wrapper.state('color')).toEqual('hotpink')
 
     Wrapper.find('Swatch').forEach((node, i) => {
