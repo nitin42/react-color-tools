@@ -128,9 +128,12 @@ export default class BasicPicker extends React.PureComponent {
     this.imageIcon = document.getElementById('image-icon')
     this.clipboardIcon = document.getElementById('clipboard')
 
-    this.imageIcon.addEventListener('click', this.simulateClick)
-    this.clipboardIcon.addEventListener('mouseleave', this.hideMsg)
-    this.clipboardIcon.addEventListener('blur', this.hideMsg)
+    this.imageIcon &&
+      this.imageIcon.addEventListener('click', this.simulateClick)
+    this.clipboardIcon &&
+      this.clipboardIcon.addEventListener('mouseleave', this.hideMsg)
+    this.clipboardIcon &&
+      this.clipboardIcon.addEventListener('blur', this.hideMsg)
 
     // Attach a listener for deleting the image (if any) from the color block
     document.addEventListener('keydown', this.updateKey)
@@ -148,9 +151,12 @@ export default class BasicPicker extends React.PureComponent {
   }
 
   componentWillUnmount() {
-    this.imageIcon.removeEventListener('click', this.simulateClick)
-    this.clipboardIcon.removeEventListener('mouseleave', this.hideMsg)
-    this.clipboardIcon.removeEventListener('blur', this.hideMsg)
+    this.imageIcon &&
+      this.imageIcon.removeEventListener('click', this.simulateClick)
+    this.clipboardIcon &&
+      this.clipboardIcon.removeEventListener('mouseleave', this.hideMsg)
+    this.clipboardIcon &&
+      this.clipboardIcon.removeEventListener('blur', this.hideMsg)
     document.removeEventListener('keydown', this.updateKey)
   }
 

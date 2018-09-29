@@ -59,6 +59,8 @@ const ColorSaturator = HOC(({ color, value, onChange }) => (
   </StyledSpan>
 ))
 
+ColorSaturator.displayName = 'ColorSaturator'
+
 const ColorDesaturator = HOC(({ color, value, onChange }) => (
   <StyledSpan title="color desaturator">
     <DesaturatorIcon width={20} height={20} color={color} />
@@ -72,6 +74,8 @@ const ColorDesaturator = HOC(({ color, value, onChange }) => (
     <StyledLabel color={color}>{value}</StyledLabel>
   </StyledSpan>
 ))
+
+ColorDesaturator.displayName = 'ColorDesaturator'
 
 const ColorBrightener = HOC(({ color, value, onChange }) => (
   <StyledSpan title="color brightener">
@@ -87,6 +91,8 @@ const ColorBrightener = HOC(({ color, value, onChange }) => (
   </StyledSpan>
 ))
 
+ColorBrightener.displayName = 'ColorBrightener'
+
 const ColorDarkener = HOC(({ color, value, onChange }) => (
   <StyledSpan title="color darkener">
     <ColorDarkenerIcon width={16} height={16} color={color} />
@@ -100,6 +106,8 @@ const ColorDarkener = HOC(({ color, value, onChange }) => (
     <StyledLabel color={color}>{value}</StyledLabel>
   </StyledSpan>
 ))
+
+ColorDarkener.displayName = 'ColorDarkener'
 
 const ColorSpinner = HOC(({ color, onChange, value }) => (
   <StyledSpan title="color spin">
@@ -117,6 +125,8 @@ const ColorSpinner = HOC(({ color, onChange, value }) => (
     </StyledLabel>
   </StyledSpan>
 ))
+
+ColorSpinner.displayName = 'ColorSpinner'
 
 const ImagePicker = HOC(({ color, uploadImage }) => (
   <StyledSpan title="Image picker">
@@ -147,6 +157,8 @@ const PaletteGenerator = HOC(({ color, generateSwatches }) => (
   </StyledSpan>
 ))
 
+PaletteGenerator.displayName = 'SwatchesGenerator'
+
 PaletteGenerator.propTypes = {
   color: PropTypes.string,
   generateSwatches: PropTypes.func
@@ -162,6 +174,8 @@ const ShadesGenerator = HOC(({ color, generateShades }) => (
     <ShadesGeneratorIcon height={20} width={20} color={color} />
   </StyledSpan>
 ))
+
+ShadesGenerator.displayName = 'ShadesGenerator'
 
 ShadesGenerator.propTypes = {
   color: PropTypes.string,
@@ -179,6 +193,8 @@ const Reset = HOC(({ color, resetColors }) => (
   </StyledSpan>
 ))
 
+Reset.displayName = 'Reset'
+
 Reset.propTypes = {
   color: PropTypes.string,
   resetColors: PropTypes.func
@@ -194,6 +210,8 @@ const TintsGenerator = HOC(({ color, generateTints }) => (
     <TintsGeneratorIcon height={21} width={21} color={color} />
   </StyledSpan>
 ))
+
+TintsGenerator.displayName = 'TintsGenerator'
 
 TintsGenerator.propTypes = {
   color: PropTypes.string,
