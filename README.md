@@ -144,7 +144,7 @@ This will render -
 
 [![Edit 935ppx461o](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/935ppx461o)
 
-or checkout [`examples`](./examples) folder
+or checkout the [`examples`](./examples) folder
 
 ## Documentation
 
