@@ -16,6 +16,8 @@
 
 - [Features](#features)
 
+- [Use cases](#use-cases)
+
 - [Theory](#theory)
 
 - [Install](#install)
@@ -51,6 +53,12 @@
 - API for color conversions
 
 - Color scheme picker
+
+## Use cases
+
+- Managing color schemes
+
+- Design systems & creating design tools
 
 ## Theory
 
