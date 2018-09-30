@@ -166,7 +166,9 @@ or checkout the [`examples`](./examples) folder
 
 - [ ] Tweak rollup config to reduce bundle size
 
-- [ ] Remove [tooltip styles]
+- [ ] Remove [tooltip styles](./src/styles) and use `react-emotion` to create tooltip component
+
+- [ ] Add bezier easing to gradient picker component
 
 ## Contributing
 
