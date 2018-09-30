@@ -56,9 +56,7 @@
 
 - Managing color schemes
 
-- Design systems
-
-- Design tools
+- Design systems & creating design tools
 
 ## Theory
 
