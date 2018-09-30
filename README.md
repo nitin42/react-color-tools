@@ -160,6 +160,14 @@ or checkout the [`examples`](./examples) folder
 
 [Check out the detailed documentation](./docs)
 
+## TODO
+
+- [ ] Use a monorepo format to store different pickers and color tools
+
+- [ ] Tweak rollup config to reduce bundle size
+
+- [ ] Remove [tooltip styles]
+
 ## Contributing
 
 If you'd like to contribute to this project, then follow the below instructions to setup the project locally on your machine.
