@@ -1,12 +1,15 @@
 {
   "name": "react-color-tools",
-  "version": "1.0.0-beta.5",
+  "version": "1.0.0",
   "description": "A set of tools as React components for working with colors",
   "main": "build/react-color-tools.js",
   "module": "build/react-color-tools.es.js",
   "unpkg": "build/react-color-tools.min.js",
   "author": "Nitin Tulswani",
   "license": "MIT",
+  "files": [
+    "build"
+  ],
   "dependencies": {
     "@ctrl/tinycolor": "^2.2.0",
     "clipboard-polyfill": "^2.5.4",
