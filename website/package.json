@@ -7,8 +7,9 @@
     "react-scripts": "^1.1.5"
   },
   "dependencies": {
+    "emotion": "^9.2.12",
     "react": "^16.5.2",
-    "react-color-tools": "1.0.0-beta.3",
+    "react-color-tools": "^1.0.0",
     "react-dom": "^16.5.2"
   },
   "scripts": {
