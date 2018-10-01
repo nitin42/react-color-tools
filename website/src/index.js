@@ -17,17 +17,35 @@ const Heading = props => (
   <h1
     className={css`
       font-size: 4em;
-      color: ${props.color};
       ${props.gradientPicker
-        ? `      background-image: ${props.color};
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: 'transparent;
-`
-        : null};
+        ? `background-image: ${props.color};
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        `
+        : `color: ${props.color};
+        `};
     `}
   >
     {props.children}
   </h1>
+)
+
+Heading.defaultProps = {
+  gradientPicker: false
+}
+
+const GitHubLink = props => (
+  <div style={{ marginTop: 20 }}>
+    <a
+      className="github-button"
+      href="https://github.com/nitin42/react-color-tools"
+      data-size="large"
+      data-show-count="true"
+      aria-label="Star nitin42/react-color-tools on GitHub"
+    >
+      Star
+    </a>
+  </div>
 )
 
 const Container = props => (
@@ -65,7 +83,12 @@ Link.defaultProps = {
 
 const Footer = props => (
   <footer style={{ marginTop: 5, bottom: 0 }}>
-    <p style={{ fontSize: 18 }}>
+    <p
+      style={{
+        fontSize: 18,
+        color: '#4f4f4f'
+      }}
+    >
       Made with ❤️ by{' '}
       <Link url="https://nitin-tulswani.surge.sh/" underline={false}>
         Nitin Tulswani
@@ -99,7 +122,7 @@ class App extends React.Component {
       <div>
         <Container direction={'column'}>
           <Heading
-            gradientPicker
+            gradientPicker={this.state.currentPicker === GRADIENT_PICKER}
             color={
               this.state.currentPicker !== GRADIENT_PICKER
                 ? this.state.color
@@ -119,6 +142,7 @@ class App extends React.Component {
             )}
             {this.state.currentPicker === SCHEME_PICKER && (
               <SchemePicker
+                scheme="analogous"
                 color={this.state.color}
                 onChange={color => this.setState({ color })}
               />
@@ -134,6 +158,7 @@ class App extends React.Component {
               {this.renderPickerOptions()}
             </select>
           </div>
+          <GitHubLink />
           <div style={{ marginTop: 20, marginBottom: 10 }}>
             <Link url="https://github.com/nitin42/react-color-tools/tree/master/docs">
               Read the detailed documentation
