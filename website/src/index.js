@@ -1,7 +1,11 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { css } from 'emotion'
-import { BasicPicker } from 'react-color-tools'
+import { BasicPicker, SchemePicker, GradientPicker } from 'react-color-tools'
+
+const BASIC_PICKER = 'Basic Color Picker'
+const SCHEME_PICKER = 'Color Scheme Picker'
+const GRADIENT_PICKER = 'Gradient Picker'
 
 const shadow = css`
   -webkit-box-shadow: 10px 10px 9px -11px rgba(122, 121, 122, 1);
@@ -12,8 +16,14 @@ const shadow = css`
 const Heading = props => (
   <h1
     className={css`
-      font-size: 5em;
+      font-size: 4em;
       color: ${props.color};
+      ${props.gradientPicker
+        ? `      background-image: ${props.color};
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: 'transparent;
+`
+        : null};
     `}
   >
     {props.children}
@@ -54,7 +64,7 @@ Link.defaultProps = {
 }
 
 const Footer = props => (
-  <footer style={{ marginTop: 5 }}>
+  <footer style={{ marginTop: 5, bottom: 0 }}>
     <p style={{ fontSize: 18 }}>
       Made with ❤️ by{' '}
       <Link url="https://nitin-tulswani.surge.sh/" underline={false}>
@@ -72,24 +82,56 @@ class App extends React.Component {
     gradient: ''
   }
 
+  changeFormat = e => this.setState({ currentPicker: e.target.value })
+
+  renderPickerOptions = () => {
+    const { pickers } = this.state
+
+    return pickers.map(picker => (
+      <option value={picker} key={picker}>
+        {picker}
+      </option>
+    ))
+  }
+
   render() {
     return (
       <div>
         <Container direction={'column'}>
-          <Heading color={this.state.color}>React Color Tools</Heading>
+          <Heading
+            gradientPicker
+            color={
+              this.state.currentPicker !== GRADIENT_PICKER
+                ? this.state.color
+                : this.state.gradient
+            }
+          >
+            React Color Tools
+          </Heading>
           <div className={shadow}>
-            <BasicPicker
-              triangle={false}
-              color={this.state.color}
-              onChange={color => this.setState({ color })}
-              showTools
-            />
+            {this.state.currentPicker === BASIC_PICKER && (
+              <BasicPicker
+                triangle={false}
+                color={this.state.color}
+                onChange={color => this.setState({ color })}
+                showTools
+              />
+            )}
+            {this.state.currentPicker === SCHEME_PICKER && (
+              <SchemePicker
+                color={this.state.color}
+                onChange={color => this.setState({ color })}
+              />
+            )}
+            {this.state.currentPicker === GRADIENT_PICKER && (
+              <GradientPicker
+                getGradient={gradient => this.setState({ gradient })}
+              />
+            )}
           </div>
           <div style={{ marginTop: 20 }}>
-            <select>
-              <option>Basic Color Picker</option>
-              <option>Gradient Picker</option>
-              <option>Color Scheme Picker</option>
+            <select onChange={this.changeFormat}>
+              {this.renderPickerOptions()}
             </select>
           </div>
           <div style={{ marginTop: 20, marginBottom: 10 }}>
