@@ -22,6 +22,9 @@
     "values.js": "^1.0.3"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^3.4.11",
+    "@storybook/addon-links": "^3.4.11",
+    "@storybook/react": "^3.4.11",
     "babel-core": "^6.26.3",
     "babel-eslint": "^9.0.0",
     "babel-jest": "^23.6.0",
@@ -51,10 +54,7 @@
     "rollup-plugin-filesize": "^4.0.1",
     "rollup-plugin-postcss": "^1.6.2",
     "rollup-plugin-replace": "^2.0.0",
-    "rollup-plugin-uglify": "^4.0.0",
-    "@storybook/react": "^3.4.11",
-    "@storybook/addon-actions": "^3.4.11",
-    "@storybook/addon-links": "^3.4.11"
+    "rollup-plugin-uglify": "^4.0.0"
   },
   "peerDependencies": {
     "react": "^16.3.2"
@@ -74,7 +74,7 @@
     "build:watch": "NODE_ENV=production rollup -c -w",
     "formatall": "find src -name '*.js' | xargs prettier --write --no-semi --single-quote",
     "lint": "eslint ./src",
-    "build": "NODE_ENV=production rollup -c",
+    "build": "rm -rf ./build && NODE_ENV=production rollup -c",
     "validate": "yarn formatall && yarn lint && yarn test",
     "test:watch": "NODE_ENV=test ./node_modules/.bin/jest --watch",
     "test": "NODE_ENV=test ./node_modules/.bin/jest",
