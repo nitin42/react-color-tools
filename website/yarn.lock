@@ -2024,6 +2024,10 @@ cookie@0.3.1:
   version "0.3.1"
   resolved "https://registry.npmjs.org/cookie/-/cookie-0.3.1.tgz#e7e0a1f9ef43b4c8ba925c5c5a96e806d16873bb"
 
+coolhue@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.npmjs.org/coolhue/-/coolhue-1.0.9.tgz#ddd7178d0b745d1ad62b29e20b0acb68d15ae917"
+
 copy-descriptor@^0.1.0:
   version "0.1.1"
   resolved "https://registry.npmjs.org/copy-descriptor/-/copy-descriptor-0.1.1.tgz#676f6eb3c39997c2ee1ac3a924fd6124748f578d"
