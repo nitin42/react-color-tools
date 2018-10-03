@@ -15,7 +15,7 @@
   },
   "scripts": {
     "start": "SKIP_PREFLIGHT_CHECK=true react-scripts start",
-    "build": "react-scripts build",
+    "build": "SKIP_PREFLIGHT_CHECK=true react-scripts build",
     "deploy": "yarn build && surge"
   },
   "browserslist": [
