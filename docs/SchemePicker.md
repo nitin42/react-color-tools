@@ -69,3 +69,5 @@ class App extends React.Component {
   }
 }
 ```
+
+> For analogous and monochromatic schemes, you can scroll through the list of swatches to see all the available colors.
