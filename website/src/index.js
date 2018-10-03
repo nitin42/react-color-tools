@@ -132,8 +132,8 @@ const Footer = props => (
       Made with{' '}
       <span role="img" aria-label="heart">
         ❤️
-      </span>
-      ️ by{' '}
+      </span>{' '}
+      by{' '}
       <Link url="https://nitin-tulswani.surge.sh/" style={{ fontSize: 18 }}>
         Nitin Tulswani
       </Link>
