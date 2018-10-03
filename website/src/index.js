@@ -2,8 +2,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import { css, injectGlobal } from 'emotion'
 import { BasicPicker, SchemePicker, GradientPicker } from 'react-color-tools'
-
-const coolhue = require('coolhue')
+import coolhue from 'coolhue'
 
 const BASIC_PICKER = 'Basic Color Picker'
 const SCHEME_PICKER = 'Color Scheme Picker'
@@ -11,59 +10,10 @@ const GRADIENT_PICKER = 'Gradient Picker'
 
 injectGlobal`
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
   color: #2f2f2f;
 }
 `
-
-// `@media only screen and (max-width: 480px) {
-//   body {
-//     padding: 10px;
-//   }
-
-//   .swatches {
-//     width: 50px;
-//     height: 50px;
-//   }
-
-//   img {
-//     width: 300px;
-//     height: 200px;
-//   }
-
-//   .search-input {
-//     width: 250px;
-//     padding: 10px;
-//     font-size: 12px;
-//   }
-
-//   .heading {
-//     font-size: 30px;
-//   }
-
-//   .link {
-//     font-size: 14px;
-//   }
-
-//   .display-swatches {
-//     display: grid;
-//     grid-template-columns: repeat(4, 1fr);
-//     grid-gap: 10px;
-//     justify-items: center;
-//   }
-
-//   .error-message {
-//     font-size: 12px;
-//   }
-
-//   .hex-codes {
-//     font-size: 12px;
-//   }
-
-//   footer {
-//     font-size: 14px;
-//   }
-// }`
 
 const shadow = css`
   -webkit-box-shadow: 10px 10px 9px -11px rgba(122, 121, 122, 1);
@@ -164,6 +114,7 @@ const Link = ({ underline, url, children, ...rest }) => (
     `}
     href={url}
     target="_blank"
+    rel="noopener noreferrer"
     {...rest}
   >
     {children}
@@ -178,7 +129,11 @@ const Footer = props => (
         color: '#4f4f4f'
       }}
     >
-      Made with ❤️ by{' '}
+      Made with{' '}
+      <span role="img" aria-label="heart">
+        ❤️
+      </span>
+      ️ by{' '}
       <Link url="https://nitin-tulswani.surge.sh/" style={{ fontSize: 18 }}>
         Nitin Tulswani
       </Link>
